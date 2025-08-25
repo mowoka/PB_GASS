@@ -1,97 +1,140 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# PBGass - React Native Project Setup
 
-# Getting Started
+## 🚀 Project Information
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+This is a React Native CLI project with the following features:
 
-## Step 1: Start Metro
+- **React Native CLI**: Latest version with TypeScript support
+- **TypeScript**: Full TypeScript configuration
+- **NativeWind**: Tailwind CSS for React Native
+- **Node.js 22**: Using the latest LTS version
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 📁 Project Structure
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+```
+PBGass/
+├── android/          # Android native code
+├── ios/              # iOS native code
+├── src/              # Source code
+│   └── components/   # React components
+├── App.tsx           # Main application component
+├── index.js          # Entry point
+├── tailwind.config.js # Tailwind CSS configuration
+├── babel.config.js   # Babel configuration with NativeWind
+├── metro.config.js   # Metro bundler configuration
+└── app.d.ts          # NativeWind type declarations
+```
 
-```sh
-# Using npm
+## 🛠️ Setup Instructions
+
+### Prerequisites
+- Node.js 22 (use `nvm use 22`)
+- React Native development environment
+- Android Studio (for Android development)
+- Xcode (for iOS development)
+
+### Installation
+All dependencies are already installed. To run the project:
+
+#### For Android:
+```bash
+nvm use 22
+cd PBGass
+npx react-native run-android
+```
+
+#### For iOS:
+```bash
+nvm use 22
+cd PBGass
+npx react-native run-ios
+```
+
+## 🎨 NativeWind Configuration
+
+### Current Setup
+- ✅ NativeWind installed
+- ✅ Tailwind CSS installed
+- ✅ Babel configuration updated
+- ✅ TypeScript declarations added
+- ✅ Tailwind config with content paths
+
+### Usage Example
+```tsx
+import React from 'react';
+import { View, Text } from 'react-native';
+
+export default function MyComponent() {
+  return (
+    <View className="bg-blue-500 p-4 rounded-lg">
+      <Text className="text-white text-center font-bold">
+        Hello NativeWind!
+      </Text>
+    </View>
+  );
+}
+```
+
+**Note**: The TypeScript compiler may show errors for `className` props during development. This is expected during the initial setup. The Babel plugin will transform these at runtime.
+
+## 🔧 Development Commands
+
+```bash
+# Start Metro bundler
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+# Run on Android
 npm run android
 
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+# Run on iOS  
 npm run ios
 
-# OR using Yarn
-yarn ios
+# Run tests
+npm test
+
+# Type checking
+npx tsc --noEmit
+
+# Lint code
+npm run lint
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## 🚨 Known Issues & Solutions
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+1. **TypeScript className errors**: This is expected during development. The Babel plugin transforms className props at runtime.
 
-## Step 3: Modify your app
+2. **Metro bundler cache**: If you encounter issues, clear the cache:
+   ```bash
+   npx react-native start --reset-cache
+   ```
 
-Now that you have successfully run the app, let's make changes!
+3. **iOS CocoaPods**: Update Xcode to version 16.1+ or run:
+   ```bash
+   cd ios && pod install
+   ```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## 📱 Features Demo
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+The main `App.tsx` demonstrates:
+- Dark/Light mode support
+- Responsive layout
+- Modern UI components
+- Feature checklist display
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## 🤝 Contributing
 
-## Congratulations! :tada:
+1. Ensure Node.js 22 is active: `nvm use 22`
+2. Follow TypeScript best practices
+3. Use Tailwind CSS classes where possible
+4. Test on both iOS and Android
 
-You've successfully run and modified your React Native App. :partying_face:
+## 📚 Additional Resources
 
-### Now what?
+- [React Native Documentation](https://reactnative.dev/)
+- [NativeWind Documentation](https://www.nativewind.dev/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/)
+- [TypeScript Documentation](https://www.typescriptlang.org/)
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+---
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+**Happy Coding! 🎉**
