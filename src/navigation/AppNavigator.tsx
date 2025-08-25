@@ -28,14 +28,14 @@ const AppNavigator: React.FC = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            title: '🏠 PBGass Home',
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="Settings"
           component={SettingsScreen}
           options={{
-            title: '⚙️ Settings',
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
