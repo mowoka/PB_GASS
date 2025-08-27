@@ -83,7 +83,7 @@ const AppNavigator: React.FC = () => {
         style={styles.bottomBar}
         shadowStyle={styles.shadow}
         height={60}
-        circleWidth={65}
+        circleWidth={80}
         bgColor="white"
         initialRouteName="Home"
         borderTopLeftRight
