@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import CurvedBottomBarNavigator from './CurvedBottomBarNavigator';
 import CreateMatchScreen from '../screens/CreateMatch';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Matches from '../screens/Matches';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="MainTabs"
           component={CurvedBottomBarNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Matches"
+          component={Matches}
           options={{ headerShown: false }}
         />
         <Stack.Screen

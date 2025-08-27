@@ -1,7 +1,7 @@
-import { Text, View } from 'react-native';
 import { Layout } from '../components/Layout';
 import { RootStackParamList } from '../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Header } from '../components/Header';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -14,10 +14,8 @@ interface Props {
 
 export default function CreateMatchScreen({ navigation }: Props) {
   return (
-    <Layout>
-      <View>
-        <Text>Create Match</Text>
-      </View>
+    <Layout safeView={false}>
+      <Header title="Buat Pertandingan" onPress={() => navigation.goBack()} />
     </Layout>
   );
 }

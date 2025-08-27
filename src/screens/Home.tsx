@@ -18,7 +18,7 @@ interface Props {
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout>
-      <WelcomeCard onCreateMatch={() => navigation.push('CreateMatch')} />
+      <WelcomeCard onCreateMatch={() => navigation.push('Matches')} />
       <Banner />
       <Menu />
     </Layout>
