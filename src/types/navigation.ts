@@ -3,6 +3,7 @@ export type RootStackParamList = {
     Settings: undefined;
     Register: undefined;
     History: undefined;
+    CreateMatch: undefined;
 };
 
 declare global {

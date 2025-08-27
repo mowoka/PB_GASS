@@ -15,10 +15,10 @@ interface Props {
   navigation: HomeScreenNavigationProp;
 }
 
-const HomeScreen: React.FC<Props> = () => {
+const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout>
-      <WelcomeCard />
+      <WelcomeCard onCreateMatch={() => navigation.push('CreateMatch')} />
       <Banner />
       <Menu />
     </Layout>
