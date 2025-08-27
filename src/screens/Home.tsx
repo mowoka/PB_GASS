@@ -19,8 +19,8 @@ const HomeScreen: React.FC<Props> = () => {
   return (
     <Layout>
       <WelcomeCard />
-      <Menu />
       <Banner />
+      <Menu />
     </Layout>
   );
 };
