@@ -1,4 +1,5 @@
 import { Text, View } from 'react-native';
+import { cn } from '../../utils/func';
 
 export type IStatus =
   | 'Mendatang'
@@ -17,7 +18,7 @@ export function Status({ status }: { status: IStatus }) {
   };
 
   return (
-    <View className={`px-5 py-1 rounded-full ${statusColors[status]}`}>
+    <View className={cn(`px-5 py-1 rounded-full`, statusColors[status])}>
       <Text className="text-white font-bold text-sm">{status}</Text>
     </View>
   );
