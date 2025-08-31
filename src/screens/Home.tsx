@@ -19,8 +19,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout>
       <WelcomeCard onCreateMatch={() => navigation.push('Matches')} />
-      <Banner />
       <Menu />
+      <Banner />
     </Layout>
   );
 };

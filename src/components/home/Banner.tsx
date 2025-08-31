@@ -17,7 +17,7 @@ const bannerData = [
 
 export function Banner() {
   return (
-    <View className="w-full mt-5">
+    <View className="w-full px-5">
       <Carousel
         loop
         width={screenWidth - 40}

@@ -2,14 +2,15 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 export function WelcomeCard({ onCreateMatch }: { onCreateMatch: () => void }) {
   return (
-    <View className="p-5 bg-white w-full rounded-xl shadow-lg border border-gray-300">
-      <Text className="text-left text-black text-xl font-bold ">
-        Selamat Datang Di PBGasss,
+    <View className="bg-black w-full rounded-b-[20px] shadow-lg px-5 h-[350px] pt-[50px]">
+      <Text className="text-left text-white text-4xl font-bold ">Welcome</Text>
+      <Text className="text-left text-white text-2xl font-bold mt-1">
+        PB GASS Badminton
       </Text>
-      <Text className="mt-2 text-black text-lg font-semibold">Admin</Text>
+      <Text className="mt-1 text-white text-base font-semibold">Admin</Text>
       <TouchableOpacity
         onPress={onCreateMatch}
-        className="mt-5 w-full h-12 rounded-2xl flex justify-center items-center bg-[#D64545]"
+        className="mt-5 w-full h-12 rounded-xl flex justify-center items-center bg-[#D64545]"
       >
         <Text className="text-white uppercase font-bold">
           Buat Pertandingan
