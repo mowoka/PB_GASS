@@ -9,13 +9,21 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
-        'light-blue': '#E0F7FA',
-        'dark-blue': '#007BFF',
-        'dark-grey': ' #4A4A4A',
+      fontFamily:{
+        'roboto-bold': ['Roboto-Bold'],
+        'roboto-extra-regular': ['Roboto-Extra-Regular'],
+        'roboto-extra-light': ['Roboto-Extra-Light'],
+        'roboto-light': ['Roboto-Light'],
+        'roboto-medium': ['Roboto-Medium'],
+        'roboto-regular': ['Roboto-Regular'],
+        'roboto-semi-medium': ['Roboto-Semi-Medium'],
+        'roboto-thin': ['Roboto-Thin'],
+        'ubuntu': ['Ubuntu-Regular'],
+        'ubuntu-bold': ['Ubuntu-Bold'],
+        'ubuntu-medium': ['Ubuntu-Medium'],
+        'ubuntu-light': ['Ubuntu-Light'],
       }
     },
   },
   plugins: [],
 }
-
