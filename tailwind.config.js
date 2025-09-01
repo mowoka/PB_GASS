@@ -12,6 +12,7 @@ module.exports = {
       colors:{
         'primary':{
           'red': '#D84040',
+          'gray': '#C9CDCF',
         }
       },
       fontFamily:{

@@ -4,6 +4,8 @@ import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { View } from 'react-native';
 import { FieldItem } from '../../components/setting/FieldItem';
+import { useBottomModal } from '../../providers/useBottomModal';
+import { AddFieldForm } from '../../components/setting/AddFieldForm';
 
 type MatchFieldScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -15,12 +17,13 @@ interface Props {
 }
 
 export default function MatchField({ navigation }: Props) {
+  const { showBottomModal } = useBottomModal();
   return (
     <Layout
       safeView={false}
       bottomBtnText="Tambah Lapangan"
       showBottomBtn={true}
-      onPressBtn={() => {}}
+      onPressBtn={() => showBottomModal(<AddFieldForm />, 500)}
     >
       <Header title="Lapangan" onPress={() => navigation.goBack()} />
       <View className="flex-1 p-5">

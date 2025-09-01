@@ -7,7 +7,12 @@
 
 import React from 'react';
 import AppNavigator from './src/navigation/AppNavigator';
+import { Providers } from './src/providers';
 
 export default function App() {
-  return <AppNavigator />;
+  return (
+    <Providers>
+      <AppNavigator />
+    </Providers>
+  );
 }

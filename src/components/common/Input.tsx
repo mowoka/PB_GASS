@@ -1,4 +1,4 @@
-import { Text, TextInput, View } from 'react-native';
+import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { cn } from '../../utils/func';
 
 interface InputProps {
@@ -8,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   inputClassName?: string;
+  inputProps?: TextInputProps;
 }
 
 export function Input({
@@ -17,14 +18,16 @@ export function Input({
   placeholder = '',
   className = '',
   inputClassName = '',
+  inputProps,
 }: InputProps) {
   return (
     <View className={cn(`mb-5`, className)}>
       <Text className="font-roboto-bold text-base">{label}</Text>
       <View className="mt-2">
         <TextInput
+          {...inputProps}
           className={cn(
-            `w-full border border-gray-400 rounded-md h-[47px] p-3`,
+            `w-full border border-gray-400 rounded-md p-3 min-h-[47px]`,
             inputClassName,
           )}
           placeholder={placeholder}
