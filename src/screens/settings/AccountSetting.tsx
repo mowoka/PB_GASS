@@ -4,6 +4,7 @@ import { Header } from '../../components/common/Header';
 import { RootStackParamList } from '../../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Input } from '../../components/common/Input';
+import { useAccountSetting } from '../../hooks/settings/useAccountSetting';
 
 type AccountSettingScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -15,6 +16,8 @@ interface Props {
 }
 
 export default function AccountSetting({ navigation }: Props) {
+  const { name, handleUpdateName } = useAccountSetting();
+
   return (
     <Layout
       safeView={false}
@@ -24,7 +27,12 @@ export default function AccountSetting({ navigation }: Props) {
     >
       <Header title="Profil Akun" onPress={() => navigation.goBack()} />
       <View className="flex-1 bg-white p-5">
-        <Input label="Nama" placeholder="Input Nama" />
+        <Input
+          label="Nama"
+          placeholder="Input Nama"
+          value={name}
+          onChange={handleUpdateName}
+        />
       </View>
     </Layout>
   );

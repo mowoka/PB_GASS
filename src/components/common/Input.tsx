@@ -3,6 +3,8 @@ import { cn } from '../../utils/func';
 
 interface InputProps {
   label: string;
+  value: string;
+  onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
   inputClassName?: string;
@@ -10,6 +12,8 @@ interface InputProps {
 
 export function Input({
   label,
+  value,
+  onChange,
   placeholder = '',
   className = '',
   inputClassName = '',
@@ -24,6 +28,8 @@ export function Input({
             inputClassName,
           )}
           placeholder={placeholder}
+          value={value}
+          onChangeText={onChange}
         />
       </View>
     </View>
