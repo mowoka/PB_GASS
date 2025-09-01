@@ -5,6 +5,7 @@ import CreateMatchScreen from '../screens/CreateMatch';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Matches from '../screens/Matches';
 import AccountSetting from '../screens/settings/AccountSetting';
+import MatchField from '../screens/settings/MatchField';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="AccountSetting"
           component={AccountSetting}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MatchField"
+          component={MatchField}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

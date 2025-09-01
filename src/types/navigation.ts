@@ -6,6 +6,7 @@ export type RootStackParamList = {
     CreateMatch: undefined;
     Matches: undefined;
     AccountSetting: undefined;
+    MatchField: undefined;
 };
 
 declare global {

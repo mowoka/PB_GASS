@@ -23,7 +23,10 @@ export default function SettingScreen({ navigation }: Props) {
           title="Profil Akun"
           onPress={() => navigation.push('AccountSetting')}
         />
-        <MenuItem title="Lapangan Pertandingan" onPress={() => {}} />
+        <MenuItem
+          title="Lapangan Pertandingan"
+          onPress={() => navigation.push('MatchField')}
+        />
         <MenuItem title="Level Pemain" onPress={() => {}} />
       </View>
     </Layout>
