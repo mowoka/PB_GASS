@@ -14,7 +14,7 @@ export function WelcomeCard({ onCreateMatch }: { onCreateMatch: () => void }) {
       </Text>
       <TouchableOpacity
         onPress={onCreateMatch}
-        className="mt-5 w-full h-12 rounded-xl flex justify-center items-center bg-[#D64545]"
+        className="mt-5 w-full h-12 rounded-xl flex justify-center items-center bg-primary-red"
       >
         <Text className="text-white uppercase font-roboto-bold">
           Buat Pertandingan

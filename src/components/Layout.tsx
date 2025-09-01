@@ -16,7 +16,7 @@ export function Layout({
 function DefaultLayout({ children }: { children: React.ReactNode }) {
   return (
     <View className="flex-1">
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar barStyle={'light-content'} />
       {children}
     </View>
   );

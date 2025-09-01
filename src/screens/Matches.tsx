@@ -30,10 +30,10 @@ export default function Matches({ navigation }: Props) {
           </View>
         </ScrollView>
       </View>
-      <View className="bg-white px-5 pt-5 pb-8 w-full">
+      <View className="bg-black px-5 pt-5 pb-8 w-full">
         <TouchableOpacity
           onPress={() => navigation.push('CreateMatch')}
-          className="w-full bg-blue-600 h-[48px] rounded-lg flex justify-center items-center"
+          className="w-full bg-primary-red h-[48px] rounded-lg flex justify-center items-center"
         >
           <Text className="text-white font-bold text-base">
             Buat Pertandigan

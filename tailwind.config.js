@@ -9,6 +9,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        'primary':{
+          'red': '#D84040',
+        }
+      },
       fontFamily:{
         // Roboto Family
         'roboto': ['Roboto-Regular'],
@@ -28,11 +33,6 @@ module.exports = {
         'ubuntu-light': ['Ubuntu-Light'],
         'ubuntu-italic': ['Ubuntu-Italic'],
       },
-      colors:{
-        'light-blue': '#E0F7FA',
-        'dark-blue': '#007BFF',
-        'dark-grey': '#4A4A4A',
-      }
     },
   },
   plugins: [],
