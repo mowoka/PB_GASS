@@ -53,7 +53,7 @@ function MenuItem({
       className="flex flex-col justify-center items-center mb-5 mx-[5px] w-20"
       onPress={onPress}
     >
-      <View className="bg-white rounded-full w-16 h-16 p-3 flex justify-center items-center border border-gray-200">
+      <View className="bg-white rounded-full w-16 h-16 p-3 flex justify-center items-center">
         <Image
           source={image}
           width={48}
@@ -61,7 +61,7 @@ function MenuItem({
           className="w-full h-full"
         />
       </View>
-      <Text className="mt-2 text-xs font-medium text-center text-gray-600">
+      <Text className="mt-2 text-xs font-roboto-regular text-center text-gray-600">
         {name}
       </Text>
     </TouchableOpacity>
