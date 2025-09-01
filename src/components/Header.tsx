@@ -28,7 +28,7 @@ export function Header({
           </View>
         )}
         <View className="flex-1">
-          <Text className="text-center font-bold text-xl text-white font-ubuntu-bold">
+          <Text className="text-center uppercase font-bold text-xl text-white font-ubuntu-bold">
             {title}
           </Text>
         </View>
