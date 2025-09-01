@@ -1,7 +1,7 @@
 import { Image, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 // Asset
-import ArrowBack from '../assets/icons/arrow-back.png';
+import ArrowBack from '../../assets/icons/arrow-back.png';
 
 export function Header({
   title,

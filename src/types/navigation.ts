@@ -5,6 +5,7 @@ export type RootStackParamList = {
     History: undefined;
     CreateMatch: undefined;
     Matches: undefined;
+    AccountSetting: undefined;
 };
 
 declare global {

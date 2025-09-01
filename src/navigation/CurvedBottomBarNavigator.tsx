@@ -10,7 +10,7 @@ import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import HomeScreen from '../screens/Home';
 import RegisterScreen from '../screens/Register';
 import HistoryScreen from '../screens/History';
-import SettingsScreen from '../screens/Settings';
+import SettingsScreen from '../screens/settings/Settings';
 import Home from '../assets/icons/home.png';
 import HomeFocus from '../assets/icons/home-focused.png';
 import Register from '../assets/icons/register.png';

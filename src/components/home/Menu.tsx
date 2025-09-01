@@ -19,7 +19,7 @@ import Setting from '../../assets/icons/setting-color.png';
 export function Menu() {
   return (
     <View className="w-full p-5 relative -mt-32">
-      <View className="bg-white px-1 py-3 rounded-xl">
+      <View className="bg-white px-1 py-3 rounded-xl border border-gray-200">
         <View className="w-full flex flex-row justify-stretch items-start flex-wrap">
           <MenuItem name="Buat Pesan" image={WhatsApp} onPress={() => {}} />
           <MenuItem name="Kontak Member" image={Contact} onPress={() => {}} />

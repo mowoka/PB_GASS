@@ -4,6 +4,7 @@ import CurvedBottomBarNavigator from './CurvedBottomBarNavigator';
 import CreateMatchScreen from '../screens/CreateMatch';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Matches from '../screens/Matches';
+import AccountSetting from '../screens/settings/AccountSetting';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="CreateMatch"
           component={CreateMatchScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AccountSetting"
+          component={AccountSetting}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

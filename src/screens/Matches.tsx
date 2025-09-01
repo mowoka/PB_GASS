@@ -1,8 +1,8 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { RootStackParamList } from '../types/navigation';
-import { Layout } from '../components/Layout';
-import { Header } from '../components/Header';
+import { Layout } from '../components/common/Layout';
+import { Header } from '../components/common/Header';
 import { MatchItem } from '../components/match/MatchItem';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -18,7 +18,7 @@ export default function Matches({ navigation }: Props) {
   return (
     <Layout safeView={false}>
       <Header title="Pertandigan" onPress={() => navigation.goBack()} />
-      <View className="flex-1">
+      <View className="flex-1 bg-white">
         <ScrollView>
           <View className="p-5">
             <MatchItem />

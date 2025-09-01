@@ -2,7 +2,7 @@ import React from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { WelcomeCard } from '../components/home/WelcomeCard';
-import { Layout } from '../components/Layout';
+import { Layout } from '../components/common/Layout';
 import { Menu } from '../components/home/Menu';
 import { Banner } from '../components/home/Banner';
 

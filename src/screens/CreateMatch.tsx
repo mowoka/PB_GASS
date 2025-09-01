@@ -1,7 +1,7 @@
-import { Layout } from '../components/Layout';
+import { Layout } from '../components/common/Layout';
 import { RootStackParamList } from '../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Header } from '../components/Header';
+import { Header } from '../components/common/Header';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
