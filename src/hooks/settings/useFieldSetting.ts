@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { IField, useSettingStore } from "../../stores/useSettings";
 import { Alert, Linking, Platform } from "react-native";
+import { useSnackbar } from "../../providers/snakbar";
 
 const DEFAULT_FIELD: IField = {
     id: '',
@@ -10,9 +11,11 @@ const DEFAULT_FIELD: IField = {
 };
 
 export function useFieldSettingHooks({ openBottomModal, onCloseBottomModal }: { openBottomModal: () => void, onCloseBottomModal: () => void }) {
+    const { handleShow, handleClose } = useSnackbar();
     const fields = useSettingStore(state => state.fields);
     const addField = useSettingStore(state => state.setField);
     const updateField = useSettingStore(state => state.updateField);
+    const deleteField = useSettingStore(state => state.deleteField);
 
     const [field, setField] = useState<IField>(DEFAULT_FIELD);
 
@@ -82,6 +85,20 @@ export function useFieldSettingHooks({ openBottomModal, onCloseBottomModal }: { 
         }
     }
 
+    const onDeleteField = (item: IField) => {
+        handleShow({
+            show: true,
+            autohide: false,
+            title: 'Hapus Lapangan',
+            message: `Apakah Anda yakin ingin menghapus lapangan ${item.name}?`,
+            onCancel: handleClose,
+            onPress: () => {
+                deleteField(item.id);
+                handleClose();
+            },
+        })
+    }
+
     const handleSaveField = () => {
         const data = { ...field };
         if (data.id === '') {
@@ -106,5 +123,6 @@ export function useFieldSettingHooks({ openBottomModal, onCloseBottomModal }: { 
         handleSaveField,
         EditField,
         onOpenMaps,
+        onDeleteField,
     }
 }

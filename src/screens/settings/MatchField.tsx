@@ -20,6 +20,7 @@ interface Props {
 
 export default function MatchField({ navigation }: Props) {
   const { openModal, closeModal, bottomSheetModalRef } = useBottomModalHooks();
+
   const {
     fields,
     field,
@@ -28,6 +29,7 @@ export default function MatchField({ navigation }: Props) {
     handleSaveField,
     EditField,
     onOpenMaps,
+    onDeleteField,
   } = useFieldSettingHooks({
     openBottomModal: openModal,
     onCloseBottomModal: closeModal,
@@ -60,7 +62,7 @@ export default function MatchField({ navigation }: Props) {
                 key={index}
                 title={item.name}
                 address={item.address}
-                onDelete={() => {}}
+                onDelete={() => onDeleteField(item)}
                 onEdit={() => EditField(item)}
                 onMap={() => onOpenMaps(item)}
               />
