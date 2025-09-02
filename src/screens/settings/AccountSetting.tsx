@@ -4,7 +4,7 @@ import { Header } from '../../components/common/Header';
 import { RootStackParamList } from '../../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Input } from '../../components/common/Input';
-import { useAccountSetting } from '../../hooks/settings/useAccountSetting';
+import { useAccountSettingHooks } from '../../hooks/settings/useAccountSetting';
 
 type AccountSettingScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function AccountSetting({ navigation }: Props) {
-  const { name, handleUpdateName } = useAccountSetting();
+  const { name, handleUpdateName } = useAccountSettingHooks();
 
   return (
     <Layout

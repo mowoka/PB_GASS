@@ -4,8 +4,10 @@ import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { View } from 'react-native';
 import { FieldItem } from '../../components/setting/FieldItem';
-import { useBottomModal } from '../../providers/useBottomModal';
 import { AddFieldForm } from '../../components/setting/AddFieldForm';
+import { useFieldSettingHooks } from '../../hooks/settings/useFieldSetting';
+import { useBottomModalHooks } from '../../hooks/common/useBottomModal';
+import { BottomModal } from '../../components/common/BottomModal';
 
 type MatchFieldScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -17,24 +19,55 @@ interface Props {
 }
 
 export default function MatchField({ navigation }: Props) {
-  const { showBottomModal } = useBottomModal();
+  const { openModal, closeModal, bottomSheetModalRef } = useBottomModalHooks();
+  const {
+    fields,
+    field,
+    isBtnDisable,
+    handleOnChange,
+    handleSaveField,
+    EditField,
+    onOpenMaps,
+  } = useFieldSettingHooks({
+    openBottomModal: openModal,
+    onCloseBottomModal: closeModal,
+  });
+
   return (
-    <Layout
-      safeView={false}
-      bottomBtnText="Tambah Lapangan"
-      showBottomBtn={true}
-      onPressBtn={() => showBottomModal(<AddFieldForm />, 500)}
-    >
-      <Header title="Lapangan" onPress={() => navigation.goBack()} />
-      <View className="flex-1 p-5">
-        <FieldItem
-          onDelete={() => {}}
-          onEdit={() => {}}
-          onMap={() => {}}
-          title="MBS GOR"
-          address="7977+VWH, Jongke Tengah, Sendangadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55285"
+    <BottomModal
+      ref={bottomSheetModalRef}
+      height={500}
+      modalChildren={
+        <AddFieldForm
+          field={field}
+          isBtnDisable={isBtnDisable}
+          onChange={handleOnChange}
+          onSave={handleSaveField}
         />
-      </View>
-    </Layout>
+      }
+    >
+      <Layout
+        safeView={false}
+        bottomBtnText="Tambah Lapangan"
+        showBottomBtn={true}
+        onPressBtn={openModal}
+      >
+        <Header title="Lapangan" onPress={() => navigation.goBack()} />
+        <View className="flex-1 p-5">
+          {fields.map((item, index) => {
+            return (
+              <FieldItem
+                key={index}
+                title={item.name}
+                address={item.address}
+                onDelete={() => {}}
+                onEdit={() => EditField(item)}
+                onMap={() => onOpenMaps(item)}
+              />
+            );
+          })}
+        </View>
+      </Layout>
+    </BottomModal>
   );
 }
