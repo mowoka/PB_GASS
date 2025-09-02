@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Matches from '../screens/Matches';
 import AccountSetting from '../screens/settings/AccountSetting';
 import MatchField from '../screens/settings/MatchField';
+import PlayerLevel from '../screens/settings/PlayerLevel';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="MatchField"
           component={MatchField}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PlayerLevel"
+          component={PlayerLevel}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

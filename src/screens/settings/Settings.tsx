@@ -27,7 +27,10 @@ export default function SettingScreen({ navigation }: Props) {
           title="Lapangan Pertandingan"
           onPress={() => navigation.push('MatchField')}
         />
-        <MenuItem title="Level Pemain" onPress={() => {}} />
+        <MenuItem
+          title="Level Pemain"
+          onPress={() => navigation.push('PlayerLevel')}
+        />
       </View>
     </Layout>
   );
