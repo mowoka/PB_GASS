@@ -1,9 +1,9 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { RootStackParamList } from '../types/navigation';
-import { Layout } from '../components/common/Layout';
-import { Header } from '../components/common/Header';
-import { MatchItem } from '../components/match/MatchItem';
+import { RootStackParamList } from '../../types/navigation';
+import { Layout } from '../../components/common/Layout';
+import { Header } from '../../components/common/Header';
+import { MatchItem } from '../../components/match/MatchItem';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

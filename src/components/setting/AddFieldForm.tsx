@@ -1,7 +1,7 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { Input } from '../common/Input';
 import { IField } from '../../stores/useSettings';
-import { cn } from '../../utils/func';
+import { Button } from '../common/Button';
 
 interface IAddFieldFormProps {
   field: IField;
@@ -49,16 +49,7 @@ export function AddFieldForm({
           }}
         />
       </View>
-      <TouchableOpacity
-        onPress={onSave}
-        disabled={isBtnDisable}
-        className={cn(
-          'h-[47px] w-full  flex justify-center items-center rounded-lg',
-          isBtnDisable ? 'bg-primary-gray' : 'bg-black',
-        )}
-      >
-        <Text className="text-white font-roboto-bold text-base">Simpan</Text>
-      </TouchableOpacity>
+      <Button isBtnDisable={isBtnDisable} btnText="Simpan" onPress={onSave} />
     </View>
   );
 }

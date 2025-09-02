@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import CurvedBottomBarNavigator from './CurvedBottomBarNavigator';
-import CreateMatchScreen from '../screens/CreateMatch';
+import CreateMatchScreen from '../screens/matches/CreateMatch';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Matches from '../screens/Matches';
+import Matches from '../screens/matches/Matches';
 import AccountSetting from '../screens/settings/AccountSetting';
 import MatchField from '../screens/settings/MatchField';
 import PlayerLevel from '../screens/settings/PlayerLevel';
