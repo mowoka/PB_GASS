@@ -29,6 +29,7 @@ export function AddFieldForm({
           }}
         />
         <Input
+          containerClass="mt-5"
           label="Link Map Alamat Lapangan"
           placeholder="Input Link Map Alamat Lapangan"
           value={field.link_map}
@@ -38,6 +39,7 @@ export function AddFieldForm({
           }}
         />
         <Input
+          containerClass="mt-5"
           label="Alamat Lapangan"
           placeholder="Input Alamat Lapangan"
           value={field.address}

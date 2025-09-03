@@ -10,6 +10,8 @@ import { Calendar } from '../../components/common/Calendar';
 import { InputTimePicker } from '../../components/common/InputTimePicker';
 import { useCreateMatchHooks } from '../../hooks/matches/useCreateMatch';
 import { FieldOptions } from '../../components/common/FieldOptions';
+import { ParticipanInput } from '../../components/match/ParticipanInput';
+import { AddParticipantForm } from '../../components/match/AddParticipantForm';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -26,9 +28,12 @@ export default function CreateMatchScreen({ navigation }: Props) {
     match,
     fields,
     bottomMenu,
+    bottomModalHeight,
     openBottomMenu,
     handleSelectField,
     handleSelectDate,
+    addParticipant,
+    deleteParticipant,
   } = useCreateMatchHooks({
     openModal,
   });
@@ -36,7 +41,7 @@ export default function CreateMatchScreen({ navigation }: Props) {
   return (
     <BottomModal
       ref={bottomSheetModalRef}
-      height={450}
+      height={bottomModalHeight}
       modalChildren={
         <>
           {bottomMenu === 'calendar' && (
@@ -53,6 +58,14 @@ export default function CreateMatchScreen({ navigation }: Props) {
               options={fields}
               onPress={value => {
                 handleSelectField(value);
+                closeModal();
+              }}
+            />
+          )}
+          {bottomMenu === 'participant' && (
+            <AddParticipantForm
+              onSave={form => {
+                addParticipant(form);
                 closeModal();
               }}
             />
@@ -81,6 +94,13 @@ export default function CreateMatchScreen({ navigation }: Props) {
             value={match.field.name}
             placeholder="Pilih Tempat Pertandingan"
             onPress={() => openBottomMenu('field')}
+          />
+          <ParticipanInput
+            inputClass="mt-5"
+            label="Partisipasi"
+            onAddParticipant={() => openBottomMenu('participant')}
+            participants={match.participants}
+            onDeleteParticipant={deleteParticipant}
           />
         </View>
       </Layout>

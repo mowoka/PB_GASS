@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { cn } from '../../utils/func';
 
 interface InputButtonProps {
-  label: string;
+  label?: string;
   value?: string;
   onPress: () => void;
   inputClass?: string;
@@ -19,11 +19,11 @@ export function InputButton({
   const isValueEmpty = value === undefined || value === '';
   return (
     <View className={cn(`w-full`, inputClass)}>
-      <Text className="font-roboto-bold text-base">{label}</Text>
-      <View className="mt-2">
+      {label && <Text className="font-roboto-bold text-base">{label}</Text>}
+      <View className={cn(label && 'mt-2')}>
         <TouchableOpacity
           onPress={onPress}
-          className="w-full border border-gray-400 rounded-md p-3 min-h-[47px]"
+          className="w-full border border-primary-gray rounded-md p-3 min-h-[47px]"
         >
           <Text
             className={cn(

@@ -1,6 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IField } from "./useSettings";
+import { IField, IPlayerLevel } from "./useSettings";
+
+export type Gender = "Cowo" | "Cewe";
+
+export interface IParticipant {
+    id: string;
+    playerLevel: IPlayerLevel;
+    gender: Gender;
+    attendance: number;
+}
 
 export interface IMatch {
     id: string;
@@ -8,6 +17,7 @@ export interface IMatch {
     start_time: string;
     end_time: string;
     field: IField;
+    participants: IParticipant[];
 }
 
 export interface IMatchStore {

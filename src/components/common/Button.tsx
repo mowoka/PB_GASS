@@ -5,14 +5,16 @@ interface ButtonProps {
   btnText: string;
   onPress: () => void;
   isBtnDisable?: boolean;
-  className?: string;
+  btnClass?: string;
+  variant?: 'contained' | 'outlined';
 }
 
 export function Button({
   onPress,
   btnText,
   isBtnDisable,
-  className = '',
+  btnClass: className = '',
+  variant = 'contained',
 }: ButtonProps) {
   return (
     <TouchableOpacity
@@ -20,11 +22,21 @@ export function Button({
       disabled={isBtnDisable}
       className={cn(
         'h-[47px] w-full  flex justify-center items-center rounded-lg',
-        isBtnDisable ? 'bg-primary-gray' : 'bg-black',
         className,
+        variant === 'outlined' && 'border border-black',
+        variant === 'contained' && 'bg-black',
+        isBtnDisable && 'bg-primary-gray',
       )}
     >
-      <Text className="text-white font-roboto-bold text-base">{btnText}</Text>
+      <Text
+        className={cn(
+          ' font-roboto-bold text-base',
+          variant === 'outlined' && 'text-black',
+          variant === 'contained' && 'text-white',
+        )}
+      >
+        {btnText}
+      </Text>
     </TouchableOpacity>
   );
 }
