@@ -1,12 +1,6 @@
 import { Text, View } from 'react-native';
 import { cn } from '../../utils/func';
-
-export type IStatus =
-  | 'Mendatang'
-  | 'Berlangsung'
-  | 'Selesai'
-  | 'Terlewat'
-  | 'Dibatalkan';
+import { IStatus } from '../../stores/useMatch';
 
 export function Status({ status }: { status: IStatus }) {
   const statusColors: Record<IStatus, string> = {

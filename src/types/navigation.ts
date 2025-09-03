@@ -1,3 +1,8 @@
+export interface IErrorForm {
+    show: boolean;
+    message: string;
+}
+
 export type RootStackParamList = {
     Home: undefined;
     Settings: undefined;

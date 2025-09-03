@@ -4,6 +4,14 @@ import { IField, IPlayerLevel } from "./useSettings";
 
 export type Gender = "Cowo" | "Cewe";
 
+export type IStatus =
+    | 'Mendatang'
+    | 'Berlangsung'
+    | 'Selesai'
+    | 'Terlewat'
+    | 'Dibatalkan';
+
+
 export interface IParticipant {
     id: string;
     playerLevel: IPlayerLevel;
@@ -17,6 +25,8 @@ export interface IMatch {
     start_time: string;
     end_time: string;
     field: IField;
+    total_field: number;
+    status: IStatus;
     participants: IParticipant[];
 }
 

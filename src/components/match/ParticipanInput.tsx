@@ -35,6 +35,13 @@ export function ParticipanInput({
         </TouchableOpacity>
       </View>
       <View className="mt-5">
+        {participants.length === 0 && (
+          <View className="">
+            <Text className="font-roboto-medium text-base text-center">
+              Partisipasi belum ada
+            </Text>
+          </View>
+        )}
         {participants.map((item, index) => {
           return (
             <ParticipanItem
