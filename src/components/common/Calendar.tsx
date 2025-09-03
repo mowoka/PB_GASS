@@ -5,8 +5,13 @@ import DateTimePicker, {
   useDefaultStyles,
 } from 'react-native-ui-datepicker';
 import { Button } from './Button';
+import { format } from 'date-fns';
 
-export function Calendar() {
+interface ICalendarProps {
+  onPress: (value?: string) => void;
+}
+
+export function Calendar({ onPress }: ICalendarProps) {
   const defaultStyles = useDefaultStyles();
   const [selected, setSelected] = useState<DateType>();
   return (
@@ -14,13 +19,20 @@ export function Calendar() {
       <DateTimePicker
         mode="single"
         date={selected}
-        onChange={({ date }) => setSelected(date)}
+        onChange={({ date }) => {
+          setSelected(date);
+        }}
         styles={defaultStyles}
       />
       <Button
         isBtnDisable={false}
         btnText="Simpan"
-        onPress={() => console.log({ selected: selected?.toString() })}
+        onPress={() => {
+          const date = selected?.toString();
+          if (date === undefined) return;
+          const d = format(date, 'dd MMMM yyyy');
+          onPress(d);
+        }}
       />
     </View>
   );

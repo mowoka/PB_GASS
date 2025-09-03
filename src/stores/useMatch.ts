@@ -1,0 +1,40 @@
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { IField } from "./useSettings";
+
+export interface IMatch {
+    id: string;
+    date: string;
+    start_time: string;
+    end_time: string;
+    field: IField;
+}
+
+export interface IMatchStore {
+    matches: IMatch[];
+}
+
+export interface IMatchActions {
+    setMatches: (match: IMatch) => void;
+}
+
+
+export const useMatchStore = create<IMatchStore & IMatchActions>()(
+    persist(
+        (set) => ({
+            matches: [],
+            setMatches: (match: IMatch) => set(state => {
+                const find_match = state.matches.find(m => m.id === match.id);
+                if (find_match) {
+                    return {
+                        matches: state.matches.map(m => (m.id === match.id ? match : m))
+                    };
+                }
+                return {
+                    matches: [...state.matches, match]
+                };
+            })
+        }),
+        { name: 'match' }
+    )
+)
