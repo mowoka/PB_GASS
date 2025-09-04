@@ -5,9 +5,13 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 interface InputTimePickerProps {
   inputClass: string;
+  onChange: (mode: 'start_time' | 'end_time', value: string) => void;
 }
 
-export function InputTimePicker({ inputClass }: InputTimePickerProps) {
+export function InputTimePicker({
+  inputClass,
+  onChange,
+}: InputTimePickerProps) {
   const [mode, setMode] = useState<'start_time' | 'end_time'>('start_time');
   const [time, setTime] = useState<{ start_time?: Date; end_time?: Date }>({
     start_time: undefined,
@@ -40,6 +44,7 @@ export function InputTimePicker({ inputClass }: InputTimePickerProps) {
             ...prev,
             [mode]: date,
           }));
+          onChange(mode, getTime(date));
           hideDatePicker();
         }}
         onCancel={hideDatePicker}

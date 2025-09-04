@@ -23,7 +23,13 @@ const DEFAULT_MATCH: IMatch = {
 
 export type BottomMenu = 'calendar' | 'field' | 'participant';
 
-export function useCreateMatchHooks({ openModal }: { openModal: () => void }) {
+export function useCreateMatchHooks({
+  openModal,
+  backButton,
+}: {
+  openModal: () => void;
+  backButton: () => void;
+}) {
   const fields = useSettingStore(state => state.fields);
   const addMatch = useMatchStore(state => state.setMatches);
 
@@ -53,6 +59,13 @@ export function useCreateMatchHooks({ openModal }: { openModal: () => void }) {
 
   const handleSelectDate = (date: string) => {
     setMatch(prev => ({ ...prev, date }));
+  };
+
+  const handleOnChangeDateTime = (
+    mode: 'start_time' | 'end_time',
+    value: string,
+  ) => {
+    setMatch(prev => ({ ...prev, [mode]: value }));
   };
 
   const addParticipant = (form: IParticipant) => {
@@ -110,6 +123,7 @@ export function useCreateMatchHooks({ openModal }: { openModal: () => void }) {
     data.id = Date.now().toString();
     addMatch(data);
     setMatch(DEFAULT_MATCH);
+    backButton();
   };
 
   return {
@@ -124,6 +138,7 @@ export function useCreateMatchHooks({ openModal }: { openModal: () => void }) {
     addParticipant,
     deleteParticipant,
     handleOnChange,
+    handleOnChangeDateTime,
     onSubmit,
   };
 }

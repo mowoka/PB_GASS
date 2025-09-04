@@ -37,9 +37,11 @@ export default function CreateMatchScreen({ navigation }: Props) {
     addParticipant,
     deleteParticipant,
     handleOnChange,
+    handleOnChangeDateTime,
     onSubmit,
   } = useCreateMatchHooks({
     openModal,
+    backButton: () => navigation.goBack(),
   });
 
   return (
@@ -98,7 +100,10 @@ export default function CreateMatchScreen({ navigation }: Props) {
             onPress={() => openBottomMenu('calendar')}
             placeholder="Pilih Tanggal Pertandingan"
           />
-          <InputTimePicker inputClass="mt-5" />
+          <InputTimePicker
+            inputClass="mt-5"
+            onChange={handleOnChangeDateTime}
+          />
           <InputButton
             inputClass="mt-5"
             label="Tempat Pertandingan"
