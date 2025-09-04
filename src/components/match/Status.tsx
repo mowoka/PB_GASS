@@ -13,7 +13,7 @@ export function Status({ status }: { status: IStatus }) {
 
   return (
     <View className={cn(`px-3 py-1 rounded-full`, statusColors[status])}>
-      <Text className="text-white font-bold text-xs">{status}</Text>
+      <Text className="text-white font-roboto-bold text-xs">{status}</Text>
     </View>
   );
 }

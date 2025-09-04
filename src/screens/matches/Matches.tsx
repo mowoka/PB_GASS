@@ -20,12 +20,20 @@ export default function Matches({ navigation }: Props) {
 
   return (
     <Layout safeView={false}>
-      <Header title="Pertandigan" onPress={() => navigation.goBack()} />
+      <Header title="Pertandingan" onPress={() => navigation.goBack()} />
       <View className="flex-1 bg-white">
         <ScrollView>
           <View className="p-5">
             {matchs.map((item, index) => {
-              return <MatchItem key={index} match={item} />;
+              return (
+                <MatchItem
+                  key={index}
+                  match={item}
+                  onPress={() =>
+                    navigation.push('MatchDetail', { id: item.id })
+                  }
+                />
+              );
             })}
           </View>
         </ScrollView>
@@ -36,7 +44,7 @@ export default function Matches({ navigation }: Props) {
           className="w-full bg-primary-red h-[48px] rounded-lg flex justify-center items-center"
         >
           <Text className="text-white font-bold text-base">
-            Buat Pertandigan
+            Buat Pertandingan
           </Text>
         </TouchableOpacity>
       </View>

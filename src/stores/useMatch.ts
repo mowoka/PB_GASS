@@ -37,12 +37,13 @@ export interface IMatchStore {
 
 export interface IMatchActions {
     setMatches: (match: IMatch) => void;
+    findMatch: (id: string) => IMatch;
 }
 
 
 export const useMatchStore = create<IMatchStore & IMatchActions>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             matches: [
                 MATH_DUMMY,
             ],
@@ -56,7 +57,10 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                 return {
                     matches: [...state.matches, match]
                 };
-            })
+            }),
+            findMatch: (id: string) => {
+                return get().matches.find(item => item.id === id)!;
+            }
         }),
         { name: 'match' }
     )

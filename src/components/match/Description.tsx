@@ -9,14 +9,14 @@ export function Description({
   participant: IParticipant;
 }) {
   return (
-    <View className="mt-1.5 flex flex-row justify-start items-center">
+    <View className="pl-2 mt-1.5 flex flex-row justify-start items-center">
       <Text className="text-xs">{number}.</Text>
       <View className="ml-1 flex flex-row justify-start items-center">
-        <Text className="font-medium text-xs">{participant.gender}</Text>
-        <Text className="font-medium text-xs ml-1">
+        <Text className="font-roboto-medium text-xs">{participant.gender}</Text>
+        <Text className="font-roboto-medium text-xs ml-1">
           {participant.playerLevel.name}
         </Text>
-        <Text className="font-medium text-xs ml-1">
+        <Text className="font-roboto-medium text-xs ml-1">
           {participant.attendance} Orang
         </Text>
       </View>
