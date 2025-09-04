@@ -4,6 +4,7 @@ import { RootStackParamList } from '../../types/navigation';
 import { Layout } from '../../components/common/Layout';
 import { Header } from '../../components/common/Header';
 import { MatchItem } from '../../components/match/MatchItem';
+import { useMatchHooks } from '../../hooks/matches/useMatch';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -15,18 +16,17 @@ interface Props {
 }
 
 export default function Matches({ navigation }: Props) {
+  const { matchs } = useMatchHooks();
+
   return (
     <Layout safeView={false}>
       <Header title="Pertandigan" onPress={() => navigation.goBack()} />
       <View className="flex-1 bg-white">
         <ScrollView>
           <View className="p-5">
-            <MatchItem />
-            <MatchItem />
-            <MatchItem />
-            <MatchItem />
-            <MatchItem />
-            <MatchItem />
+            {matchs.map((item, index) => {
+              return <MatchItem key={index} match={item} />;
+            })}
           </View>
         </ScrollView>
       </View>
