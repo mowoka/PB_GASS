@@ -41,6 +41,7 @@ export function MatchDetailScreen({ navigation }: Props) {
         <Divider dividerClass="mt-5" />
         <MatchDescription
           field={match.field}
+          status={match.status}
           date={match.date}
           start_time={match.start_time}
           end_time={match.end_time}

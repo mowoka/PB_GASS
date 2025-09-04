@@ -13,11 +13,13 @@ import Time from '../../assets/icons/time.png';
 import Person from '../../assets/icons/person.png';
 import AddressIcon from '../../assets/icons/address.png';
 import { IField } from '../../stores/useSettings';
-import { IParticipant } from '../../stores/useMatch';
+import { IParticipant, IStatus } from '../../stores/useMatch';
 import { getTotalParticipants } from '../../utils/func';
+import { Status } from './Status';
 
 interface IMatchDescriptionProps {
   field: IField;
+  status: IStatus;
   date: string;
   start_time: string;
   end_time: string;
@@ -27,6 +29,7 @@ interface IMatchDescriptionProps {
 
 export function MatchDescription({
   field,
+  status,
   date,
   start_time,
   end_time,
@@ -35,6 +38,11 @@ export function MatchDescription({
 }: IMatchDescriptionProps) {
   return (
     <View className="w-full relative">
+      <View className="absolute top-0 right-5">
+        <View className="w-[120px] h-[60px] bg-white border-b-2 border-l-2 border-r-2 border-primary-gray rounded-b-lg flex justify-center items-center px-2">
+          <Status status={status} />
+        </View>
+      </View>
       <View className="p-5">
         <Cotent
           icon={SportBuilding}
