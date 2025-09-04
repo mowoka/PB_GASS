@@ -57,7 +57,7 @@ export function MatchDescription({
         <Cotent icon={AddressIcon} name={field.address} />
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <View className="flex flex-row justify-center items-center pl-2.5">
+        <View className="flex flex-row justify-center items-center pl-4">
           {participants.map((item, index) => {
             return <ParticipantTagItem key={index} participant={item} />;
           })}
@@ -85,7 +85,7 @@ function Cotent({ icon, name }: { icon: ImageSourcePropType; name: string }) {
 
 function ParticipantTagItem({ participant }: { participant: IParticipant }) {
   return (
-    <View className="px-3 py-2 bg-black rounded-md mx-2.5">
+    <View className="px-3 py-2 bg-black rounded-md mx-1">
       <Text className="text-white font-roboto-bold">{`${participant.attendance} ${participant.gender} ${participant.playerLevel.name}`}</Text>
     </View>
   );

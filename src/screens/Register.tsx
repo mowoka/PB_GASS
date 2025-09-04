@@ -1,6 +1,17 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Text, View } from 'react-native';
+import { RootStackParamList } from '../types/navigation';
 
-export default function RegisterScreen() {
+type RegisterScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Register'
+>;
+
+interface Props {
+  navigation: RegisterScreenNavigationProp;
+}
+
+export default function RegisterScreen({ navigation }: Props) {
   return (
     <View className="flex-1 bg-gray-100 justify-center items-center p-6">
       <View className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
