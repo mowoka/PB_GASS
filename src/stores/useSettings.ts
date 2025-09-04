@@ -1,5 +1,7 @@
 import { create, } from "zustand";
 import { persist } from "zustand/middleware";
+import { FIELD_DUMMY } from "../utils/data/field_dummy";
+import { PLAYER_LEVEL } from "../utils/data/player_level_dummy";
 
 export interface IAccountSetting {
     name: string;
@@ -39,17 +41,8 @@ export const useSettingStore = create<ISettings & ISettingActions>()(
             account: {
                 name: '',
             },
-            fields: [
-                { id: 'gor-mbs', name: 'GOR MBS', link_map: 'https://maps.app.goo.gl/3sgcaB8cLmduuRKq5', address: '7977+VWH, Jongke Tengah, Sendangadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55285' },
-                { id: 'gor-ds', name: 'GOR DS', link_map: "https://maps.app.goo.gl/Wi5wvzxdzp5Xvuq88", address: 'Jl. Selokerto, Wonosobo, Sardonoharjo, Ngaglik, Sleman Regency, Special Region of Yogyakarta 55581' },
-            ],
-            playerLevels: [
-                { id: 'all-level', name: 'All Level' },
-                { id: 'pemula', name: 'Pemula' },
-                { id: 'menengah-bawah', name: 'Menengah Bawah' },
-                { id: 'menengah-atas', name: 'Menengah Atas' },
-                { id: 'pro', name: 'Pro' },
-            ],
+            fields: FIELD_DUMMY,
+            playerLevels: PLAYER_LEVEL,
             setAccountName: (name: string) => set((state) => ({ account: { ...state.account, name } })),
             setField: (field: IField) => set((state) => {
                 const existingField = state.fields.find((f) => f.id === field.id);
