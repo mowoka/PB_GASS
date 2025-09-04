@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import { format } from 'date-fns';
+import { format, isToday } from 'date-fns';
 
 /**
  * Utility function to merge Tailwind CSS classes.
@@ -12,4 +12,8 @@ export function cn(...inputs: (string | false | null | undefined)[]): string {
 export function getTime(date: Date | undefined): string {
     if (!date) return '-';
     return format(date, 'HH:mm');
+}
+
+export function isMatchToday(date: Date): boolean {
+    return isToday(date);
 }

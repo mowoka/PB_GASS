@@ -3,6 +3,9 @@ import { Header } from '../../components/common/Header';
 import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { useMatchDetailHooks } from '../../hooks/matches/useMatchDetail';
+import { View } from 'react-native';
+import { MatchSchedule } from '../../components/match/MatchSchedule';
+import { Divider } from '../../components/common/Divider';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -27,6 +30,15 @@ export function MatchDetailScreen({ navigation }: Props) {
         hideBackButton={false}
         onPress={() => navigation.goBack()}
       />
+      <View className="flex-1">
+        <MatchSchedule
+          date={match.date}
+          startTime={match.start_time}
+          endTime={match.end_time}
+          location={match.field.name}
+        />
+        <Divider dividerClass="mt-5" />
+      </View>
     </Layout>
   );
 }
