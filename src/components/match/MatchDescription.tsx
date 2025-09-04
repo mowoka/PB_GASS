@@ -38,7 +38,7 @@ export function MatchDescription({
 }: IMatchDescriptionProps) {
   return (
     <View className="w-full relative">
-      <View className="absolute top-0 right-5">
+      <View className="absolute top-0 right-10">
         <View className="w-[120px] h-[60px] bg-white border-b-2 border-l-2 border-r-2 border-primary-gray rounded-b-lg flex justify-center items-center px-2">
           <Status status={status} />
         </View>
