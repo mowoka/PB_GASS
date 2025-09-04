@@ -6,6 +6,7 @@ import { useMatchDetailHooks } from '../../hooks/matches/useMatchDetail';
 import { View } from 'react-native';
 import { MatchSchedule } from '../../components/match/MatchSchedule';
 import { Divider } from '../../components/common/Divider';
+import { MatchDescription } from '../../components/match/MatchDescription';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -36,6 +37,15 @@ export function MatchDetailScreen({ navigation }: Props) {
           startTime={match.start_time}
           endTime={match.end_time}
           location={match.field.name}
+        />
+        <Divider dividerClass="mt-5" />
+        <MatchDescription
+          field={match.field}
+          date={match.date}
+          start_time={match.start_time}
+          end_time={match.end_time}
+          total_field={match.total_field.toString()}
+          participants={match.participants}
         />
         <Divider dividerClass="mt-5" />
       </View>

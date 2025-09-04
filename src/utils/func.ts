@@ -1,5 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { format, isToday } from 'date-fns';
+import { IParticipant } from '../stores/useMatch';
 
 /**
  * Utility function to merge Tailwind CSS classes.
@@ -16,4 +17,12 @@ export function getTime(date: Date | undefined): string {
 
 export function isMatchToday(date: Date): boolean {
     return isToday(date);
+}
+
+export function getTotalParticipants(participants: IParticipant[]): number {
+    let totalParticipant = 0;
+    participants.map(item => {
+        totalParticipant += item.attendance;
+    })
+    return totalParticipant;
 }
