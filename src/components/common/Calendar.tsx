@@ -25,7 +25,7 @@ export function Calendar({ onPress }: ICalendarProps) {
         styles={defaultStyles}
       />
       <Button
-        isBtnDisable={false}
+        isBtnDisable={selected === undefined}
         btnText="Simpan"
         onPress={() => {
           const date = selected?.toString();

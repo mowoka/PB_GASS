@@ -38,6 +38,7 @@ export interface IMatchStore {
 export interface IMatchActions {
     setMatches: (match: IMatch) => void;
     findMatch: (id: string) => IMatch;
+    findMatchForRegister: (date?: string) => IMatch[];
 }
 
 
@@ -60,6 +61,12 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
             }),
             findMatch: (id: string) => {
                 return get().matches.find(item => item.id === id)!;
+            },
+            findMatchForRegister: (date?: string) => {
+                if (date === undefined) {
+                    return get().matches.filter(item => item.status === 'Mendatang');
+                }
+                return get().matches.filter(item => item.status === 'Mendatang' && item.date === date);
             }
         }),
         { name: 'match' }

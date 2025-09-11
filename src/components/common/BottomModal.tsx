@@ -48,6 +48,8 @@ const styles = StyleSheet.create({
     borderColor: '#F6F1E9',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
+    position: 'relative',
+    zIndex: 999,
   },
   contentContainer: {
     padding: 20,

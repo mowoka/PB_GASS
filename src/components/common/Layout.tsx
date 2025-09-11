@@ -1,10 +1,4 @@
-import {
-  ScrollView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
 
 export function Layout({
   children,
@@ -86,21 +80,19 @@ function LayoutWithSafeView({
   return (
     <View className="flex-1 bg-white">
       <StatusBar barStyle={'light-content'} />
-      <ScrollView>
-        <View className="flex-1 bg-gray-100 relative">{children}</View>
-        {showBottomBtn && (
-          <View className="bg-black px-5 pt-5 pb-8 w-full">
-            <TouchableOpacity
-              onPress={onPressBtn}
-              className="w-full bg-primary-red h-[48px] rounded-lg flex justify-center items-center"
-            >
-              <Text className="text-white font-bold text-base">
-                {bottomBtnText}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </ScrollView>
+      <View className="flex-1 bg-gray-100 relative">{children}</View>
+      {showBottomBtn && (
+        <View className="bg-black px-5 pt-5 pb-8 w-full">
+          <TouchableOpacity
+            onPress={onPressBtn}
+            className="w-full bg-primary-red h-[48px] rounded-lg flex justify-center items-center"
+          >
+            <Text className="text-white font-bold text-base">
+              {bottomBtnText}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }

@@ -1,6 +1,14 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { RootStackParamList } from '../types/navigation';
+import { Layout } from '../components/common/Layout';
+import { Header } from '../components/common/Header';
+import { useRegisterHooks } from '../hooks/register/useRegister';
+import { MatchItem } from '../components/register/MatchItem';
+import { Filter } from '../components/register/Filter';
+import { BottomModal } from '../components/common/BottomModal';
+import { useBottomModalHooks } from '../hooks/common/useBottomModal';
+import { Calendar } from '../components/common/Calendar';
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -12,16 +20,45 @@ interface Props {
 }
 
 export default function RegisterScreen({ navigation }: Props) {
+  const { openModal, closeModal, bottomSheetModalRef } = useBottomModalHooks();
+  const {
+    matches,
+    selectedDate,
+    handleSelectDate,
+    handleFilter,
+    handleResetFilter,
+  } = useRegisterHooks();
+
   return (
-    <View className="flex-1 bg-gray-100 justify-center items-center p-6">
-      <View className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
-        <Text className="text-3xl font-bold text-center text-gray-900 mb-4">
-          🏠 Register Screen Screen
-        </Text>
-        <Text className="text-center text-gray-600 mb-8">
-          Welcome to PBGass! This is your main dashboard.
-        </Text>
-      </View>
-    </View>
+    <BottomModal
+      ref={bottomSheetModalRef}
+      height={550}
+      modalChildren={
+        <Calendar
+          onPress={value => {
+            if (value === undefined) return;
+            handleSelectDate(value);
+            closeModal();
+          }}
+        />
+      }
+    >
+      <Layout safeView={true}>
+        <Header title="Pendaftaracdn" hideBackButton={true} />
+        <View className="flex-1">
+          <Filter
+            filterValue={selectedDate}
+            openDatePicker={openModal}
+            onFilter={handleFilter}
+            onResetFilter={handleResetFilter}
+          />
+          <View className="px-5 mt-10">
+            {matches.map((item, index) => {
+              return <MatchItem match={item} key={index} />;
+            })}
+          </View>
+        </View>
+      </Layout>
+    </BottomModal>
   );
 }
