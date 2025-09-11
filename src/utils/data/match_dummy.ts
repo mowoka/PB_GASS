@@ -14,18 +14,21 @@ export const MATH_DUMMY: IMatch = {
             playerLevel: { id: 'menengah-atas', name: 'Menengah Atas' },
             gender: 'Cowo',
             attendance: 8,
+            players: [],
         },
         {
             id: (Date.now() + 2).toString(),
             playerLevel: { id: 'all-level', name: 'All Level' },
             gender: 'Cowo',
             attendance: 4,
+            players: [],
         },
         {
             id: (Date.now() + 3).toString(),
             playerLevel: { id: 'all-level', name: 'All Level' },
             gender: 'Cewe',
             attendance: 6,
+            players: [],
         },
     ],
 }

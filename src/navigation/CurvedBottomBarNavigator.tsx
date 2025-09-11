@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import HomeScreen from '../screens/Home';
-import RegisterScreen from '../screens/Register';
+import RegisterScreen from '../screens/register/Register';
 import HistoryScreen from '../screens/History';
 import SettingsScreen from '../screens/settings/Settings';
 import Home from '../assets/icons/home.png';

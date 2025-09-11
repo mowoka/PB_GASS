@@ -12,12 +12,17 @@ export type IStatus =
     | 'Terlewat'
     | 'Dibatalkan';
 
+export interface IPlayer {
+    id: number;
+    name: string;
+}
 
 export interface IParticipant {
     id: string;
     playerLevel: IPlayerLevel;
     gender: Gender;
     attendance: number;
+    players: IPlayer[];
 }
 
 export interface IMatch {

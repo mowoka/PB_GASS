@@ -7,6 +7,7 @@ export type RootStackParamList = {
     Home: undefined;
     Settings: undefined;
     Register: undefined;
+    AddParticipant: { id: string };
     History: undefined;
     Matches: undefined;
     CreateMatch: undefined;

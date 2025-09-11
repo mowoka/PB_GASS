@@ -1,21 +1,8 @@
-import {
-  Image,
-  ImageSourcePropType,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-
-// Asset
-import SportBuilding from '../../assets/icons/sport-building.png';
-import Schedule from '../../assets/icons/schedule.png';
-import Time from '../../assets/icons/time.png';
-import Person from '../../assets/icons/person.png';
-import AddressIcon from '../../assets/icons/address.png';
+import { ScrollView, Text, View } from 'react-native';
 import { IField } from '../../stores/useSettings';
 import { IParticipant, IStatus } from '../../stores/useMatch';
-import { getTotalParticipants } from '../../utils/func';
 import { Status } from './Status';
+import { MatchDescriptionCard } from '../common/MatchDescription';
 
 interface IMatchDescriptionProps {
   field: IField;
@@ -43,19 +30,14 @@ export function MatchDescription({
           <Status status={status} />
         </View>
       </View>
-      <View className="p-5">
-        <Cotent
-          icon={SportBuilding}
-          name={`${field.name} (${total_field} Lapangan)`}
-        />
-        <Cotent icon={Schedule} name={date} />
-        <Cotent icon={Time} name={`${start_time} - ${end_time}`} />
-        <Cotent
-          icon={Person}
-          name={`${getTotalParticipants(participants)} Pemain`}
-        />
-        <Cotent icon={AddressIcon} name={field.address} />
-      </View>
+      <MatchDescriptionCard
+        field={field}
+        date={date}
+        start_time={start_time}
+        end_time={end_time}
+        total_field={total_field}
+        participants={participants}
+      />
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View className="flex flex-row justify-center items-center pl-4">
           {participants.map((item, index) => {
@@ -63,22 +45,6 @@ export function MatchDescription({
           })}
         </View>
       </ScrollView>
-    </View>
-  );
-}
-
-function Cotent({ icon, name }: { icon: ImageSourcePropType; name: string }) {
-  return (
-    <View className="w-full flex flex-row justify-start items-start mb-2">
-      <Image
-        source={icon}
-        width={48}
-        height={48}
-        className="w-[18px] h-[18px] mt-0.5"
-      />
-      <View className="ml-2">
-        <Text className="text-md font-roboto-regular">{name}</Text>
-      </View>
     </View>
   );
 }

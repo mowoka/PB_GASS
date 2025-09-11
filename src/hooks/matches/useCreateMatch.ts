@@ -8,6 +8,7 @@ export const DEFAULT_PARTICIPANT: IParticipant = {
   gender: 'Cowo',
   attendance: 0,
   playerLevel: { id: '', name: '' },
+  players: [],
 };
 
 const DEFAULT_MATCH: IMatch = {
