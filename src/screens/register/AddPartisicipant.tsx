@@ -6,6 +6,9 @@ import { useAddParticipantHooks } from '../../hooks/register/useAddParticipant';
 import { ScrollView, View } from 'react-native';
 import { MatchDescriptionCard } from '../../components/common/MatchDescription';
 import { Participan } from '../../components/register/Participant';
+import { BottomModal } from '../../components/common/BottomModal';
+import { useBottomModalHooks } from '../../hooks/common/useBottomModal';
+import { AddParticipantForm } from '../../components/register/AddParticipantForm';
 
 type AddParticipantScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -17,36 +20,63 @@ interface Props {
 }
 
 export default function AddParticipant({ navigation }: Props) {
-  const { match } = useAddParticipantHooks({
-    id:
-      navigation
-        .getState()
-        .routes.find(route => route.name === 'AddParticipant')?.params?.id ??
-      '',
-  });
+  const { openModal, closeModal, bottomSheetModalRef } = useBottomModalHooks();
+  const { match, form, handleAddParticipant, handleChangePlayerName } =
+    useAddParticipantHooks({
+      id:
+        navigation
+          .getState()
+          .routes.find(route => route.name === 'AddParticipant')?.params?.id ??
+        '',
+      onOpenModal: openModal,
+    });
 
   return (
-    <Layout safeView={true}>
-      <Header
-        title={match.field.name}
-        hideBackButton={false}
-        onPress={() => navigation.goBack()}
-      />
-      <ScrollView className="flex-1">
-        <View className="flex-1">
-          <MatchDescriptionCard
-            date={match.date}
-            start_time={match.start_time}
-            end_time={match.end_time}
-            field={match.field}
-            total_field={match.total_field.toString()}
-            participants={match.participants}
-          />
-          {match.participants.map((item, index) => {
-            return <Participan key={index} participant={item} />;
-          })}
-        </View>
-      </ScrollView>
-    </Layout>
+    <BottomModal
+      ref={bottomSheetModalRef}
+      height={200}
+      modalChildren={
+        <AddParticipantForm
+          form={form}
+          onChange={value => {
+            handleChangePlayerName(value);
+          }}
+          onSubmit={() => {
+            closeModal();
+          }}
+        />
+      }
+    >
+      <Layout safeView={true}>
+        <Header
+          title={match.field.name}
+          hideBackButton={false}
+          onPress={() => navigation.goBack()}
+        />
+        <ScrollView className="flex-1">
+          <View className="flex-1">
+            <MatchDescriptionCard
+              date={match.date}
+              start_time={match.start_time}
+              end_time={match.end_time}
+              field={match.field}
+              total_field={match.total_field.toString()}
+              participants={match.participants}
+            />
+            {match.participants.map((item, index) => {
+              return (
+                <Participan
+                  key={index}
+                  participant={item}
+                  onAddParticipant={(participantId, playerId) => {
+                    handleAddParticipant(item.id, participantId, playerId);
+                  }}
+                />
+              );
+            })}
+          </View>
+        </ScrollView>
+      </Layout>
+    </BottomModal>
   );
 }

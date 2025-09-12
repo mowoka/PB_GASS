@@ -44,6 +44,7 @@ export interface IMatchActions {
     setMatches: (match: IMatch) => void;
     findMatch: (id: string) => IMatch;
     findMatchForRegister: (date?: string) => IMatch[];
+    addPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => void;
 }
 
 
@@ -72,7 +73,28 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                     return get().matches.filter(item => item.status === 'Mendatang');
                 }
                 return get().matches.filter(item => item.status === 'Mendatang' && item.date === date);
-            }
+            },
+            addPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => set(state => {
+                const match = state.matches.find(m => m.id === matchId);
+                if (match) {
+                    const participant = match.participants.find(p => p.id === participantId);
+                    if (participant) {
+                        const updatedParticipant = {
+                            ...participant,
+                            players: [...participant.players, player]
+                        };
+                        const updatedMatch = {
+                            ...match,
+                            participants: match.participants.map(p => p.id === participantId ? updatedParticipant : p)
+                        };
+                        return {
+                            matches: state.matches.map(m => m.id === matchId ? updatedMatch : m)
+                        };
+                    }
+                }
+                return state;
+            })
+
         }),
         { name: 'match' }
     )

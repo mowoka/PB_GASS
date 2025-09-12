@@ -80,7 +80,7 @@ function LayoutWithSafeView({
   return (
     <View className="flex-1 bg-white">
       <StatusBar barStyle={'light-content'} />
-      <View className="flex-1 bg-gray-100 relative">{children}</View>
+      <View className="flex-1 bg-white relative">{children}</View>
       {showBottomBtn && (
         <View className="bg-black px-5 pt-5 pb-8 w-full">
           <TouchableOpacity
