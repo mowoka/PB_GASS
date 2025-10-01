@@ -3,7 +3,7 @@ import {
   BottomSheetView,
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -20,6 +20,8 @@ export function BottomModal({
 }) {
   const handleSheetChanges = useCallback(() => {}, []);
 
+  const snapPoints = useMemo(() => ['25%'], []);
+
   return (
     <GestureHandlerRootView>
       {children}
@@ -28,9 +30,15 @@ export function BottomModal({
           ref={ref}
           onChange={handleSheetChanges}
           handleStyle={styles.modalContainer}
+          snapPoints={snapPoints}
+          keyboardBehavior="interactive"
+          keyboardBlurBehavior="restore"
         >
           <BottomSheetView
-            style={{ ...styles.contentContainer, height: height }}
+            style={{
+              ...styles.contentContainer,
+              height: height,
+            }}
           >
             {modalChildren}
           </BottomSheetView>

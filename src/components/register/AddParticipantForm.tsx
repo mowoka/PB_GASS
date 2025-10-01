@@ -16,14 +16,16 @@ export function AddParticipantForm({
 }: iAddParticipantFormProps) {
   return (
     <View className="w-full flex-1 flex flex-col justify-between items-center">
-      <Input
-        label="Nama peserta"
-        placeholder="Input nama peserta"
-        value={form.player.name}
-        onChange={onChange}
-        containerClass="w-full"
-      />
-      <Button btnText="Simpan" onPress={onSubmit} />
+      <View className="flex-1 w-full">
+        <Input
+          label="Nama Peserta"
+          value={form.player.name}
+          onChange={value => onChange(value)}
+          placeholder="Input nama peserta"
+          mode="bottom-sheet"
+        />
+      </View>
+      <Button btnText="Simpan" onPress={onSubmit} btnClass="mt-5" />
     </View>
   );
 }
