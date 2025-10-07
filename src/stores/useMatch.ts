@@ -46,6 +46,7 @@ export interface IMatchActions {
     setMatches: (match: IMatch) => void;
     findMatch: (id: string) => IMatch;
     findMatchForRegister: (date?: string) => IMatch[];
+    findMatchForAttendance: (date?: string) => IMatch[];
     upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => void;
 }
 
@@ -69,9 +70,7 @@ const EMTPY_MATCH: IMatch = {
 export const useMatchStore = create<IMatchStore & IMatchActions>()(
     persist(
         (set, get) => ({
-            matches: [
-                MATH_DUMMY,
-            ],
+            matches: MATH_DUMMY,
             setMatches: (match: IMatch) => set(state => {
                 const find_match = state.matches.find(m => m.id === match.id);
                 if (find_match) {
@@ -92,6 +91,12 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                     return get().matches.filter(item => item.status === 'Mendatang');
                 }
                 return get().matches.filter(item => item.status === 'Mendatang' && item.date === date);
+            },
+            findMatchForAttendance: (date?: string) => {
+                if (date === undefined) {
+                    return get().matches.filter(item => item.status === 'Berlangsung');
+                }
+                return get().matches.filter(item => item.status === 'Berlangsung' && item.date === date);
             },
             upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => set(state => {
                 const match = state.matches.find(m => m.id === matchId);

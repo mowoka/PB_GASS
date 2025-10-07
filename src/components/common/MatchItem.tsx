@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { IMatch } from '../../stores/useMatch';
-import { Dot } from '../common/Dot';
+import { Dot } from './Dot';
 
 interface IMatchItemProps {
   match: IMatch;

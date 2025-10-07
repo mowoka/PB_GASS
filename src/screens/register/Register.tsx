@@ -4,7 +4,7 @@ import { RootStackParamList } from '../../types/navigation';
 import { Layout } from '../../components/common/Layout';
 import { Header } from '../../components/common/Header';
 import { useRegisterHooks } from '../../hooks/register/useRegister';
-import { MatchItem } from '../../components/register/MatchItem';
+import { MatchItem } from '../../components/common/MatchItem';
 import { Filter } from '../../components/register/Filter';
 import { BottomModal } from '../../components/common/BottomModal';
 import { useBottomModalHooks } from '../../hooks/common/useBottomModal';
