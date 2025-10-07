@@ -11,7 +11,7 @@ export function BottomModal({
   children,
   modalChildren,
   ref,
-  height = 400,
+  height,
 }: {
   children: React.ReactNode;
   modalChildren: React.ReactNode;
@@ -20,7 +20,12 @@ export function BottomModal({
 }) {
   const handleSheetChanges = useCallback(() => {}, []);
 
-  const snapPoints = useMemo(() => ['25%'], []);
+  const snapPoints = useMemo(() => {
+    if (height) {
+      return [height];
+    }
+    return ['25%'];
+  }, [height]);
 
   return (
     <GestureHandlerRootView>

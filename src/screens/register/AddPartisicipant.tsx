@@ -40,7 +40,6 @@ export default function AddParticipant({ navigation }: Props) {
   return (
     <BottomModal
       ref={bottomSheetModalRef}
-      height={200}
       modalChildren={
         <AddParticipantForm
           form={form}
