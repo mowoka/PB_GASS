@@ -1,7 +1,8 @@
 import { create, } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { FIELD_DUMMY } from "../utils/data/field_dummy";
 import { PLAYER_LEVEL } from "../utils/data/player_level_dummy";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export interface IAccountSetting {
     name: string;
@@ -68,6 +69,10 @@ export const useSettingStore = create<ISettings & ISettingActions>()(
             }),
             deletePlayerLevel: (id: string) => set((state) => ({ playerLevels: state.playerLevels.filter((level) => level.id !== id) })),
         }),
-        { name: 'settings' }
+        {
+            name: 'settings',
+            storage: createJSONStorage(() => AsyncStorage),
+
+        }
     ),
 )

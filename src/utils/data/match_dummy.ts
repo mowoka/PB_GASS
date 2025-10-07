@@ -1,7 +1,7 @@
 import { IMatch } from "../../stores/useMatch";
 
 export const MATH_DUMMY: IMatch = {
-    id: Date.now().toString(),
+    id: 'match__01',
     date: '27 September 2025',
     start_time: '08:00',
     end_time: '10:00',
@@ -10,21 +10,21 @@ export const MATH_DUMMY: IMatch = {
     status: 'Mendatang',
     participants: [
         {
-            id: (Date.now() + 1).toString(),
+            id: 'participant__01',
             playerLevel: { id: 'menengah-atas', name: 'Menengah Atas' },
             gender: 'Cowo',
             attendance: 8,
             players: [],
         },
         {
-            id: (Date.now() + 2).toString(),
+            id: 'participant__02',
             playerLevel: { id: 'all-level', name: 'All Level' },
             gender: 'Cowo',
             attendance: 4,
             players: [],
         },
         {
-            id: (Date.now() + 3).toString(),
+            id: 'participant__03',
             playerLevel: { id: 'all-level', name: 'All Level' },
             gender: 'Cewe',
             attendance: 6,

@@ -21,15 +21,20 @@ interface Props {
 
 export default function AddParticipant({ navigation }: Props) {
   const { openModal, closeModal, bottomSheetModalRef } = useBottomModalHooks();
-  const { match, form, handleAddParticipant, handleChangePlayerName } =
-    useAddParticipantHooks({
-      id:
-        navigation
-          .getState()
-          .routes.find(route => route.name === 'AddParticipant')?.params?.id ??
-        '',
-      onOpenModal: openModal,
-    });
+  const {
+    match,
+    form,
+    handleAddParticipant,
+    handleChangePlayerName,
+    handleSubmitParticipant,
+  } = useAddParticipantHooks({
+    id:
+      navigation
+        .getState()
+        .routes.find(route => route.name === 'AddParticipant')?.params?.id ??
+      '',
+    onOpenModal: openModal,
+  });
 
   return (
     <BottomModal
@@ -42,6 +47,7 @@ export default function AddParticipant({ navigation }: Props) {
             handleChangePlayerName(value);
           }}
           onSubmit={() => {
+            handleSubmitParticipant();
             closeModal();
           }}
         />
@@ -69,7 +75,7 @@ export default function AddParticipant({ navigation }: Props) {
                   key={index}
                   participant={item}
                   onAddParticipant={(participantId, playerId) => {
-                    handleAddParticipant(item.id, participantId, playerId);
+                    handleAddParticipant(match.id, participantId, playerId);
                   }}
                 />
               );

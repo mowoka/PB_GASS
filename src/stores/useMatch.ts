@@ -1,7 +1,8 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { IField, IPlayerLevel } from "./useSettings";
 import { MATH_DUMMY } from "../utils/data/match_dummy";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Gender = "Cowo" | "Cewe";
 
@@ -48,6 +49,22 @@ export interface IMatchActions {
 }
 
 
+const EMTPY_MATCH: IMatch = {
+    id: '',
+    date: '',
+    start_time: '',
+    end_time: '',
+    field: {
+        id: '',
+        name: '',
+        link_map: '',
+        address: '',
+    },
+    total_field: 0,
+    status: 'Mendatang',
+    participants: [],
+}
+
 export const useMatchStore = create<IMatchStore & IMatchActions>()(
     persist(
         (set, get) => ({
@@ -66,7 +83,8 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                 };
             }),
             findMatch: (id: string) => {
-                return get().matches.find(item => item.id === id)!;
+                const match = get().matches.find(item => item.id === id);
+                return match ?? EMTPY_MATCH;
             },
             findMatchForRegister: (date?: string) => {
                 if (date === undefined) {
@@ -96,6 +114,9 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
             })
 
         }),
-        { name: 'match' }
+        {
+            name: 'match',
+            storage: createJSONStorage(() => AsyncStorage),
+        }
     )
 )
