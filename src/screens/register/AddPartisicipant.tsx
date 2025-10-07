@@ -27,6 +27,7 @@ export default function AddParticipant({ navigation }: Props) {
     handleAddParticipant,
     handleChangePlayerName,
     handleSubmitParticipant,
+    handleEditParticipant,
   } = useAddParticipantHooks({
     id:
       navigation
@@ -77,6 +78,14 @@ export default function AddParticipant({ navigation }: Props) {
                   onAddParticipant={(participantId, playerId) => {
                     handleAddParticipant(match.id, participantId, playerId);
                   }}
+                  onEditParticipant={(participantId, playerId, playerName) =>
+                    handleEditParticipant(
+                      match.id,
+                      participantId,
+                      playerId,
+                      playerName,
+                    )
+                  }
                 />
               );
             })}

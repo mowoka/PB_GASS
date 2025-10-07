@@ -18,7 +18,7 @@ const DEFAULT_FORM: IAddParticipantForm = {
 
 export function useAddParticipantHooks({ id, onOpenModal }: { id: string, onOpenModal: () => void }) {
     const findMatch = useMatchStore(state => state.findMatch);
-    const addPlayerParticipant = useMatchStore(state => state.addPlayerParticipant);
+    const upsertPlayerParticipant = useMatchStore(state => state.upsertPlayerParticipant);
     const match = findMatch(id);
 
     const [form, setForm] = useState<IAddParticipantForm>(DEFAULT_FORM);
@@ -34,10 +34,14 @@ export function useAddParticipantHooks({ id, onOpenModal }: { id: string, onOpen
     }
 
     const handleSubmitParticipant = () => {
-        console.log({ form });
-        addPlayerParticipant(form.matchId, form.participantId, form.player);
+        upsertPlayerParticipant(form.matchId, form.participantId, form.player);
         setForm(DEFAULT_FORM);
     }
 
-    return { match, form, handleAddParticipant, handleChangePlayerName, handleSubmitParticipant };
+    const handleEditParticipant = (matchId: string, participantId: string, playerId: number, name: string) => {
+        setForm(prev => ({ ...prev, matchId, participantId, player: { ...prev.player, id: playerId, name } }));
+        onOpenModal();
+    }
+
+    return { match, form, handleAddParticipant, handleChangePlayerName, handleSubmitParticipant, handleEditParticipant };
 }

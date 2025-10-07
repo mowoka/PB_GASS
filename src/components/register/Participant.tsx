@@ -8,11 +8,17 @@ import AddIcon from '../../assets/icons/add.png';
 interface IParticipanProps {
   participant: IParticipant;
   onAddParticipant: (participantId: string, playerId: number) => void;
+  onEditParticipant: (
+    participantId: string,
+    playerId: number,
+    playerName: string,
+  ) => void;
 }
 
 export function Participan({
   participant,
   onAddParticipant,
+  onEditParticipant,
 }: IParticipanProps) {
   const findPlayer = (id: number): IPlayer => {
     const player = participant.players.find(p => p.id === id);
@@ -29,6 +35,9 @@ export function Participan({
           number={i + 1}
           player={player}
           onPress={() => onAddParticipant(participant.id, i + 1)}
+          onEdit={() =>
+            onEditParticipant(participant.id, player.id, player.name)
+          }
         />,
       );
     }
@@ -62,17 +71,25 @@ function Player({
   number,
   player,
   onPress,
+  onEdit,
 }: {
   number: number;
   player: IPlayer;
   onPress: () => void;
+  onEdit: () => void;
 }) {
   const isPlayerEmpty = player.id === 0 && player.name === '';
   return (
     <View className="w-full flex flex-row justify-start items-center mb-3">
-      <Text className="font-roboto-regular text-base">
-        {number}. {player.name}
-      </Text>
+      <TouchableOpacity
+        onPress={onEdit}
+        className="flex flex-row justify-start items-center"
+      >
+        <Text className="font-roboto-regular text-base">{number}.</Text>
+        <Text className="font-roboto-regular text-base ml-2">
+          {player.name}
+        </Text>
+      </TouchableOpacity>
       {isPlayerEmpty && (
         <TouchableOpacity
           onPress={onPress}
