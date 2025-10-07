@@ -9,6 +9,7 @@ import MatchField from '../screens/settings/MatchField';
 import PlayerLevel from '../screens/settings/PlayerLevel';
 import { MatchDetailScreen } from '../screens/matches/MatchDetail';
 import AddParticipant from '../screens/register/AddPartisicipant';
+import Attendence from '../screens/attendence/Attendence';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="AddParticipant"
           component={AddParticipant}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Attendance"
+          component={Attendence}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

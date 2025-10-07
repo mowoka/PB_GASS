@@ -16,6 +16,7 @@ export type IStatus =
 export interface IPlayer {
     id: number;
     name: string;
+    match_attendance: boolean;
 }
 
 export interface IParticipant {

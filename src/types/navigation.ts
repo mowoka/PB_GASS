@@ -15,6 +15,7 @@ export type RootStackParamList = {
     AccountSetting: undefined;
     MatchField: undefined;
     PlayerLevel: undefined;
+    Attendance: undefined;
 };
 
 declare global {

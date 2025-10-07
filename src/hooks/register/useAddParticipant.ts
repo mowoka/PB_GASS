@@ -13,6 +13,7 @@ const DEFAULT_FORM: IAddParticipantForm = {
     player: {
         id: 0,
         name: '',
+        match_attendance: false,
     }
 }
 
