@@ -34,9 +34,9 @@ export function SnackBarComponent({
               {showCancelBnt && (
                 <TouchableOpacity
                   onPress={onCancel}
-                  className="flex-1 ml-1 flex justify-center items-center h-[50px] border border-primary-red rounded-lg"
+                  className="flex-1 ml-1 flex justify-center items-center h-[50px] border border-black rounded-lg"
                 >
-                  <Text className="font-semibold text-primary-red">BATAL</Text>
+                  <Text className="font-semibold text-black">BATAL</Text>
                 </TouchableOpacity>
               )}
             </View>

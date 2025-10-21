@@ -6,6 +6,7 @@ import { useConfirmAttendance } from '../../hooks/attendance/useConfirmAttendanc
 import { ScrollView, View } from 'react-native';
 import { MatchDescriptionCard } from '../../components/common/MatchDescription';
 import { ParticipantItem } from '../../components/attendance/ParticipantItem';
+import { useSnackbar } from '../../providers/snakbar';
 
 type ConfirmAttendanceScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export default function ConfirmAttendance({ navigation }: Props) {
+  const { handleShow, handleClose } = useSnackbar();
   const { match, participants, onConfirmParticipant, onSubmit } =
     useConfirmAttendance({
       id:
@@ -34,7 +36,22 @@ export default function ConfirmAttendance({ navigation }: Props) {
       bottomBtnText="Simpan"
       onPressBtn={onSubmit}
     >
-      <Header title={match.field.name} onPress={() => navigation.goBack()} />
+      <Header
+        title={match.field.name}
+        onPress={() =>
+          handleShow({
+            show: true,
+            autohide: false,
+            title: 'Peringatan',
+            message: `Apakah Anda yakin untuk kembali? Data yang belum disimpan akan hilang.`,
+            onCancel: handleClose,
+            onPress: () => {
+              handleClose();
+              navigation.goBack();
+            },
+          })
+        }
+      />
       <ScrollView className="flex-1">
         <MatchDescriptionCard
           date={match.date}
