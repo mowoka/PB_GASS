@@ -1,9 +1,9 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { IParticipant, IPlayer } from '../../stores/useMatch';
-import { Dot } from '../common/Dot';
 import { JSX } from 'react';
 
 import AddIcon from '../../assets/icons/add.png';
+import { ParticipantTitle } from '../common/ParticipantTitle';
 
 interface IParticipanProps {
   participant: IParticipant;
@@ -22,7 +22,9 @@ export function Participan({
 }: IParticipanProps) {
   const findPlayer = (id: number): IPlayer => {
     const player = participant.players.find(p => p.id === id);
-    return player === undefined ? { id: 0, name: '' } : player;
+    return player === undefined
+      ? { id: 0, name: '', match_attendance: false }
+      : player;
   };
 
   const renderPlayers = (): JSX.Element[] => {
@@ -49,19 +51,7 @@ export function Participan({
 
   return (
     <View className="mb-5 px-5">
-      <View className="flex flex-row justify-start items-center">
-        <Text className="font-roboto-medium text-base">
-          {participant.gender}
-        </Text>
-        <Dot />
-        <Text className="font-roboto-medium text-base">
-          {participant.playerLevel.name}
-        </Text>
-        <Dot />
-        <Text className="font-roboto-medium text-base">
-          ( {participant.attendance} Pemain )
-        </Text>
-      </View>
+      <ParticipantTitle participant={participant} />
       <View className="mt-3">{participans.map(item => item)}</View>
     </View>
   );

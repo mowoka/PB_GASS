@@ -23,7 +23,15 @@ export default function Attendence({ navigation }: Props) {
       <Header title="Kehadiran" onPress={() => navigation.goBack()} />
       <View className="px-5 mt-10">
         {matches.map((item, index) => {
-          return <MatchItem match={item} key={index} onPress={() => {}} />;
+          return (
+            <MatchItem
+              match={item}
+              key={index}
+              onPress={() =>
+                navigation.push('ConfirmAttendance', { id: item.id })
+              }
+            />
+          );
         })}
       </View>
     </Layout>

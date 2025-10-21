@@ -16,6 +16,7 @@ export type RootStackParamList = {
     MatchField: undefined;
     PlayerLevel: undefined;
     Attendance: undefined;
+    ConfirmAttendance: { id: string };
 };
 
 declare global {
