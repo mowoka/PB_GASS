@@ -13,7 +13,7 @@ export function Button({
   onPress,
   btnText,
   isBtnDisable,
-  btnClass: className = '',
+  btnClass = '',
   variant = 'contained',
 }: ButtonProps) {
   return (
@@ -21,8 +21,8 @@ export function Button({
       onPress={onPress}
       disabled={isBtnDisable}
       className={cn(
-        'h-[47px] w-full  flex justify-center items-center rounded-lg',
-        className,
+        'h-[47px] w-full flex justify-center items-center rounded-lg',
+        btnClass,
         variant === 'outlined' && 'border border-black',
         variant === 'contained' && 'bg-black',
         isBtnDisable && 'bg-primary-gray',

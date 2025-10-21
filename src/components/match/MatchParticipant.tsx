@@ -1,0 +1,60 @@
+import { Text, View } from 'react-native';
+import { IParticipant } from '../../stores/useMatch';
+import { ParticipantTitle } from '../common/ParticipantTitle';
+import { Player } from './Player';
+import { Button } from '../common/Button';
+
+export function MatchParticipant({
+  participants,
+  onAddParticipant,
+  onConfirmAttendance,
+}: {
+  participants: IParticipant[];
+  onAddParticipant: () => void;
+  onConfirmAttendance: () => void;
+}) {
+  const isZeroParticipant = participants.length === 0;
+  return (
+    <View className="p-5">
+      {isZeroParticipant ? (
+        <ZeroParticipant />
+      ) : (
+        participants.map((participant, index) => {
+          return (
+            <View key={index} className="mb-2">
+              <ParticipantTitle participant={participant} />
+              {participant.players.map((player, pIndex) => {
+                return (
+                  <Player key={pIndex} player={player} number={pIndex + 1} />
+                );
+              })}
+            </View>
+          );
+        })
+      )}
+      <View className="mt-3 w-full">
+        <Button
+          btnText={'Konfirmasi Kehadiran'}
+          onPress={onConfirmAttendance}
+          variant="contained"
+        />
+        <Button
+          btnText={
+            isZeroParticipant ? 'Tambah Partisipasi' : 'Edit Partisipasi'
+          }
+          onPress={onAddParticipant}
+          variant="contained"
+          btnClass="mt-3"
+        />
+      </View>
+    </View>
+  );
+}
+
+function ZeroParticipant() {
+  return (
+    <View className="w-full flex justify-center items-center">
+      <Text>Belum ada Partisipasi</Text>
+    </View>
+  );
+}

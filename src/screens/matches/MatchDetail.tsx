@@ -3,10 +3,11 @@ import { Header } from '../../components/common/Header';
 import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { useMatchDetailHooks } from '../../hooks/matches/useMatchDetail';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { MatchSchedule } from '../../components/match/MatchSchedule';
 import { Divider } from '../../components/common/Divider';
 import { MatchDescription } from '../../components/match/MatchDescription';
+import { MatchParticipant } from '../../components/match/MatchParticipant';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -31,24 +32,35 @@ export function MatchDetailScreen({ navigation }: Props) {
         hideBackButton={false}
         onPress={() => navigation.goBack()}
       />
-      <View className="flex-1">
-        <MatchSchedule
-          date={match.date}
-          startTime={match.start_time}
-          endTime={match.end_time}
-          location={match.field.name}
-        />
-        <MatchDescription
-          field={match.field}
-          status={match.status}
-          date={match.date}
-          start_time={match.start_time}
-          end_time={match.end_time}
-          total_field={match.total_field.toString()}
-          participants={match.participants}
-        />
-        <Divider dividerClass="mt-5" />
-      </View>
+      <ScrollView className="flex-1">
+        <View className="flex-1">
+          <MatchSchedule
+            date={match.date}
+            startTime={match.start_time}
+            endTime={match.end_time}
+            location={match.field.name}
+          />
+          <MatchDescription
+            field={match.field}
+            status={match.status}
+            date={match.date}
+            start_time={match.start_time}
+            end_time={match.end_time}
+            total_field={match.total_field.toString()}
+            participants={match.participants}
+          />
+          <Divider dividerClass="mt-5" />
+          <MatchParticipant
+            participants={match.participants}
+            onAddParticipant={() =>
+              navigation.push('AddParticipant', { id: match.id })
+            }
+            onConfirmAttendance={() =>
+              navigation.push('ConfirmAttendance', { id: match.id })
+            }
+          />
+        </View>
+      </ScrollView>
     </Layout>
   );
 }
