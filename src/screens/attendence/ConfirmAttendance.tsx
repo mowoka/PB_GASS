@@ -17,16 +17,23 @@ interface Props {
 }
 
 export default function ConfirmAttendance({ navigation }: Props) {
-  const { match, participants } = useConfirmAttendance({
-    id:
-      navigation
-        .getState()
-        .routes.find(route => route.name === 'ConfirmAttendance')?.params?.id ??
-      '',
-  });
+  const { match, participants, onConfirmParticipant, onSubmit } =
+    useConfirmAttendance({
+      id:
+        navigation
+          .getState()
+          .routes.find(route => route.name === 'ConfirmAttendance')?.params
+          ?.id ?? '',
+      backButton: () => navigation.goBack(),
+    });
 
   return (
-    <Layout safeView={false}>
+    <Layout
+      safeView={false}
+      showBottomBtn={true}
+      bottomBtnText="Simpan"
+      onPressBtn={onSubmit}
+    >
       <Header title={match.field.name} onPress={() => navigation.goBack()} />
       <ScrollView className="flex-1">
         <MatchDescriptionCard
@@ -39,7 +46,13 @@ export default function ConfirmAttendance({ navigation }: Props) {
         />
         <View className="px-5">
           {participants.map((participant, index) => {
-            return <ParticipantItem key={index} participant={participant} />;
+            return (
+              <ParticipantItem
+                key={index}
+                participant={participant}
+                onConfirmParticipant={onConfirmParticipant}
+              />
+            );
           })}
         </View>
       </ScrollView>

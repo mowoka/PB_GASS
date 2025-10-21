@@ -47,6 +47,7 @@ export interface IMatchActions {
     findMatch: (id: string) => IMatch;
     findMatchForRegister: (date?: string) => IMatch[];
     findMatchForAttendance: (date?: string) => IMatch[];
+    saveMatchAttendance: (match: IMatch) => void
     upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => void;
 }
 
@@ -98,6 +99,15 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                 }
                 return get().matches.filter(item => item.status === 'Berlangsung' && item.date === date);
             },
+            saveMatchAttendance: (match: IMatch) => set(state => {
+                const findMatch = state.matches.find(m => m.id === match.id);
+                if (findMatch) {
+                    return {
+                        matches: state.matches.map(m => m.id === match.id ? match : m)
+                    }
+                }
+                return state
+            }),
             upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => set(state => {
                 const match = state.matches.find(m => m.id === matchId);
                 if (match) {
