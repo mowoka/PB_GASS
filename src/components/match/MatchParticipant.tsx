@@ -6,10 +6,16 @@ import { Button } from '../common/Button';
 
 export function MatchParticipant({
   participants,
+  showEditParticipant,
+  showConfirmAttendance,
+  disabled,
   onAddParticipant,
   onConfirmAttendance,
 }: {
   participants: IParticipant[];
+  showEditParticipant: boolean;
+  showConfirmAttendance: boolean;
+  disabled?: boolean;
   onAddParticipant: () => void;
   onConfirmAttendance: () => void;
 }) {
@@ -33,19 +39,25 @@ export function MatchParticipant({
         })
       )}
       <View className="mt-3 w-full">
-        <Button
-          btnText={'Konfirmasi Kehadiran'}
-          onPress={onConfirmAttendance}
-          variant="contained"
-        />
-        <Button
-          btnText={
-            isZeroParticipant ? 'Tambah Partisipasi' : 'Edit Partisipasi'
-          }
-          onPress={onAddParticipant}
-          variant="contained"
-          btnClass="mt-3"
-        />
+        {showConfirmAttendance && (
+          <Button
+            btnText={'Konfirmasi Kehadiran'}
+            onPress={onConfirmAttendance}
+            variant="contained"
+            isBtnDisable={disabled}
+          />
+        )}
+        {showEditParticipant && (
+          <Button
+            btnText={
+              isZeroParticipant ? 'Tambah Partisipasi' : 'Edit Partisipasi'
+            }
+            onPress={onAddParticipant}
+            variant="contained"
+            btnClass="mt-3"
+            isBtnDisable={disabled}
+          />
+        )}
       </View>
     </View>
   );

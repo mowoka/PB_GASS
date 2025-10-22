@@ -19,15 +19,20 @@ interface Props {
 
 export default function ConfirmAttendance({ navigation }: Props) {
   const { handleShow, handleClose } = useSnackbar();
-  const { match, participants, onConfirmParticipant, onSubmit } =
-    useConfirmAttendance({
-      id:
-        navigation
-          .getState()
-          .routes.find(route => route.name === 'ConfirmAttendance')?.params
-          ?.id ?? '',
-      backButton: () => navigation.goBack(),
-    });
+  const {
+    match,
+    participants,
+    isParticipantChange,
+    onConfirmParticipant,
+    onSubmit,
+  } = useConfirmAttendance({
+    id:
+      navigation
+        .getState()
+        .routes.find(route => route.name === 'ConfirmAttendance')?.params?.id ??
+      '',
+    backButton: () => navigation.goBack(),
+  });
 
   return (
     <Layout
@@ -38,7 +43,11 @@ export default function ConfirmAttendance({ navigation }: Props) {
     >
       <Header
         title={match.field.name}
-        onPress={() =>
+        onPress={() => {
+          if (!isParticipantChange) {
+            navigation.goBack();
+            return;
+          }
           handleShow({
             show: true,
             autohide: false,
@@ -49,8 +58,8 @@ export default function ConfirmAttendance({ navigation }: Props) {
               handleClose();
               navigation.goBack();
             },
-          })
-        }
+          });
+        }}
       />
       <ScrollView className="flex-1">
         <MatchDescriptionCard

@@ -8,6 +8,7 @@ import { MatchSchedule } from '../../components/match/MatchSchedule';
 import { Divider } from '../../components/common/Divider';
 import { MatchDescription } from '../../components/match/MatchDescription';
 import { MatchParticipant } from '../../components/match/MatchParticipant';
+import { ButtonActions } from '../../components/match/ButtonActions';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -19,7 +20,14 @@ interface Props {
 }
 
 export function MatchDetailScreen({ navigation }: Props) {
-  const { match } = useMatchDetailHooks({
+  const {
+    match,
+    showEditParticipant,
+    showConfirmAttendance,
+    isMatchExpired,
+    onStartMatch,
+    onEndMatch,
+  } = useMatchDetailHooks({
     id:
       navigation.getState().routes.find(route => route.name === 'MatchDetail')
         ?.params?.id ?? '',
@@ -52,6 +60,9 @@ export function MatchDetailScreen({ navigation }: Props) {
           <Divider dividerClass="mt-5" />
           <MatchParticipant
             participants={match.participants}
+            showEditParticipant={showEditParticipant}
+            showConfirmAttendance={showConfirmAttendance}
+            disabled={isMatchExpired}
             onAddParticipant={() =>
               navigation.push('AddParticipant', { id: match.id })
             }
@@ -59,8 +70,16 @@ export function MatchDetailScreen({ navigation }: Props) {
               navigation.push('ConfirmAttendance', { id: match.id })
             }
           />
+          <Divider dividerClass="" />
         </View>
       </ScrollView>
+      {!isMatchExpired && (
+        <ButtonActions
+          onStartMatch={onStartMatch}
+          onEndMatch={onEndMatch}
+          status={match.status}
+        />
+      )}
     </Layout>
   );
 }

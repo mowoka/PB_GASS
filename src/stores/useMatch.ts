@@ -49,6 +49,8 @@ export interface IMatchActions {
     findMatchForAttendance: (date?: string) => IMatch[];
     saveMatchAttendance: (match: IMatch) => void
     upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => void;
+    startMatch: (matchId: string) => void;
+    endMatch: (matchId: string) => void;
 }
 
 
@@ -134,6 +136,32 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                             matches: state.matches.map(m => m.id === matchId ? updatedMatch : m)
                         };
                     }
+                }
+                return state;
+            }),
+            startMatch: (matchId: string) => set(state => {
+                const match = state.matches.find(m => m.id === matchId);
+                if (match) {
+                    const updatedMatch = {
+                        ...match,
+                        status: 'Berlangsung' as IStatus
+                    };
+                    return {
+                        matches: state.matches.map(m => m.id === matchId ? updatedMatch : m)
+                    };
+                }
+                return state;
+            }),
+            endMatch: (matchId: string) => set(state => {
+                const match = state.matches.find(m => m.id === matchId);
+                if (match) {
+                    const updatedMatch = {
+                        ...match,
+                        status: 'Selesai' as IStatus
+                    };
+                    return {
+                        matches: state.matches.map(m => m.id === matchId ? updatedMatch : m)
+                    };
                 }
                 return state;
             }),

@@ -22,9 +22,9 @@ export function Button({
       disabled={isBtnDisable}
       className={cn(
         'h-[47px] w-full flex justify-center items-center rounded-lg',
-        btnClass,
         variant === 'outlined' && 'border border-black',
         variant === 'contained' && 'bg-black',
+        btnClass,
         isBtnDisable && 'bg-primary-gray',
       )}
     >

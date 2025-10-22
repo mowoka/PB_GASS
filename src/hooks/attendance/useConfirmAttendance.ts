@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { IMatch, useMatchStore } from "../../stores/useMatch";
 
 export function useConfirmAttendance({ id, backButton }: { id: string, backButton: () => void }) {
@@ -34,9 +34,30 @@ export function useConfirmAttendance({ id, backButton }: { id: string, backButto
         backButton();
     }
 
+    const isParticipantChange: boolean = useMemo(() => {
+        const originalMatch = findMatch(id);
+        for (let i = 0; i < match.participants.length; i++) {
+            const participant = match.participants[i];
+            const originalParticipant = originalMatch.participants.find(p => p.id === participant.id);
+            if (originalParticipant) {
+                for (let j = 0; j < participant.players.length; j++) {
+                    const player = participant.players[j];
+                    const originalPlayer = originalParticipant.players.find(pl => pl.id === player.id);
+                    if (originalPlayer) {
+                        if (player.match_attendance !== originalPlayer.match_attendance) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }, [findMatch, id, match.participants])
+
     return {
         match,
         participants: match.participants ?? [],
+        isParticipantChange,
         onConfirmParticipant,
         onSubmit,
     }

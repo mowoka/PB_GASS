@@ -1,12 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IMatch, useMatchStore } from "../../stores/useMatch";
 import { useIsFocused } from '@react-navigation/native'
 
 export function useMatchDetailHooks({ id }: { id: string }) {
     const isFocused = useIsFocused();
     const findMatch = useMatchStore(state => state.findMatch);
+    const startMatch = useMatchStore(state => state.startMatch);
+    const endMatch = useMatchStore(state => state.endMatch);
     const [match, setMatch] = useState<IMatch>(findMatch(id));
 
+    const onStartMatch = () => {
+        startMatch(id);
+        setMatch(findMatch(id));
+    }
+
+    const onEndMatch = () => {
+        endMatch(id);
+        setMatch(findMatch(id));
+    }
+
+    const showEditParticipant = useMemo(() => {
+        return match.status === 'Mendatang';
+    }, [match.status])
+
+    const showConfirmAttendance = useMemo(() => {
+        return match.status === 'Berlangsung';
+    }, [match.status])
 
     useEffect(() => {
         if (isFocused) {
@@ -14,5 +33,12 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         }
     }, [findMatch, id, isFocused])
 
-    return { match };
+    return {
+        match,
+        showEditParticipant,
+        showConfirmAttendance,
+        isMatchExpired: match.status === 'Terlewat',
+        onStartMatch,
+        onEndMatch
+    };
 }
