@@ -51,6 +51,7 @@ export interface IMatchActions {
     upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => void;
     startMatch: (matchId: string) => void;
     endMatch: (matchId: string) => void;
+    setMatchExpired: (matchId: string) => void;
 }
 
 
@@ -158,6 +159,19 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                     const updatedMatch = {
                         ...match,
                         status: 'Selesai' as IStatus
+                    };
+                    return {
+                        matches: state.matches.map(m => m.id === matchId ? updatedMatch : m)
+                    };
+                }
+                return state;
+            }),
+            setMatchExpired: (matchId: string) => set(state => {
+                const match = state.matches.find(m => m.id === matchId);
+                if (match) {
+                    const updatedMatch = {
+                        ...match,
+                        status: 'Terlewat' as IStatus
                     };
                     return {
                         matches: state.matches.map(m => m.id === matchId ? updatedMatch : m)

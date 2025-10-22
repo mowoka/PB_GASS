@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Status } from './Status';
 import { Description } from './Description';
 import { IMatch } from '../../stores/useMatch';
+import { isDateOverCurrent } from '../../utils/func';
 
 interface IMatchItemProps {
   match: IMatch;
@@ -9,6 +10,8 @@ interface IMatchItemProps {
 }
 
 export function MatchItem({ match, onPress }: IMatchItemProps) {
+  const isMatchExpired = isDateOverCurrent(new Date(match.date));
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -16,7 +19,7 @@ export function MatchItem({ match, onPress }: IMatchItemProps) {
     >
       <View className="w-full flex flex-row justify-between items-center">
         <Text className="text-base font-ubuntu-bold">{match.date}</Text>
-        <Status status={match.status} />
+        <Status status={isMatchExpired ? 'Terlewat' : match.status} />
       </View>
       <View className="w-full border-b border-primary-gray h-[1px] py-1" />
       <View className="mt-3">

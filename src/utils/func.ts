@@ -2,10 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { format, isToday } from 'date-fns';
 import { IParticipant } from '../stores/useMatch';
 
-/**
- * Utility function to merge Tailwind CSS classes.
- * Usage: cn('bg-red-500', condition && 'text-white', ...)
- */
+
 export function cn(...inputs: (string | false | null | undefined)[]): string {
     return twMerge(inputs.filter(Boolean).join(' '));
 }
@@ -25,4 +22,12 @@ export function getTotalParticipants(participants: IParticipant[]): number {
         totalParticipant += item.attendance;
     })
     return totalParticipant;
+}
+
+export function isDateOverCurrent(date: Date): boolean {
+    const currentDate = new Date();
+    const currentDateOnly = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    const providedDateOnly = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    return providedDateOnly > currentDateOnly;
 }

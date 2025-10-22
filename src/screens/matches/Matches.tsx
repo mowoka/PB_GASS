@@ -5,6 +5,7 @@ import { Layout } from '../../components/common/Layout';
 import { Header } from '../../components/common/Header';
 import { MatchItem } from '../../components/match/MatchItem';
 import { useMatchHooks } from '../../hooks/matches/useMatch';
+import { isDateOverCurrent } from '../../utils/func';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export default function Matches({ navigation }: Props) {
-  const { matchs } = useMatchHooks();
+  const { matchs, updateMatchExpired } = useMatchHooks();
 
   return (
     <Layout safeView={false}>
@@ -29,9 +30,15 @@ export default function Matches({ navigation }: Props) {
                 <MatchItem
                   key={index}
                   match={item}
-                  onPress={() =>
-                    navigation.push('MatchDetail', { id: item.id })
-                  }
+                  onPress={() => {
+                    if (item.status === 'Mendatang') {
+                      const isMatchExpired = isDateOverCurrent(
+                        new Date(item.date),
+                      );
+                      if (isMatchExpired) updateMatchExpired(item.id);
+                    }
+                    navigation.push('MatchDetail', { id: item.id });
+                  }}
                 />
               );
             })}
