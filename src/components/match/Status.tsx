@@ -5,7 +5,7 @@ import { IStatus } from '../../stores/useMatch';
 export function Status({ status }: { status: IStatus }) {
   const statusColors: Record<IStatus, string> = {
     Mendatang: 'bg-blue-600',
-    Berlangsung: 'bg-yellow-600',
+    Berlangsung: 'bg-rose-600',
     Selesai: 'bg-green-600',
     Terlewat: 'bg-gray-600',
     Dibatalkan: 'bg-red-600',

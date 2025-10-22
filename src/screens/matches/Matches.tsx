@@ -1,11 +1,12 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
 import { RootStackParamList } from '../../types/navigation';
 import { Layout } from '../../components/common/Layout';
 import { Header } from '../../components/common/Header';
 import { MatchItem } from '../../components/match/MatchItem';
 import { useMatchHooks } from '../../hooks/matches/useMatch';
 import { isDateOverCurrent } from '../../utils/func';
+import PlusWhite from '../../assets/icons/plus-white.png';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -21,7 +22,20 @@ export default function Matches({ navigation }: Props) {
 
   return (
     <Layout safeView={false}>
-      <Header title="Pertandingan" onPress={() => navigation.goBack()} />
+      <Header
+        title="Pertandingan"
+        onPress={() => navigation.goBack()}
+        showRightIcon={true}
+        rightIcon={
+          <Image
+            source={PlusWhite}
+            width={40}
+            height={40}
+            className="w-[35px] h-[35px]"
+          />
+        }
+        onPressRightIcon={() => navigation.push('CreateMatch')}
+      />
       <View className="flex-1 bg-white">
         <ScrollView>
           <View className="p-5">
@@ -44,16 +58,6 @@ export default function Matches({ navigation }: Props) {
             })}
           </View>
         </ScrollView>
-      </View>
-      <View className="bg-black px-5 pt-5 pb-8 w-full">
-        <TouchableOpacity
-          onPress={() => navigation.push('CreateMatch')}
-          className="w-full bg-primary-red h-[48px] rounded-lg flex justify-center items-center"
-        >
-          <Text className="text-white font-bold text-base">
-            Buat Pertandingan
-          </Text>
-        </TouchableOpacity>
       </View>
     </Layout>
   );

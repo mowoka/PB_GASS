@@ -20,6 +20,7 @@ export function MatchParticipant({
   onConfirmAttendance: () => void;
 }) {
   const isZeroParticipant = participants.length === 0;
+
   return (
     <View className="p-5">
       {isZeroParticipant ? (

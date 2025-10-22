@@ -9,7 +9,6 @@ import {
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import HomeScreen from '../screens/Home';
 import RegisterScreen from '../screens/register/Register';
-import HistoryScreen from '../screens/History';
 import SettingsScreen from '../screens/settings/Settings';
 import Home from '../assets/icons/home.png';
 import HomeFocus from '../assets/icons/home-focused.png';
@@ -20,6 +19,7 @@ import HistoryFocus from '../assets/icons/history-focused.png';
 import Settings from '../assets/icons/settings.png';
 import SettingsFocus from '../assets/icons/settings-focused.png';
 import Racket from '../assets/icons/racket.png';
+import Matches from '../screens/matches/Matches';
 
 interface TabBarProps {
   routeName: string;
@@ -41,8 +41,8 @@ const CurvedBottomBarNavigator: React.FC = () => {
       case 'Register':
         icon = selectedTab === 'Register' ? RegisterFocus : Register;
         break;
-      case 'History':
-        icon = selectedTab === 'History' ? HistoryFocus : History;
+      case 'Matches':
+        icon = selectedTab === 'Matches' ? HistoryFocus : History;
         break;
     }
     return (
@@ -116,8 +116,8 @@ const CurvedBottomBarNavigator: React.FC = () => {
         options={{ headerShown: false }}
       />
       <CurvedBottomBar.Screen
-        name="History"
-        component={HistoryScreen}
+        name="Matches"
+        component={Matches}
         position="RIGHT"
         options={{ headerShown: false }}
       />

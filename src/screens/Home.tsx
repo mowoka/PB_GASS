@@ -57,7 +57,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     {
       name: 'Bertanding',
       image: SportNet,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Matches'),
     },
     {
       name: 'Pembayaran',
@@ -77,7 +77,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   ];
   return (
     <Layout>
-      <WelcomeCard onCreateMatch={() => navigation.push('Matches')} />
+      <WelcomeCard onCreateMatch={() => navigation.push('CreateMatch')} />
       <Menu menu={MENU} />
       <Banner />
     </Layout>
