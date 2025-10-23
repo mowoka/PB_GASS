@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
 import { IPlayer } from '../../stores/useMatch';
 import { cn } from '../../utils/func';
+import { PaymentProof } from '../common/PaymentProof';
 
 export function Player({
   player,
@@ -10,6 +11,7 @@ export function Player({
   number: number;
 }) {
   const isConfirmAttendance = player.match_attendance;
+
   return (
     <View className="flex flex-row py-2 justify-start items-center">
       <Text
@@ -28,6 +30,9 @@ export function Player({
       >
         {player.name}
       </Text>
+      {player.payment.is_paid && (
+        <PaymentProof paymentMethod={player.payment.payment_method} />
+      )}
     </View>
   );
 }

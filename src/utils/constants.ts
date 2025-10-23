@@ -1,0 +1,1 @@
+export const MATCH_PAID_AMOUNT_PER_PLAYER = 20000;

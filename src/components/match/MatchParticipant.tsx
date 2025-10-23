@@ -26,7 +26,7 @@ export function MatchParticipant({
   const isZeroParticipant = participants.length === 0;
 
   return (
-    <View className="p-5">
+    <View className="p-5 bg-white">
       {isZeroParticipant ? (
         <ZeroParticipant />
       ) : (

@@ -9,6 +9,7 @@ import { Divider } from '../../components/common/Divider';
 import { MatchDescription } from '../../components/match/MatchDescription';
 import { MatchParticipant } from '../../components/match/MatchParticipant';
 import { ButtonActions } from '../../components/match/ButtonActions';
+import { PaymentResult } from '../../components/match/PaymentResult';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -24,8 +25,12 @@ export function MatchDetailScreen({ navigation }: Props) {
     match,
     showEditParticipant,
     showConfirmAttendance,
-    showPayment,
+    isMatchFinished,
     isMatchExpired,
+    showButtomBottomScreen,
+    totalEarnings,
+    qrisPaymentCount,
+    cashPaymentCount,
     onStartMatch,
     onEndMatch,
   } = useMatchDetailHooks({
@@ -58,12 +63,19 @@ export function MatchDetailScreen({ navigation }: Props) {
             total_field={match.total_field.toString()}
             participants={match.participants}
           />
-          <Divider dividerClass="mt-5" />
+          {!isMatchFinished && <Divider dividerClass="mt-5" />}
+          {isMatchFinished && (
+            <PaymentResult
+              totalEarnings={totalEarnings}
+              qrisPaymentCount={qrisPaymentCount}
+              cashPaymentCount={cashPaymentCount}
+            />
+          )}
           <MatchParticipant
             participants={match.participants}
             showEditParticipant={showEditParticipant}
             showConfirmAttendance={showConfirmAttendance}
-            showPayment={showPayment}
+            showPayment={isMatchFinished}
             disabled={isMatchExpired}
             onAddParticipant={() =>
               navigation.push('AddParticipant', { id: match.id })
@@ -71,12 +83,13 @@ export function MatchDetailScreen({ navigation }: Props) {
             onConfirmAttendance={() =>
               navigation.push('ConfirmAttendance', { id: match.id })
             }
-            onConfirmPayment={() => {}}
+            onConfirmPayment={() =>
+              navigation.push('ConfirmPayment', { id: match.id })
+            }
           />
-          <Divider dividerClass="" />
         </View>
       </ScrollView>
-      {!isMatchExpired && (
+      {showButtomBottomScreen && (
         <ButtonActions
           onStartMatch={onStartMatch}
           onEndMatch={onEndMatch}

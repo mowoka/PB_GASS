@@ -1,7 +1,7 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { IPlayer, PaymentMethod } from '../../stores/useMatch';
+import { Text, TouchableOpacity } from 'react-native';
+import { IPlayer } from '../../stores/useMatch';
 import { cn } from '../../utils/func';
-import Money from '../../assets/icons/money.png';
+import { PaymentProof } from '../common/PaymentProof';
 
 export function Player({
   number,
@@ -40,18 +40,5 @@ export function Player({
         <PaymentProof paymentMethod={player.payment.payment_method} />
       )}
     </TouchableOpacity>
-  );
-}
-
-function PaymentProof({ paymentMethod }: { paymentMethod?: PaymentMethod }) {
-  return (
-    <View className="ml-8 flex flex-row justify-start items-center">
-      <Image source={Money} className="w-5 h-5" />
-      {paymentMethod && (
-        <Text className="ml-3 font-ubuntu-medium text-green-600">
-          {paymentMethod}
-        </Text>
-      )}
-    </View>
   );
 }

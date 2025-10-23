@@ -31,3 +31,9 @@ export function isDateOverCurrent(date: Date): boolean {
 
     return providedDateOnly > currentDateOnly;
 }
+
+export function formatCurrency(amount: number): string {
+    if (isNaN(amount)) return 'Rp 0';
+
+    return 'Rp ' + amount.toLocaleString('id-ID');
+}

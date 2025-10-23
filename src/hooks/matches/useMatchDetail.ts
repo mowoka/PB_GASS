@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { IMatch, useMatchStore } from "../../stores/useMatch";
 import { useIsFocused } from '@react-navigation/native'
+import { MATCH_PAID_AMOUNT_PER_PLAYER } from "../../utils/constants";
 
 export function useMatchDetailHooks({ id }: { id: string }) {
     const isFocused = useIsFocused();
@@ -28,9 +29,56 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         return match.status === 'Berlangsung';
     }, [match.status])
 
-    const showPayment = useMemo(() => {
+    const isMatchFinished = useMemo(() => {
         return match.status === 'Selesai';
     }, [match.status])
+
+    const showButtomBottomScreen = useMemo(() => {
+        return match.status === 'Mendatang' || match.status === 'Berlangsung';
+    }, [match.status])
+
+    const totalEarnings = useMemo(() => {
+        let totalHasPlayersPaid = 0;
+
+        match.participants.forEach((participant) => {
+            participant.players.forEach((player) => {
+                if (player.payment.is_paid) {
+                    totalHasPlayersPaid += 1;
+                }
+            });
+        })
+
+        return totalHasPlayersPaid * MATCH_PAID_AMOUNT_PER_PLAYER;
+
+    }, [match.participants])
+
+    const qrisPaymentCount = useMemo(() => {
+        let count = 0;
+
+        match.participants.forEach((participant) => {
+            participant.players.forEach((player) => {
+                if (player.payment.is_paid && player.payment.payment_method === 'QRIS') {
+                    count += 1;
+                }
+            });
+        })
+
+        return count;
+    }, [match.participants])
+
+    const cashPaymentCount = useMemo(() => {
+        let count = 0;
+
+        match.participants.forEach((participant) => {
+            participant.players.forEach((player) => {
+                if (player.payment.is_paid && player.payment.payment_method === 'CASH') {
+                    count += 1;
+                }
+            });
+        })
+
+        return count;
+    }, [match.participants])
 
     useEffect(() => {
         if (isFocused) {
@@ -42,8 +90,12 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         match,
         showEditParticipant,
         showConfirmAttendance,
-        showPayment,
+        isMatchFinished,
         isMatchExpired: match.status === 'Terlewat',
+        showButtomBottomScreen,
+        totalEarnings,
+        qrisPaymentCount,
+        cashPaymentCount,
         onStartMatch,
         onEndMatch,
     };
