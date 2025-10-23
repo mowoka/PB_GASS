@@ -24,6 +24,7 @@ export function MatchDetailScreen({ navigation }: Props) {
     match,
     showEditParticipant,
     showConfirmAttendance,
+    showPayment,
     isMatchExpired,
     onStartMatch,
     onEndMatch,
@@ -62,6 +63,7 @@ export function MatchDetailScreen({ navigation }: Props) {
             participants={match.participants}
             showEditParticipant={showEditParticipant}
             showConfirmAttendance={showConfirmAttendance}
+            showPayment={showPayment}
             disabled={isMatchExpired}
             onAddParticipant={() =>
               navigation.push('AddParticipant', { id: match.id })
@@ -69,6 +71,7 @@ export function MatchDetailScreen({ navigation }: Props) {
             onConfirmAttendance={() =>
               navigation.push('ConfirmAttendance', { id: match.id })
             }
+            onConfirmPayment={() => {}}
           />
           <Divider dividerClass="" />
         </View>

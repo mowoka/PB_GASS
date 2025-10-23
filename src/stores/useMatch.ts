@@ -11,12 +11,20 @@ export type IStatus =
     | 'Berlangsung'
     | 'Selesai'
     | 'Terlewat'
-    | 'Dibatalkan';
+    | 'Dibatalkan'
+
+export type PaymentMethod = 'QRIS' | 'CASH';
+
+export interface IPayment {
+    is_paid: boolean;
+    payment_method?: PaymentMethod;
+}
 
 export interface IPlayer {
     id: number;
     name: string;
     match_attendance: boolean;
+    payment: IPayment;
 }
 
 export interface IParticipant {
@@ -44,9 +52,11 @@ export interface IMatchStore {
 
 export interface IMatchActions {
     setMatches: (match: IMatch) => void;
+    saveMatch: (match: IMatch) => void;
     findMatch: (id: string) => IMatch;
     findMatchForRegister: (date?: string) => IMatch[];
     findMatchForAttendance: (date?: string) => IMatch[];
+    findMatchForPayment: (date?: string) => IMatch[];
     saveMatchAttendance: (match: IMatch) => void
     upsertPlayerParticipant: (matchId: string, participantId: string, player: IPlayer) => void;
     startMatch: (matchId: string) => void;
@@ -86,6 +96,15 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                     matches: [...state.matches, match]
                 };
             }),
+            saveMatch: (match: IMatch) => set(state => {
+                const foundMatch = state.matches.find(m => m.id === match.id);
+                if (foundMatch) {
+                    return {
+                        matches: state.matches.map(m => m.id === match.id ? match : m)
+                    }
+                }
+                return state
+            }),
             findMatch: (id: string) => {
                 const match = get().matches.find(item => item.id === id);
                 return match ?? EMTPY_MATCH;
@@ -95,6 +114,12 @@ export const useMatchStore = create<IMatchStore & IMatchActions>()(
                     return get().matches.filter(item => item.status === 'Mendatang');
                 }
                 return get().matches.filter(item => item.status === 'Mendatang' && item.date === date);
+            },
+            findMatchForPayment: (date?: string) => {
+                if (date === undefined) {
+                    return get().matches.filter(item => item.status === 'Selesai');
+                }
+                return get().matches.filter(item => item.status === 'Selesai' && item.date === date);
             },
             findMatchForAttendance: (date?: string) => {
                 if (date === undefined) {

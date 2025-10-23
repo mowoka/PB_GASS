@@ -62,7 +62,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     {
       name: 'Pembayaran',
       image: Payment,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Payment'),
     },
     {
       name: 'Riwayat',

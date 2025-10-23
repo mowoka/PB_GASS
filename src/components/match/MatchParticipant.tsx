@@ -8,16 +8,20 @@ export function MatchParticipant({
   participants,
   showEditParticipant,
   showConfirmAttendance,
+  showPayment,
   disabled,
   onAddParticipant,
   onConfirmAttendance,
+  onConfirmPayment,
 }: {
   participants: IParticipant[];
   showEditParticipant: boolean;
   showConfirmAttendance: boolean;
+  showPayment: boolean;
   disabled?: boolean;
   onAddParticipant: () => void;
   onConfirmAttendance: () => void;
+  onConfirmPayment: () => void;
 }) {
   const isZeroParticipant = participants.length === 0;
 
@@ -40,25 +44,40 @@ export function MatchParticipant({
         })
       )}
       <View className="mt-3 w-full">
-        {showConfirmAttendance && (
+        {(
+          [
+            showConfirmAttendance && {
+              text: 'Konfirmasi Kehadiran',
+              onPress: onConfirmAttendance,
+              className: '',
+            },
+            showEditParticipant && {
+              text: isZeroParticipant
+                ? 'Tambah Partisipasi'
+                : 'Edit Partisipasi',
+              onPress: onAddParticipant,
+              className: 'mt-3',
+            },
+            showPayment && {
+              text: 'Konfirmasi Pembayaran',
+              onPress: onConfirmPayment,
+              className: 'mt-3',
+            },
+          ].filter(Boolean) as Array<{
+            text: string;
+            onPress: () => void;
+            className: string;
+          }>
+        ).map((btn, index) => (
           <Button
-            btnText={'Konfirmasi Kehadiran'}
-            onPress={onConfirmAttendance}
+            key={index}
+            btnText={btn.text}
+            onPress={btn.onPress}
             variant="contained"
+            btnClass={btn.className}
             isBtnDisable={disabled}
           />
-        )}
-        {showEditParticipant && (
-          <Button
-            btnText={
-              isZeroParticipant ? 'Tambah Partisipasi' : 'Edit Partisipasi'
-            }
-            onPress={onAddParticipant}
-            variant="contained"
-            btnClass="mt-3"
-            isBtnDisable={disabled}
-          />
-        )}
+        ))}
       </View>
     </View>
   );

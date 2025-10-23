@@ -16,6 +16,8 @@ export type RootStackParamList = {
     PlayerLevel: undefined;
     Attendance: undefined;
     ConfirmAttendance: { id: string };
+    Payment: undefined;
+    ConfirmPayment: { id: string };
 };
 
 declare global {

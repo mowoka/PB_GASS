@@ -19,12 +19,17 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         setMatch(findMatch(id));
     }
 
+
     const showEditParticipant = useMemo(() => {
         return match.status === 'Mendatang';
     }, [match.status])
 
     const showConfirmAttendance = useMemo(() => {
         return match.status === 'Berlangsung';
+    }, [match.status])
+
+    const showPayment = useMemo(() => {
+        return match.status === 'Selesai';
     }, [match.status])
 
     useEffect(() => {
@@ -37,8 +42,9 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         match,
         showEditParticipant,
         showConfirmAttendance,
+        showPayment,
         isMatchExpired: match.status === 'Terlewat',
         onStartMatch,
-        onEndMatch
+        onEndMatch,
     };
 }

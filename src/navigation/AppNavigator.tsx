@@ -11,6 +11,8 @@ import { MatchDetailScreen } from '../screens/matches/MatchDetail';
 import AddParticipant from '../screens/register/AddPartisicipant';
 import Attendence from '../screens/attendence/Attendence';
 import ConfirmAttendance from '../screens/attendence/ConfirmAttendance';
+import Payment from '../screens/payment/Payment';
+import ConfirmPayment from '../screens/payment/ConfirmPayment';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +68,16 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="ConfirmAttendance"
           component={ConfirmAttendance}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ConfirmPayment"
+          component={ConfirmPayment}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
