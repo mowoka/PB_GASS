@@ -67,12 +67,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     {
       name: 'Riwayat',
       image: History,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Matches'),
     },
     {
       name: 'Pengaturan',
       image: Setting,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Settings'),
     },
   ];
   return (

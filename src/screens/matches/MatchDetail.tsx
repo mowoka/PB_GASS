@@ -3,13 +3,14 @@ import { Header } from '../../components/common/Header';
 import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { useMatchDetailHooks } from '../../hooks/matches/useMatchDetail';
-import { ScrollView, View } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
 import { MatchSchedule } from '../../components/match/MatchSchedule';
 import { Divider } from '../../components/common/Divider';
 import { MatchDescription } from '../../components/match/MatchDescription';
 import { MatchParticipant } from '../../components/match/MatchParticipant';
 import { ButtonActions } from '../../components/match/ButtonActions';
 import { PaymentResult } from '../../components/match/PaymentResult';
+import Racket from '../../assets/icons/racket.png';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -27,6 +28,7 @@ export function MatchDetailScreen({ navigation }: Props) {
     showConfirmAttendance,
     isMatchFinished,
     isMatchExpired,
+    isMatchOngoing,
     showButtomBottomScreen,
     totalEarnings,
     qrisPaymentCount,
@@ -45,6 +47,16 @@ export function MatchDetailScreen({ navigation }: Props) {
         title={match.field.name}
         hideBackButton={false}
         onPress={() => navigation.goBack()}
+        showRightIcon={isMatchOngoing}
+        onPressRightIcon={() => {}}
+        rightIcon={
+          <Image
+            source={Racket}
+            width={40}
+            height={40}
+            className="w-[30px] h-[30px]"
+          />
+        }
       />
       <ScrollView className="flex-1">
         <View className="flex-1">

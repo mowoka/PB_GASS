@@ -11,7 +11,7 @@ export function PaymentResult({
   cashPaymentCount: number;
 }) {
   return (
-    <View className="w-full my-5">
+    <View className="w-full mt-5">
       <View className="w-full p-5 bg-black flex flex-col justify-center items-center">
         <Text className="text-white text-base font-roboto-medium">
           Pendapatan

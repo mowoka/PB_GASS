@@ -92,6 +92,7 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         showConfirmAttendance,
         isMatchFinished,
         isMatchExpired: match.status === 'Terlewat',
+        isMatchOngoing: match.status === 'Berlangsung',
         showButtomBottomScreen,
         totalEarnings,
         qrisPaymentCount,
