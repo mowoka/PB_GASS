@@ -3,7 +3,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { cn } from '../../utils/func';
 
 export interface IDropdown {
-  id: string;
+  id: string | number;
   name: string;
 }
 
@@ -26,8 +26,8 @@ export function InputDropdown({
 }: IDropdownProps) {
   return (
     <View className={cn('w-full', inputClass)}>
-      <Text className="font-roboto-bold text-base">{label}</Text>
-      <View className="w-full mt-2">
+      {label && <Text className="font-roboto-bold text-base">{label}</Text>}
+      <View className={cn('w-full', label && 'mt-2')}>
         <Dropdown
           style={[styles.dropdown]}
           placeholderStyle={styles.placeholderStyle}

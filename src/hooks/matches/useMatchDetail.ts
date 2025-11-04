@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { IMatch, useMatchStore } from "../../stores/useMatch";
+import { IMatch, IPlayer, useMatchStore } from "../../stores/useMatch";
 import { useIsFocused } from '@react-navigation/native'
 import { MATCH_PAID_AMOUNT_PER_PLAYER } from "../../utils/constants";
 
@@ -19,7 +19,6 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         endMatch(id);
         setMatch(findMatch(id));
     }
-
 
     const showEditParticipant = useMemo(() => {
         return match.status === 'Mendatang';
@@ -80,6 +79,20 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         return count;
     }, [match.participants])
 
+    const standbyPlayer = useMemo(() => {
+        let tempStandbyPlayer: IPlayer[] = [];
+        match.participants.forEach((participant) => {
+            participant.players.forEach((player) => {
+                if (player.match_attendance) {
+                    tempStandbyPlayer.push(player);
+                }
+            })
+        })
+        tempStandbyPlayer = tempStandbyPlayer.sort((a, b) => b.total_played - a.total_played);
+        return tempStandbyPlayer;
+
+    }, [match.participants])
+
     useEffect(() => {
         if (isFocused) {
             setMatch(findMatch(id));
@@ -97,6 +110,7 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         totalEarnings,
         qrisPaymentCount,
         cashPaymentCount,
+        standbyPlayer,
         onStartMatch,
         onEndMatch,
     };

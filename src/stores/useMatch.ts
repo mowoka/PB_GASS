@@ -21,9 +21,10 @@ export interface IPayment {
 }
 
 export interface IPlayer {
-    id: number;
+    id: string;
     name: string;
     match_attendance: boolean;
+    total_played: number;
     payment: IPayment;
 }
 

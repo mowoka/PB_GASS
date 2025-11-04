@@ -11,6 +11,8 @@ import { MatchParticipant } from '../../components/match/MatchParticipant';
 import { ButtonActions } from '../../components/match/ButtonActions';
 import { PaymentResult } from '../../components/match/PaymentResult';
 import Racket from '../../assets/icons/racket.png';
+import { useSidebar } from '../../providers/sidebar';
+import { MatchForm } from '../../components/match/MatchForm';
 
 type MatchDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -22,6 +24,7 @@ interface Props {
 }
 
 export function MatchDetailScreen({ navigation }: Props) {
+  const { handleShow, isSidebarOpen, handleClose } = useSidebar();
   const {
     match,
     showEditParticipant,
@@ -33,6 +36,7 @@ export function MatchDetailScreen({ navigation }: Props) {
     totalEarnings,
     qrisPaymentCount,
     cashPaymentCount,
+    standbyPlayer,
     onStartMatch,
     onEndMatch,
   } = useMatchDetailHooks({
@@ -46,9 +50,17 @@ export function MatchDetailScreen({ navigation }: Props) {
       <Header
         title={match.field.name}
         hideBackButton={false}
-        onPress={() => navigation.goBack()}
+        onPress={() => (isSidebarOpen ? handleClose() : navigation.goBack())}
         showRightIcon={isMatchOngoing}
-        onPressRightIcon={() => {}}
+        onPressRightIcon={() =>
+          handleShow({
+            show: true,
+            title: 'Pertandingan',
+            content: (
+              <MatchForm onSubmit={handleClose} standbyPlayer={standbyPlayer} />
+            ),
+          })
+        }
         rightIcon={
           <Image
             source={Racket}

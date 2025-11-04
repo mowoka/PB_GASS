@@ -11,9 +11,14 @@ const DEFAULT_FORM: IAddParticipantForm = {
     matchId: '',
     participantId: '',
     player: {
-        id: 0,
+        id: '',
         name: '',
         match_attendance: false,
+        total_played: 0,
+        payment: {
+            is_paid: false,
+            payment_method: undefined,
+        },
     }
 }
 
@@ -25,7 +30,7 @@ export function useAddParticipantHooks({ id, onOpenModal }: { id: string, onOpen
     const [form, setForm] = useState<IAddParticipantForm>(DEFAULT_FORM);
 
 
-    const handleAddParticipant = (matchId: string, participantId: string, playerId: number) => {
+    const handleAddParticipant = (matchId: string, participantId: string, playerId: string) => {
         setForm(prev => ({ ...prev, matchId, participantId, player: { ...prev.player, id: playerId } }));
         onOpenModal();
     }
@@ -39,7 +44,7 @@ export function useAddParticipantHooks({ id, onOpenModal }: { id: string, onOpen
         setForm(DEFAULT_FORM);
     }
 
-    const handleEditParticipant = (matchId: string, participantId: string, playerId: number, name: string) => {
+    const handleEditParticipant = (matchId: string, participantId: string, playerId: string, name: string) => {
         setForm(prev => ({ ...prev, matchId, participantId, player: { ...prev.player, id: playerId, name } }));
         onOpenModal();
     }

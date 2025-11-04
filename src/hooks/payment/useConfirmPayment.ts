@@ -3,13 +3,13 @@ import { IMatch, PaymentMethod, useMatchStore } from "../../stores/useMatch"
 
 export interface IPaymentForm {
     participant_id: string;
-    player_id: number;
+    player_id: string;
     payment_method?: PaymentMethod;
 }
 
 const EMPTY_PAYMENT_FORM: IPaymentForm = {
     participant_id: '',
-    player_id: 0,
+    player_id: '',
     payment_method: undefined,
 }
 
@@ -19,7 +19,7 @@ export function useConfirmPaymentHooks({ id, openBottomModal, hideBottomModal }:
     const [match, setMatch] = useState<IMatch>(findMatch(id));
     const [form, setForm] = useState<IPaymentForm>(EMPTY_PAYMENT_FORM);
 
-    const handlePlayerPayment = (participant_id: string, player_id: number) => {
+    const handlePlayerPayment = (participant_id: string, player_id: string) => {
         setForm((prev) => ({ ...prev, participant_id, player_id }));
         openBottomModal();
     }

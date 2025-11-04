@@ -6,7 +6,7 @@ export function useConfirmAttendance({ id, backButton }: { id: string, backButto
     const saveMatchAttendance = useMatchStore(state => state.saveMatchAttendance);
     const [match, setMatch] = useState<IMatch>(findMatch(id));
 
-    const onConfirmParticipant = (participantId: string, playerId: number, value: boolean) => {
+    const onConfirmParticipant = (participantId: string, playerId: string, value: boolean) => {
         setMatch(prev => ({
             ...prev,
             participants: prev.participants.map(participant => {
