@@ -10,6 +10,7 @@ export function MatchParticipant({
   showConfirmAttendance,
   showPayment,
   disabled,
+  showTotalPlayed,
   onAddParticipant,
   onConfirmAttendance,
   onConfirmPayment,
@@ -19,6 +20,7 @@ export function MatchParticipant({
   showConfirmAttendance: boolean;
   showPayment: boolean;
   disabled?: boolean;
+  showTotalPlayed: boolean;
   onAddParticipant: () => void;
   onConfirmAttendance: () => void;
   onConfirmPayment: () => void;
@@ -36,7 +38,12 @@ export function MatchParticipant({
               <ParticipantTitle participant={participant} />
               {participant.players.map((player, pIndex) => {
                 return (
-                  <Player key={pIndex} player={player} number={pIndex + 1} />
+                  <Player
+                    key={pIndex}
+                    player={player}
+                    number={pIndex + 1}
+                    showTotalPlayed={showTotalPlayed && player.match_attendance}
+                  />
                 );
               })}
             </View>

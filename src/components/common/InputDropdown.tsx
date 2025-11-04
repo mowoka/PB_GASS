@@ -3,7 +3,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { cn } from '../../utils/func';
 
 export interface IDropdown {
-  id: string | number;
+  id: string;
   name: string;
 }
 

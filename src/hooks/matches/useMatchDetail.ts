@@ -8,6 +8,7 @@ export function useMatchDetailHooks({ id }: { id: string }) {
     const findMatch = useMatchStore(state => state.findMatch);
     const startMatch = useMatchStore(state => state.startMatch);
     const endMatch = useMatchStore(state => state.endMatch);
+    const saveMatch = useMatchStore(state => state.saveMatch);
     const [match, setMatch] = useState<IMatch>(findMatch(id));
 
     const onStartMatch = () => {
@@ -18,6 +19,19 @@ export function useMatchDetailHooks({ id }: { id: string }) {
     const onEndMatch = () => {
         endMatch(id);
         setMatch(findMatch(id));
+    }
+
+    const onSubmitMatch = (players: string[]) => {
+        const temp = { ...match };
+        temp.participants.forEach((participant) => {
+            participant.players.forEach((player) => {
+                if (players.includes(player.id)) {
+                    player.total_played = player.total_played + 1;
+                }
+            })
+        })
+        saveMatch(temp);
+        setMatch(temp);
     }
 
     const showEditParticipant = useMemo(() => {
@@ -88,7 +102,7 @@ export function useMatchDetailHooks({ id }: { id: string }) {
                 }
             })
         })
-        tempStandbyPlayer = tempStandbyPlayer.sort((a, b) => b.total_played - a.total_played);
+        tempStandbyPlayer = tempStandbyPlayer.sort((a, b) => a.total_played - b.total_played);
         return tempStandbyPlayer;
 
     }, [match.participants])
@@ -113,5 +127,6 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         standbyPlayer,
         onStartMatch,
         onEndMatch,
+        onSubmitMatch,
     };
 }

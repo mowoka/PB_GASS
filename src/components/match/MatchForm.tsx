@@ -2,11 +2,12 @@ import { ScrollView, Text, View } from 'react-native';
 import { ToggleButton } from '../common/ToggleButton';
 import { IDropdown, InputDropdown } from '../common/InputDropdown';
 import { Button } from '../common/Button';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { IPlayer } from '../../stores/useMatch';
+import React from 'react';
 
 interface IMatchFormProps {
-  onSubmit: () => void;
+  onSubmit: (players: string[]) => void;
   standbyPlayer: IPlayer[];
 }
 
@@ -43,39 +44,143 @@ export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
     setMatchType(isLeft ? 'single' : 'double');
   };
 
-  const handleChangePlayerForm = (
-    type: 'teamA' | 'teamB',
-    player: 'player1' | 'player2',
-    value: IDropdown,
-  ) => {
-    setPlayerForm(prev => ({
-      ...prev,
-      [type]: {
-        ...prev[type],
-        [player]: value,
+  const handleChangePlayerForm = useCallback(
+    (
+      type: 'teamA' | 'teamB',
+      player: 'player1' | 'player2',
+      value: IDropdown,
+    ) => {
+      setPlayerForm(prev => ({
+        ...prev,
+        [type]: {
+          ...prev[type],
+          [player]: value,
+        },
+      }));
+    },
+    [],
+  );
+
+  const selectedPlayerIds = useMemo(() => {
+    return [
+      playerForm.teamA.player1.id,
+      playerForm.teamA.player2.id,
+      playerForm.teamB.player1.id,
+      playerForm.teamB.player2.id,
+    ].filter(id => id); // Filter out default/empty selections
+  }, [playerForm]);
+
+  // All available players
+  const allPlayers: IDropdown[] = useMemo(() => {
+    return [
+      {
+        id: 'player-participant__01-1',
+        name: 'Player 1',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
       },
-    }));
-  };
-
-  const isMatchDouble = matchType === 'double';
-
-  // Get all selected player IDs
-  const selectedPlayerIds = [
-    playerForm.teamA.player1.id,
-    playerForm.teamA.player2.id,
-    playerForm.teamB.player1.id,
-    playerForm.teamB.player2.id,
-  ].filter(id => id !== 0); // Filter out default/empty selections
-
-  // Filter out already selected players
-  const playerOptions = standbyPlayer
-    .filter(player => !selectedPlayerIds.includes(player.id))
-    .map(player => ({
+      {
+        id: 'player-participant__01-2',
+        name: 'Player 2',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+      {
+        id: 'player-participant__01-3',
+        name: 'Player 3',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+      {
+        id: 'player-participant__01-4',
+        name: 'Player 4',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+      {
+        id: 'player-participant__01-5',
+        name: 'Player 5',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+      {
+        id: 'player-participant__01-6',
+        name: 'Player 6',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+      {
+        id: 'player-participant__01-7',
+        name: 'Player 7',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+      {
+        id: 'player-participant__01-8',
+        name: 'Player 8',
+        match_attendance: false,
+        payment: { is_paid: false, payment_method: undefined },
+        total_played: 0,
+      },
+    ].map(player => ({
       id: player.id,
       name: player.name,
     }));
+  }, []);
 
-  console.log({ playerForm });
+  // Function to get options for a specific dropdown
+  const getPlayerOptions = useCallback(
+    (currentPlayerId: string) => {
+      // Filter out selected players but keep the current player's selection
+      return allPlayers.filter(
+        player =>
+          !selectedPlayerIds.includes(player.id) ||
+          player.id === currentPlayerId,
+      );
+    },
+    [allPlayers, selectedPlayerIds],
+  );
+
+  const handleSubmit = () => {
+    const temp_players: string[] = [];
+
+    if (playerForm.teamA.player1.id) {
+      temp_players.push(playerForm.teamA.player1.id.toString());
+    }
+    if (isMatchDouble && playerForm.teamA.player2.id) {
+      temp_players.push(playerForm.teamA.player2.id.toString());
+    }
+    if (playerForm.teamB.player1.id) {
+      temp_players.push(playerForm.teamB.player1.id.toString());
+    }
+    if (isMatchDouble && playerForm.teamB.player2.id) {
+      temp_players.push(playerForm.teamB.player2.id.toString());
+    }
+
+    onSubmit(temp_players);
+  };
+
+  const isMatchDouble = useMemo(() => matchType === 'double', [matchType]);
+
+  const isButtonDisabled = useMemo(() => {
+    if (isMatchDouble) {
+      return (
+        !playerForm.teamA.player1.id ||
+        !playerForm.teamA.player2.id ||
+        !playerForm.teamB.player1.id ||
+        !playerForm.teamB.player2.id
+      );
+    } else {
+      return !playerForm.teamA.player1.id || !playerForm.teamB.player1.id;
+    }
+  }, [isMatchDouble, playerForm]);
 
   return (
     <View className="flex-1">
@@ -86,19 +191,21 @@ export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
         onToggle={handleToggle}
       />
       <View className="mt-3">
-        <InputDropdown
-          value={playerForm.teamA.player1}
-          onChange={item => handleChangePlayerForm('teamA', 'player1', item)}
-          placeholder="Pilih peserta"
-          options={playerOptions}
+        <Dropdown
+          team="teamA"
+          playerKey="player1"
+          item={playerForm.teamA.player1}
+          onChange={handleChangePlayerForm}
+          options={getPlayerOptions(playerForm.teamA.player1.id)}
         />
         {isMatchDouble && (
-          <InputDropdown
-            value={playerForm.teamA.player2}
-            onChange={item => handleChangePlayerForm('teamA', 'player2', item)}
-            placeholder="Pilih peserta"
-            inputClass=" mt-2"
-            options={playerOptions}
+          <Dropdown
+            team="teamA"
+            playerKey="player2"
+            item={playerForm.teamA.player2}
+            onChange={handleChangePlayerForm}
+            options={getPlayerOptions(playerForm.teamA.player2.id)}
+            inputClass="mt-2"
           />
         )}
         <View className="w-full  flex flex-row justify-center items-center my-3">
@@ -106,22 +213,29 @@ export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
           <Text className="font-roboto-medium text-base px-5">VS</Text>
           <View className="flex-1 border-[1px] border-black" />
         </View>
-        <InputDropdown
-          value={playerForm.teamB.player1}
-          onChange={item => handleChangePlayerForm('teamB', 'player1', item)}
-          placeholder="Pilih peserta"
-          options={playerOptions}
+        <Dropdown
+          team="teamB"
+          playerKey="player1"
+          item={playerForm.teamB.player1}
+          onChange={handleChangePlayerForm}
+          options={getPlayerOptions(playerForm.teamB.player1.id)}
         />
         {isMatchDouble && (
-          <InputDropdown
-            value={playerForm.teamB.player2}
-            onChange={item => handleChangePlayerForm('teamB', 'player2', item)}
-            placeholder="Pilih peserta"
-            inputClass=" mt-2"
-            options={playerOptions}
+          <Dropdown
+            team="teamB"
+            playerKey="player2"
+            item={playerForm.teamB.player2}
+            onChange={handleChangePlayerForm}
+            options={getPlayerOptions(playerForm.teamB.player2.id)}
+            inputClass="mt-2"
           />
         )}
-        <Button btnText="Bertanding" onPress={onSubmit} btnClass="mt-3" />
+        <Button
+          isBtnDisable={isButtonDisabled}
+          btnText="Bertanding"
+          onPress={handleSubmit}
+          btnClass="mt-3"
+        />
       </View>
       <View className="mt-3 flex-1">
         <View className="border-b border-black py-2">
@@ -155,3 +269,46 @@ export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
     </View>
   );
 }
+
+const Dropdown = React.memo(
+  ({
+    team,
+    playerKey,
+    item,
+    options,
+    inputClass,
+    onChange,
+  }: {
+    team: 'teamA' | 'teamB';
+    playerKey: 'player1' | 'player2';
+    item: IDropdown;
+    options: IDropdown[];
+    inputClass?: string;
+    onChange: (
+      type: 'teamA' | 'teamB',
+      player: 'player1' | 'player2',
+      value: IDropdown,
+    ) => void;
+  }) => {
+    return (
+      <InputDropdown
+        value={item}
+        onChange={selectedItem => onChange(team, playerKey, selectedItem)}
+        placeholder="Pilih peserta"
+        inputClass={inputClass}
+        options={options}
+      />
+    );
+  },
+  (prevProps, nextProps) => {
+    // Only re-render if item, options length, or inputClass changed
+    return (
+      prevProps.item.id === nextProps.item.id &&
+      prevProps.item.name === nextProps.item.name &&
+      prevProps.options.length === nextProps.options.length &&
+      prevProps.inputClass === nextProps.inputClass &&
+      prevProps.team === nextProps.team &&
+      prevProps.playerKey === nextProps.playerKey
+    );
+  },
+);

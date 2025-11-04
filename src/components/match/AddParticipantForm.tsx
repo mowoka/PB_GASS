@@ -84,7 +84,7 @@ export function AddParticipantForm({
               setForm(prev => ({ ...prev, attendance: 0 }));
               return;
             }
-            setForm(prev => ({ ...prev, attendance: parseInt(value) }));
+            setForm(prev => ({ ...prev, attendance: parseInt(value, 10) }));
           }}
           inputProps={{
             maxLength: 2,

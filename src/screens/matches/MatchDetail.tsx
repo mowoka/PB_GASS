@@ -39,6 +39,7 @@ export function MatchDetailScreen({ navigation }: Props) {
     standbyPlayer,
     onStartMatch,
     onEndMatch,
+    onSubmitMatch,
   } = useMatchDetailHooks({
     id:
       navigation.getState().routes.find(route => route.name === 'MatchDetail')
@@ -57,7 +58,13 @@ export function MatchDetailScreen({ navigation }: Props) {
             show: true,
             title: 'Pertandingan',
             content: (
-              <MatchForm onSubmit={handleClose} standbyPlayer={standbyPlayer} />
+              <MatchForm
+                onSubmit={players => {
+                  onSubmitMatch(players);
+                  handleClose();
+                }}
+                standbyPlayer={standbyPlayer}
+              />
             ),
           })
         }
@@ -101,6 +108,7 @@ export function MatchDetailScreen({ navigation }: Props) {
             showConfirmAttendance={showConfirmAttendance}
             showPayment={isMatchFinished}
             disabled={isMatchExpired}
+            showTotalPlayed={isMatchOngoing || isMatchFinished}
             onAddParticipant={() =>
               navigation.push('AddParticipant', { id: match.id })
             }
