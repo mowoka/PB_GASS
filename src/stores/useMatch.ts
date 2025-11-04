@@ -6,6 +6,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Gender = "Cowo" | "Cewe";
 
+export type IMatchType = "single" | "double";
+
 export type IStatus =
     | 'Mendatang'
     | 'Berlangsung'
@@ -36,6 +38,12 @@ export interface IParticipant {
     players: IPlayer[];
 }
 
+export interface IMatchHistory {
+    type: IMatchType;
+    teamA: IPlayer[];
+    teamB: IPlayer[];
+}
+
 export interface IMatch {
     id: string;
     date: string;
@@ -45,6 +53,7 @@ export interface IMatch {
     total_field: number;
     status: IStatus;
     participants: IParticipant[];
+    history: IMatchHistory[];
 }
 
 export interface IMatchStore {
@@ -80,6 +89,7 @@ const EMTPY_MATCH: IMatch = {
     total_field: 0,
     status: 'Mendatang',
     participants: [],
+    history: [],
 }
 
 export const useMatchStore = create<IMatchStore & IMatchActions>()(

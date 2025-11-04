@@ -20,6 +20,7 @@ const DEFAULT_MATCH: IMatch = {
   status: 'Mendatang',
   field: { id: '', name: '', link_map: '', address: '' },
   participants: [],
+  history: [],
 };
 
 export type BottomMenu = 'calendar' | 'field' | 'participant';

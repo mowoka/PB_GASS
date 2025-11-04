@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { IMatch, IPlayer, useMatchStore } from "../../stores/useMatch";
+import { IMatch, IMatchType, IPlayer, useMatchStore } from "../../stores/useMatch";
 import { useIsFocused } from '@react-navigation/native'
 import { MATCH_PAID_AMOUNT_PER_PLAYER } from "../../utils/constants";
 
@@ -21,7 +21,7 @@ export function useMatchDetailHooks({ id }: { id: string }) {
         setMatch(findMatch(id));
     }
 
-    const onSubmitMatch = (players: string[]) => {
+    const onSubmitMatch = (players: string[], matchType: IMatchType) => {
         const temp = { ...match };
         temp.participants.forEach((participant) => {
             participant.players.forEach((player) => {
@@ -30,6 +30,23 @@ export function useMatchDetailHooks({ id }: { id: string }) {
                 }
             })
         })
+
+        const allPlayers = temp.participants.flatMap(p => p.players).filter(p => players.includes(p.id));
+
+        if (matchType === 'single') {
+            temp.history.push({
+                type: matchType,
+                teamA: [allPlayers[0]],
+                teamB: [allPlayers[1]],
+            })
+        } else {
+            temp.history.push({
+                type: matchType,
+                teamA: [allPlayers[0], allPlayers[1]],
+                teamB: allPlayers.slice(2),
+            })
+        }
+
         saveMatch(temp);
         setMatch(temp);
     }

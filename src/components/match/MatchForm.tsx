@@ -3,11 +3,11 @@ import { ToggleButton } from '../common/ToggleButton';
 import { IDropdown, InputDropdown } from '../common/InputDropdown';
 import { Button } from '../common/Button';
 import { useCallback, useMemo, useState } from 'react';
-import { IPlayer } from '../../stores/useMatch';
+import { IMatchType, IPlayer } from '../../stores/useMatch';
 import React from 'react';
 
 interface IMatchFormProps {
-  onSubmit: (players: string[]) => void;
+  onSubmit: (players: string[], matchType: IMatchType) => void;
   standbyPlayer: IPlayer[];
 }
 
@@ -35,7 +35,7 @@ const DEFAULT_PLAYER_FORM: IPlayerForm = {
 };
 
 export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
-  const [matchType, setMatchType] = useState<'single' | 'double'>('single');
+  const [matchType, setMatchType] = useState<IMatchType>('single');
   const [playerForm, setPlayerForm] = useState<IPlayerForm>({
     ...DEFAULT_PLAYER_FORM,
   });
@@ -72,73 +72,16 @@ export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
 
   // All available players
   const allPlayers: IDropdown[] = useMemo(() => {
-    return [
-      {
-        id: 'player-participant__01-1',
-        name: 'Player 1',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-2',
-        name: 'Player 2',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-3',
-        name: 'Player 3',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-4',
-        name: 'Player 4',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-5',
-        name: 'Player 5',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-6',
-        name: 'Player 6',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-7',
-        name: 'Player 7',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-      {
-        id: 'player-participant__01-8',
-        name: 'Player 8',
-        match_attendance: false,
-        payment: { is_paid: false, payment_method: undefined },
-        total_played: 0,
-      },
-    ].map(player => ({
+    return standbyPlayer.map(player => ({
       id: player.id,
       name: player.name,
     }));
-  }, []);
+  }, [standbyPlayer]);
 
   // Function to get options for a specific dropdown
   const getPlayerOptions = useCallback(
     (currentPlayerId: string) => {
-      // Filter out selected players but keep the current player's selection
+      console.log({ allPlayers });
       return allPlayers.filter(
         player =>
           !selectedPlayerIds.includes(player.id) ||
@@ -164,7 +107,8 @@ export function MatchForm({ onSubmit, standbyPlayer }: IMatchFormProps) {
       temp_players.push(playerForm.teamB.player2.id.toString());
     }
 
-    onSubmit(temp_players);
+    onSubmit(temp_players, matchType);
+    setPlayerForm({ ...DEFAULT_PLAYER_FORM });
   };
 
   const isMatchDouble = useMemo(() => matchType === 'double', [matchType]);

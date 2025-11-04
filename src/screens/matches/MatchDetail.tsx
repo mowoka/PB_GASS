@@ -59,8 +59,8 @@ export function MatchDetailScreen({ navigation }: Props) {
             title: 'Pertandingan',
             content: (
               <MatchForm
-                onSubmit={players => {
-                  onSubmitMatch(players);
+                onSubmit={(players, matchType) => {
+                  onSubmitMatch(players, matchType);
                   handleClose();
                 }}
                 standbyPlayer={standbyPlayer}
