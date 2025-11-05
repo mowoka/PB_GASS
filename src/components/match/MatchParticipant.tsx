@@ -3,6 +3,7 @@ import { IParticipant } from '../../stores/useMatch';
 import { ParticipantTitle } from '../common/ParticipantTitle';
 import { Player } from './Player';
 import { Button } from '../common/Button';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function MatchParticipant({
   participants,
@@ -51,13 +52,7 @@ export function MatchParticipant({
             <View
               key={index}
               className="bg-white rounded-2xl p-4 mb-4"
-              style={{
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.06,
-                shadowRadius: 6,
-                elevation: 2,
-              }}
+              style={SHADOW_STYLES.mediumSoft}
             >
               {/* Category Header */}
               <View className="mb-3 pb-2 border-b border-gray-100">
@@ -129,13 +124,7 @@ function ZeroParticipant() {
   return (
     <View
       className="w-full flex justify-center items-center py-12 bg-white rounded-2xl"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.04,
-        shadowRadius: 4,
-        elevation: 1,
-      }}
+      style={SHADOW_STYLES.small}
     >
       <View className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3">
         <Text className="text-3xl">👥</Text>

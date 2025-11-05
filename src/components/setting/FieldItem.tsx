@@ -10,6 +10,7 @@ import {
 import Maps from '../../assets/icons/maps.png';
 import Edit from '../../assets/icons/edit.png';
 import Delete from '../../assets/icons/delete.png';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 interface FieldItemProps {
   title: string;
@@ -29,13 +30,7 @@ export function FieldItem({
   return (
     <View
       className="w-full bg-white rounded-2xl px-4 py-4 mb-4 border border-gray-100"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.08,
-        shadowRadius: 8,
-        elevation: 3,
-      }}
+      style={SHADOW_STYLES.mediumElevated}
     >
       <View className="flex flex-row justify-between items-start mb-3">
         <View className="flex-1 mr-3">

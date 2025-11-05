@@ -1,4 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 // Assets
 import ArrowRight from '../../assets/icons/arrow-right.png';
@@ -35,13 +36,7 @@ export function MenuItem({
     <TouchableOpacity
       onPress={onPress}
       className="w-full bg-white px-4 py-4 rounded-2xl flex flex-row justify-start items-center mb-4 shadow-md border border-gray-100"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 3,
-      }}
+      style={SHADOW_STYLES.menuItem}
     >
       <MenuIcon iconType={iconType} />
       <View className="flex-1">

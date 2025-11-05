@@ -3,6 +3,7 @@ import { Status } from './Status';
 import { Description } from './Description';
 import { IMatch } from '../../stores/useMatch';
 import { isDateOverCurrent } from '../../utils/func';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 interface IMatchItemProps {
   match: IMatch;
@@ -16,13 +17,7 @@ export function MatchItem({ match, onPress }: IMatchItemProps) {
     <TouchableOpacity
       onPress={onPress}
       className="w-full bg-white p-4 rounded-2xl mb-4 shadow-sm border border-gray-100"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.08,
-        shadowRadius: 8,
-        elevation: 3,
-      }}
+      style={SHADOW_STYLES.mediumElevated}
     >
       {/* Header Section */}
       <View className="flex-row justify-between items-start mb-3">

@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
 import { formatCurrency } from '../../utils/func';
 import LinearGradient from 'react-native-linear-gradient';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function PaymentResult({
   totalEarnings,
@@ -18,13 +19,7 @@ export function PaymentResult({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         className="w-full rounded-2xl overflow-hidden"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.2,
-          shadowRadius: 10,
-          elevation: 6,
-        }}
+        style={SHADOW_STYLES.deep}
       >
         <View className="p-6 flex flex-col justify-center items-center">
           {/* Header Icon & Label */}
@@ -46,13 +41,7 @@ export function PaymentResult({
             {/* QRIS Payment */}
             <View
               className="flex-1 bg-white/10 rounded-xl p-4 items-center"
-              style={{
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.15,
-                shadowRadius: 4,
-                elevation: 2,
-              }}
+              style={SHADOW_STYLES.cardDark}
             >
               <View className="bg-blue-500/20 w-10 h-10 rounded-full flex items-center justify-center mb-2">
                 <Text className="text-xl">📱</Text>
@@ -68,13 +57,7 @@ export function PaymentResult({
             {/* Cash Payment */}
             <View
               className="flex-1 bg-white/10 rounded-xl p-4 items-center"
-              style={{
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.15,
-                shadowRadius: 4,
-                elevation: 2,
-              }}
+              style={SHADOW_STYLES.cardDark}
             >
               <View className="bg-green-500/20 w-10 h-10 rounded-full flex items-center justify-center mb-2">
                 <Text className="text-xl">💵</Text>

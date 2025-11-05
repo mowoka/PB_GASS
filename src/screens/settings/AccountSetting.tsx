@@ -5,6 +5,7 @@ import { RootStackParamList } from '../../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Input } from '../../components/common/Input';
 import { useAccountSettingHooks } from '../../hooks/settings/useAccountSetting';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 type AccountSettingScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -29,13 +30,7 @@ export default function AccountSetting({ navigation }: Props) {
       <View className="flex-1 bg-gray-50 px-5 pt-6">
         <View
           className="bg-white rounded-2xl p-5 border border-gray-100"
-          style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.08,
-            shadowRadius: 8,
-            elevation: 3,
-          }}
+          style={SHADOW_STYLES.mediumElevated}
         >
           <View className="flex flex-row items-center mb-4">
             <View className="w-12 h-12 bg-blue-100 rounded-full flex justify-center items-center mr-3">

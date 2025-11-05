@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View, Dimensions, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 // Assets
 import BannerOne from '../../assets/images/banner-1.png';
@@ -46,13 +47,7 @@ export function Banner() {
             <View
               key={`banner-${index}`}
               className="w-full h-full rounded-2xl overflow-hidden"
-              style={{
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.15,
-                shadowRadius: 12,
-                elevation: 6,
-              }}
+              style={SHADOW_STYLES.large}
             >
               <Image
                 source={item.image}

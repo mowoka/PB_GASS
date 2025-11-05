@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
 import { IPlayer } from '../../stores/useMatch';
 import { PaymentProof } from '../common/PaymentProof';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function Player({
   player,
@@ -18,13 +19,7 @@ export function Player({
     return (
       <View
         className="flex flex-row justify-between items-center w-full py-3 px-4 mb-2 rounded-xl bg-white border border-gray-100"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.05,
-          shadowRadius: 3,
-          elevation: 2,
-        }}
+        style={SHADOW_STYLES.medium}
       >
         <View className="flex flex-row justify-start items-center flex-1">
           {/* Avatar Circle - Confirmed */}
@@ -51,13 +46,7 @@ export function Player({
         {showTotalPlayed && (
           <View
             className="bg-blue-50 px-3 py-1.5 rounded-lg ml-2"
-            style={{
-              shadowColor: '#3b82f6',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.1,
-              shadowRadius: 2,
-              elevation: 1,
-            }}
+            style={SHADOW_STYLES.smallBlueElevated}
           >
             <View className="flex flex-row items-center">
               <Text className="font-roboto-bold text-sm text-blue-700">
@@ -77,13 +66,7 @@ export function Player({
   return (
     <View
       className="flex flex-row justify-between items-center w-full py-3 px-4 mb-2 rounded-xl border-2 border-dashed border-gray-300 bg-white"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.02,
-        shadowRadius: 1,
-        elevation: 0,
-      }}
+      style={SHADOW_STYLES.light}
     >
       <View className="flex flex-row justify-start items-center flex-1">
         {/* Avatar Circle - Unconfirmed */}

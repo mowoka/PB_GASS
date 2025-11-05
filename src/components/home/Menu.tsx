@@ -6,19 +6,14 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { IHomeMenu } from '../../screens/Home';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function Menu({ menu }: { menu: IHomeMenu[] }) {
   return (
     <View className="w-full px-5 relative -mt-12">
       <View
         className="bg-white px-4 py-6 rounded-3xl shadow-2xl"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 8 },
-          shadowOpacity: 0.15,
-          shadowRadius: 16,
-          elevation: 10,
-        }}
+        style={SHADOW_STYLES.extraLarge}
       >
         <Text className="text-gray-800 text-lg text-center font-ubuntu-bold mb-4 px-1">
           Menu Utama

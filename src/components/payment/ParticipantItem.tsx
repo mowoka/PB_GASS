@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { IParticipant } from '../../stores/useMatch';
 import { ParticipantTitle } from '../common/ParticipantTitle';
 import { Player } from './Player';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function ParticipantItem({
   participant,
@@ -13,13 +14,7 @@ export function ParticipantItem({
   return (
     <View
       className="bg-white rounded-2xl p-4 mb-4"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.06,
-        shadowRadius: 6,
-        elevation: 2,
-      }}
+      style={SHADOW_STYLES.mediumSoft}
     >
       {/* Category Header */}
       <View className="mb-3 pb-2 border-b border-gray-100">

@@ -9,6 +9,7 @@ import { Participan } from '../../components/register/Participant';
 import { BottomModal } from '../../components/common/BottomModal';
 import { useBottomModalHooks } from '../../hooks/common/useBottomModal';
 import { AddParticipantForm } from '../../components/register/AddParticipantForm';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 type AddParticipantScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -72,13 +73,7 @@ export default function AddParticipant({ navigation }: Props) {
           {/* Match Description Card */}
           <View
             className="mx-4 mt-4 bg-white rounded-2xl"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.08,
-              shadowRadius: 8,
-              elevation: 3,
-            }}
+            style={SHADOW_STYLES.mediumElevated}
           >
             <MatchDescriptionCard
               date={match.date}

@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { IPlayer } from '../../stores/useMatch';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function Player({
   player,
@@ -19,11 +20,8 @@ export function Player({
           : 'bg-white border border-gray-200'
       }`}
       style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
+        ...SHADOW_STYLES.medium,
         shadowOpacity: isChecked ? 0.08 : 0.04,
-        shadowRadius: 3,
-        elevation: 2,
       }}
     >
       <View className="flex flex-row justify-start items-center flex-1">

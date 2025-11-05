@@ -14,6 +14,7 @@ import { Header } from '../../components/common/Header';
 import { MatchItem } from '../../components/match/MatchItem';
 import { useMatchHooks } from '../../hooks/matches/useMatch';
 import { isDateOverCurrent } from '../../utils/func';
+import { SHADOW_STYLES } from '../../utils/constants';
 import PlusWhite from '../../assets/icons/plus-white.png';
 import { useState, useMemo } from 'react';
 
@@ -155,13 +156,7 @@ export default function Matches({ navigation }: Props) {
                       onPress={loadMore}
                       disabled={loadingMore}
                       className="bg-white border-2 border-gray-200 rounded-xl py-4 px-6 flex-row items-center justify-center"
-                      style={{
-                        shadowColor: '#000',
-                        shadowOffset: { width: 0, height: 2 },
-                        shadowOpacity: 0.05,
-                        shadowRadius: 4,
-                        elevation: 2,
-                      }}
+                      style={SHADOW_STYLES.card}
                     >
                       {loadingMore ? (
                         <>

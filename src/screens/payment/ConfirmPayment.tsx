@@ -9,6 +9,7 @@ import { ParticipantItem } from '../../components/payment/ParticipantItem';
 import { BottomModal } from '../../components/common/BottomModal';
 import { useBottomModalHooks } from '../../hooks/common/useBottomModal';
 import { PaymentModal } from '../../components/payment/PaymentModal';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 type ConfirmPaymentScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -52,13 +53,7 @@ export default function ConfirmPayment({ navigation }: Props) {
           {/* Match Description Card */}
           <View
             className="mx-4 mt-4 bg-white rounded-2xl"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.08,
-              shadowRadius: 8,
-              elevation: 3,
-            }}
+            style={SHADOW_STYLES.mediumElevated}
           >
             <MatchDescriptionCard
               date={match.date}

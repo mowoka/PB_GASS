@@ -5,6 +5,7 @@ import { JSX } from 'react';
 import AddIcon from '../../assets/icons/add.png';
 import { ParticipantTitle } from '../common/ParticipantTitle';
 import { generatePlayerId } from '../../utils/func';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 interface IParticipanProps {
   participant: IParticipant;
@@ -56,13 +57,7 @@ export function Participan({
   return (
     <View
       className="bg-white rounded-2xl p-4 mb-4"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.06,
-        shadowRadius: 6,
-        elevation: 2,
-      }}
+      style={SHADOW_STYLES.mediumSoft}
     >
       {/* Category Header */}
       <View className="mb-3 pb-2 border-b border-gray-100">
@@ -95,13 +90,7 @@ function Player({
         <TouchableOpacity
           onPress={onPress}
           className="flex flex-row justify-between items-center w-full py-3 px-4 rounded-xl border-2 border-dashed border-blue-300 bg-blue-50"
-          style={{
-            shadowColor: '#3b82f6',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.05,
-            shadowRadius: 2,
-            elevation: 1,
-          }}
+          style={SHADOW_STYLES.smallBlue}
         >
           <View className="flex flex-row justify-start items-center flex-1">
             {/* Number Badge */}
@@ -138,13 +127,7 @@ function Player({
         <TouchableOpacity
           onPress={onEdit}
           className="flex flex-row justify-between items-center w-full py-3 px-4 rounded-xl bg-white border border-gray-200"
-          style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.05,
-            shadowRadius: 3,
-            elevation: 2,
-          }}
+          style={SHADOW_STYLES.medium}
         >
           <View className="flex flex-row justify-start items-center flex-1">
             {/* Number Badge */}

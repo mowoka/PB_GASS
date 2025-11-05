@@ -3,6 +3,7 @@ import { IField } from '../../stores/useSettings';
 import { IParticipant, IStatus } from '../../stores/useMatch';
 import { Status } from './Status';
 import { MatchDescriptionCard } from '../common/MatchDescription';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 interface IMatchDescriptionProps {
   field: IField;
@@ -33,13 +34,7 @@ export function MatchDescription({
       {/* Match Details Card */}
       <View
         className="mx-4 bg-white rounded-2xl"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.08,
-          shadowRadius: 8,
-          elevation: 3,
-        }}
+        style={SHADOW_STYLES.mediumElevated}
       >
         <MatchDescriptionCard
           field={field}
@@ -75,11 +70,7 @@ function ParticipantTagItem({ participant }: { participant: IParticipant }) {
     <View
       className="px-4 py-2.5 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl mx-1"
       style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.15,
-        shadowRadius: 4,
-        elevation: 3,
+        ...SHADOW_STYLES.cardDark,
         backgroundColor: '#1f2937',
       }}
     >

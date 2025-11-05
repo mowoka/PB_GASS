@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
 import { cn } from '../../utils/func';
 import { IStatus } from '../../stores/useMatch';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function Status({ status }: { status: IStatus }) {
   const statusConfig: Record<
@@ -42,13 +43,7 @@ export function Status({ status }: { status: IStatus }) {
         `px-3 py-1.5 rounded-full flex-row items-center`,
         config.bg,
       )}
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-        elevation: 1,
-      }}
+      style={SHADOW_STYLES.small}
     >
       <Text className="text-xs mr-1">{config.icon}</Text>
       <Text className={cn('font-roboto-bold text-xs', config.text)}>

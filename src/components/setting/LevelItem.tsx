@@ -1,5 +1,6 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Delete from '../../assets/icons/delete.png';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 interface LevelItemProps {
   name: string;
@@ -10,13 +11,7 @@ export function LevelItem({ name, onDelete }: LevelItemProps) {
   return (
     <View
       className="w-full px-4 py-4 mb-3 bg-white rounded-2xl flex flex-row justify-between items-center border border-gray-100"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.08,
-        shadowRadius: 8,
-        elevation: 3,
-      }}
+      style={SHADOW_STYLES.mediumElevated}
     >
       <View className="flex flex-row items-center flex-1">
         <View className="w-10 h-10 bg-purple-100 rounded-full flex justify-center items-center mr-3">

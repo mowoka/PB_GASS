@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { IPlayer } from '../../stores/useMatch';
 import { PaymentProof } from '../common/PaymentProof';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 export function Player({
   number,
@@ -19,13 +20,7 @@ export function Player({
       <TouchableOpacity
         onPress={onConfirmPayment}
         className="flex flex-row justify-between items-center w-full py-3 px-4 mb-2 rounded-xl bg-white border border-gray-100"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.05,
-          shadowRadius: 3,
-          elevation: 2,
-        }}
+        style={SHADOW_STYLES.medium}
       >
         <View className="flex flex-row justify-start items-center flex-1">
           {/* Avatar Circle - Paid or Unpaid */}
@@ -78,13 +73,7 @@ export function Player({
   return (
     <View
       className="flex flex-row justify-between items-center w-full py-3 px-4 mb-2 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 opacity-50"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.02,
-        shadowRadius: 1,
-        elevation: 0,
-      }}
+      style={SHADOW_STYLES.light}
     >
       <View className="flex flex-row justify-start items-center flex-1">
         {/* Avatar Circle - Unattended */}

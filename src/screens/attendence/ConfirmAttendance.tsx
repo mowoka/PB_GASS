@@ -7,6 +7,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { MatchDescriptionCard } from '../../components/common/MatchDescription';
 import { ParticipantItem } from '../../components/attendance/ParticipantItem';
 import { useSnackbar } from '../../providers/snakbar';
+import { SHADOW_STYLES } from '../../utils/constants';
 
 type ConfirmAttendanceScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -75,13 +76,7 @@ export default function ConfirmAttendance({ navigation }: Props) {
         {/* Match Description Card */}
         <View
           className="mx-4 mt-4 bg-white rounded-2xl"
-          style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.08,
-            shadowRadius: 8,
-            elevation: 3,
-          }}
+          style={SHADOW_STYLES.mediumElevated}
         >
           <MatchDescriptionCard
             date={match.date}

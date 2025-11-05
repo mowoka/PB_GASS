@@ -19,6 +19,7 @@ import HistoryFocus from '../assets/icons/history-focused.png';
 import Settings from '../assets/icons/settings.png';
 import SettingsFocus from '../assets/icons/settings-focused.png';
 import Racket from '../assets/icons/racket.png';
+import { SHADOW_STYLES } from '../utils/constants';
 import Matches from '../screens/matches/Matches';
 
 interface TabBarProps {
@@ -132,12 +133,7 @@ const CurvedBottomBarNavigator: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: '#DDDDDD',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-  },
+  shadow: SHADOW_STYLES.tabBar,
   button: {
     flex: 1,
     justifyContent: 'center',
@@ -156,11 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 18,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 1,
+    ...SHADOW_STYLES.button,
   },
   imgCircle: {
     width: 30,
