@@ -5,7 +5,7 @@ import { WelcomeCard } from '../components/home/WelcomeCard';
 import { Layout } from '../components/common/Layout';
 import { Menu } from '../components/home/Menu';
 import { Banner } from '../components/home/Banner';
-import { ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType, ScrollView } from 'react-native';
 
 // Assets
 import WhatsApp from '../assets/icons/whatsapp.png';
@@ -77,9 +77,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   ];
   return (
     <Layout>
-      <WelcomeCard onCreateMatch={() => navigation.push('CreateMatch')} />
-      <Menu menu={MENU} />
-      <Banner />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <WelcomeCard onCreateMatch={() => navigation.push('CreateMatch')} />
+        <Menu menu={MENU} />
+        <Banner />
+      </ScrollView>
     </Layout>
   );
 };

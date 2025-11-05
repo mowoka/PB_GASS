@@ -49,7 +49,7 @@ function DefaultLayout({
   return (
     <View className="flex-1">
       <StatusBar barStyle={'light-content'} />
-      <View className="flex-1 bg-white">{children}</View>
+      <View className="flex-1 bg-gray-50">{children}</View>
       {showBottomBtn && (
         <View className="bg-black px-5 pt-5 pb-8 w-full">
           <TouchableOpacity
@@ -78,9 +78,9 @@ function LayoutWithSafeView({
   onPressBtn?: () => void;
 }) {
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-gray-50">
       <StatusBar barStyle={'light-content'} />
-      <View className="flex-1 bg-white relative">{children}</View>
+      <View className="flex-1 bg-gray-50 relative">{children}</View>
       {showBottomBtn && (
         <View className="bg-black px-5 pt-5 pb-8 w-full">
           <TouchableOpacity

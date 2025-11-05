@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Dimensions } from 'react-native';
+import { Image, View, Dimensions, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 // Assets
@@ -17,18 +17,27 @@ const bannerData = [
 
 export function Banner() {
   return (
-    <View className="w-full px-5">
+    <View className="w-full px-5 mt-6 mb-32">
+      <View className="mb-4">
+        <Text className="text-gray-800 text-lg font-ubuntu-bold px-1">
+          Informasi & Promo
+        </Text>
+        <Text className="text-gray-500 text-sm font-roboto-regular px-1 mt-1">
+          Dapatkan update terbaru seputar club
+        </Text>
+      </View>
+
       <Carousel
         loop
         width={screenWidth - 40}
-        height={180}
+        height={200}
         autoPlay
-        autoPlayInterval={3000}
+        autoPlayInterval={4000}
         data={bannerData}
         mode="parallax"
         modeConfig={{
-          parallaxScrollingScale: 0.9,
-          parallaxScrollingOffset: 50,
+          parallaxScrollingScale: 0.92,
+          parallaxScrollingOffset: 60,
         }}
         pagingEnabled
         snapEnabled
@@ -36,7 +45,14 @@ export function Banner() {
           return (
             <View
               key={`banner-${index}`}
-              className="w-full h-full rounded-lg overflow-hidden"
+              className="w-full h-full rounded-2xl overflow-hidden"
+              style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.15,
+                shadowRadius: 12,
+                elevation: 6,
+              }}
             >
               <Image
                 source={item.image}

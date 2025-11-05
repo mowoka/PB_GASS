@@ -9,9 +9,21 @@ import { IHomeMenu } from '../../screens/Home';
 
 export function Menu({ menu }: { menu: IHomeMenu[] }) {
   return (
-    <View className="w-full p-5 relative -mt-32">
-      <View className="bg-white px-1 py-3 rounded-xl border border-gray-200">
-        <View className="w-full flex flex-row justify-stretch items-start flex-wrap">
+    <View className="w-full px-5 relative -mt-12">
+      <View
+        className="bg-white px-4 py-6 rounded-3xl shadow-2xl"
+        style={{
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 8 },
+          shadowOpacity: 0.15,
+          shadowRadius: 16,
+          elevation: 10,
+        }}
+      >
+        <Text className="text-gray-800 text-lg text-center font-ubuntu-bold mb-4 px-1">
+          Menu Utama
+        </Text>
+        <View className="w-full flex flex-row justify-start items-start flex-wrap">
           {menu.map((item, index) => {
             return (
               <MenuItem
@@ -39,18 +51,20 @@ function MenuItem({
 }) {
   return (
     <TouchableOpacity
-      className="flex flex-col justify-center items-center mb-5 mx-[5px] w-20"
+      className="flex flex-col justify-center items-center mb-6 w-[22%] mx-[1.5%]"
       onPress={onPress}
+      activeOpacity={0.7}
     >
-      <View className="bg-white rounded-full w-16 h-16 p-3 flex justify-center items-center">
+      <View className="bg-gradient-to-br from-gray-50 to-white rounded-3xl w-full aspect-square p-3 flex justify-center items-center border-2 border-gray-100">
         <Image
           source={image}
-          width={48}
-          height={48}
-          className="w-full h-full"
+          width={40}
+          height={40}
+          className="w-10 h-10"
+          resizeMode="contain"
         />
       </View>
-      <Text className="mt-2 text-xs font-roboto-regular text-center text-gray-600">
+      <Text className="mt-2.5 text-[11px] font-roboto-medium text-center text-gray-700 leading-tight">
         {name}
       </Text>
     </TouchableOpacity>
