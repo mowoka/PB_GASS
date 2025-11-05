@@ -1,4 +1,4 @@
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Header } from '../../components/common/Header';
 import { Layout } from '../../components/common/Layout';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -32,6 +32,15 @@ export default function ConfirmPayment({ navigation }: Props) {
       hideBottomModal: closeModal,
     });
 
+  const totalParticipants = participants.reduce(
+    (acc, p) => acc + p.players.length,
+    0,
+  );
+  const totalPaid = participants.reduce(
+    (acc, p) => acc + p.players.filter(player => player.payment.is_paid).length,
+    0,
+  );
+
   return (
     <BottomModal
       ref={bottomSheetModalRef}
@@ -39,16 +48,49 @@ export default function ConfirmPayment({ navigation }: Props) {
     >
       <Layout safeView={false}>
         <Header title={match.field.name} onPress={() => navigation.goBack()} />
-        <ScrollView className="flex-1">
-          <MatchDescriptionCard
-            date={match.date}
-            start_time={match.start_time}
-            end_time={match.end_time}
-            field={match.field}
-            total_field={match.total_field.toString()}
-            participants={match.participants}
-          />
-          <View className="px-5">
+        <ScrollView className="flex-1 bg-gray-50">
+          {/* Match Description Card */}
+          <View
+            className="mx-4 mt-4 bg-white rounded-2xl"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.08,
+              shadowRadius: 8,
+              elevation: 3,
+            }}
+          >
+            <MatchDescriptionCard
+              date={match.date}
+              start_time={match.start_time}
+              end_time={match.end_time}
+              field={match.field}
+              total_field={match.total_field.toString()}
+              participants={match.participants}
+            />
+          </View>
+
+          {/* Payment Summary */}
+          <View className="px-4 pt-6 pb-3">
+            <Text className="font-ubuntu-bold text-xl text-gray-900">
+              Konfirmasi Pembayaran
+            </Text>
+            <View className="flex-row items-center mt-2">
+              <View className="bg-green-50 px-3 py-1.5 rounded-lg mr-2">
+                <Text className="font-roboto-bold text-sm text-green-700">
+                  {totalPaid} Sudah Bayar
+                </Text>
+              </View>
+              <View className="bg-amber-50 px-3 py-1.5 rounded-lg">
+                <Text className="font-roboto-bold text-sm text-amber-700">
+                  {totalParticipants - totalPaid} Belum Bayar
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Participants List */}
+          <View className="px-4 pb-6">
             {participants.map((participant, index) => {
               return (
                 <ParticipantItem

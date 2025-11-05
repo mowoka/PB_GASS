@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IPlayer, useMatchStore } from "../../stores/useMatch"
+import { EMTPY_PLAYER, IPlayer, useMatchStore } from "../../stores/useMatch"
 
 export interface IAddParticipantForm {
     matchId: string;
@@ -10,16 +10,7 @@ export interface IAddParticipantForm {
 const DEFAULT_FORM: IAddParticipantForm = {
     matchId: '',
     participantId: '',
-    player: {
-        id: '',
-        name: '',
-        match_attendance: false,
-        total_played: 0,
-        payment: {
-            is_paid: false,
-            payment_method: undefined,
-        },
-    }
+    player: EMTPY_PLAYER
 }
 
 export function useAddParticipantHooks({ id, onOpenModal }: { id: string, onOpenModal: () => void }) {

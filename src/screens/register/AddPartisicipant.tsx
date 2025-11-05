@@ -3,7 +3,7 @@ import { Header } from '../../components/common/Header';
 import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { useAddParticipantHooks } from '../../hooks/register/useAddParticipant';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { MatchDescriptionCard } from '../../components/common/MatchDescription';
 import { Participan } from '../../components/register/Participant';
 import { BottomModal } from '../../components/common/BottomModal';
@@ -37,6 +37,15 @@ export default function AddParticipant({ navigation }: Props) {
     onOpenModal: openModal,
   });
 
+  const totalRegistered = match.participants.reduce(
+    (acc, p) => acc + p.players.filter(player => player.name !== '').length,
+    0,
+  );
+  const totalSlots = match.participants.reduce(
+    (acc, p) => acc + p.attendance,
+    0,
+  );
+
   return (
     <BottomModal
       ref={bottomSheetModalRef}
@@ -59,8 +68,18 @@ export default function AddParticipant({ navigation }: Props) {
           hideBackButton={false}
           onPress={() => navigation.goBack()}
         />
-        <ScrollView className="flex-1">
-          <View className="flex-1">
+        <ScrollView className="flex-1 bg-gray-50">
+          {/* Match Description Card */}
+          <View
+            className="mx-4 mt-4 bg-white rounded-2xl"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.08,
+              shadowRadius: 8,
+              elevation: 3,
+            }}
+          >
             <MatchDescriptionCard
               date={match.date}
               start_time={match.start_time}
@@ -69,6 +88,29 @@ export default function AddParticipant({ navigation }: Props) {
               total_field={match.total_field.toString()}
               participants={match.participants}
             />
+          </View>
+
+          {/* Participant Summary */}
+          <View className="px-4 pt-6 pb-3">
+            <Text className="font-ubuntu-bold text-xl text-gray-900">
+              Tambah Partisipasi
+            </Text>
+            <View className="flex-row items-center mt-2">
+              <View className="bg-blue-50 px-3 py-1.5 rounded-lg mr-2">
+                <Text className="font-roboto-bold text-sm text-blue-700">
+                  {totalRegistered} Terdaftar
+                </Text>
+              </View>
+              <View className="bg-gray-100 px-3 py-1.5 rounded-lg">
+                <Text className="font-roboto-bold text-sm text-gray-700">
+                  {totalSlots} Slot Total
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Participants List */}
+          <View className="px-4 pb-6">
             {match.participants.map((item, index) => {
               return (
                 <Participan

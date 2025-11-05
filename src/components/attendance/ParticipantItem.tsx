@@ -10,14 +10,28 @@ export function ParticipantItem({
   participant: IParticipant;
   onConfirmParticipant: (
     participantId: string,
-    playerId: number,
+    playerId: string,
     value: boolean,
   ) => void;
 }) {
   return (
-    <View className="mb-5">
-      <ParticipantTitle participant={participant} />
-      <View className="mt-2">
+    <View
+      className="bg-white rounded-2xl p-4 mb-4"
+      style={{
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.06,
+        shadowRadius: 6,
+        elevation: 2,
+      }}
+    >
+      {/* Category Header */}
+      <View className="mb-3 pb-2 border-b border-gray-100">
+        <ParticipantTitle participant={participant} />
+      </View>
+
+      {/* Players */}
+      <View>
         {participant.players.map((player, index) => {
           return (
             <Player

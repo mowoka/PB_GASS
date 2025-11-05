@@ -8,7 +8,7 @@ export function PaymentProof({
   paymentMethod?: PaymentMethod;
 }) {
   return (
-    <View className="ml-8 flex flex-row justify-start items-center">
+    <View className="flex flex-row justify-start items-center">
       <Image source={Money} className="w-5 h-5" />
       {paymentMethod && (
         <Text className="ml-3 font-ubuntu-medium text-green-600">

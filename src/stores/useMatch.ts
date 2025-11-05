@@ -75,7 +75,7 @@ export interface IMatchActions {
 }
 
 
-const EMTPY_MATCH: IMatch = {
+export const EMTPY_MATCH: IMatch = {
     id: '',
     date: '',
     start_time: '',
@@ -90,6 +90,17 @@ const EMTPY_MATCH: IMatch = {
     status: 'Mendatang',
     participants: [],
     history: [],
+}
+
+export const EMTPY_PLAYER: IPlayer = {
+    id: '',
+    name: '',
+    match_attendance: false,
+    total_played: 0,
+    payment: {
+        is_paid: false,
+        payment_method: undefined,
+    },
 }
 
 export const useMatchStore = create<IMatchStore & IMatchActions>()(
