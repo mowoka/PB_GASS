@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { IPlayerLevel } from '../../stores/useSettings';
 import { Input } from '../common/Input';
 import { Button } from '../common/Button';
@@ -17,8 +17,16 @@ export function AddPlayerLevelForm({
   isBtnDisable = false,
 }: IAddPlayerLevelFormProps) {
   return (
-    <View className="w-full h-full  flex flex-col justify-between items-center">
+    <View className="w-full h-full flex flex-col justify-between items-center px-5 pt-5 pb-20">
       <View className="flex-1 w-full">
+        <View className="flex flex-row items-center mb-5">
+          <View className="w-10 h-10 bg-purple-100 rounded-full flex justify-center items-center mr-3">
+            <Text className="text-xl">⭐</Text>
+          </View>
+          <Text className="font-roboto-bold text-xl text-gray-800">
+            Tambah Level Pemain
+          </Text>
+        </View>
         <Input
           label="Level Pemain"
           placeholder="Input Level Pemain"

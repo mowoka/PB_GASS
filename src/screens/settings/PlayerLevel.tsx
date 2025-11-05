@@ -34,7 +34,7 @@ export default function PlayerLevel({ navigation }: Props) {
   return (
     <BottomModal
       ref={bottomSheetModalRef}
-      height={200}
+      height={350}
       modalChildren={
         <AddPlayerLevelForm
           playerLevel={playerLevel}
@@ -52,7 +52,7 @@ export default function PlayerLevel({ navigation }: Props) {
       >
         <Header title="Level Pemain" onPress={() => navigation.goBack()} />
         <ScrollView>
-          <View className="flex-1 p-5">
+          <View className="flex-1 px-5 pt-6 pb-5 bg-gray-50">
             {playerLevels.map((item, index) => {
               return (
                 <LevelItem

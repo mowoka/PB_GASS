@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Input } from '../common/Input';
 import { IField } from '../../stores/useSettings';
 import { Button } from '../common/Button';
@@ -17,8 +17,16 @@ export function AddFieldForm({
   isBtnDisable = false,
 }: IAddFieldFormProps) {
   return (
-    <View className="w-full h-full  flex flex-col justify-between items-center">
+    <View className="w-full h-full flex flex-col justify-between items-center px-5 pt-5 pb-20">
       <View className="flex-1 w-full">
+        <View className="flex flex-row items-center mb-5">
+          <View className="w-10 h-10 bg-green-100 rounded-full flex justify-center items-center mr-3">
+            <Text className="text-xl">🏟️</Text>
+          </View>
+          <Text className="font-roboto-bold text-xl text-gray-800">
+            Tambah Lapangan
+          </Text>
+        </View>
         <Input
           label="Nama Lapangan"
           placeholder="Input Nama Lapangan"

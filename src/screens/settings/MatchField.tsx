@@ -38,7 +38,7 @@ export default function MatchField({ navigation }: Props) {
   return (
     <BottomModal
       ref={bottomSheetModalRef}
-      height={500}
+      height={600}
       modalChildren={
         <AddFieldForm
           field={field}
@@ -55,7 +55,7 @@ export default function MatchField({ navigation }: Props) {
         onPressBtn={openModal}
       >
         <Header title="Lapangan" onPress={() => navigation.goBack()} />
-        <View className="flex-1 p-5">
+        <View className="flex-1 px-5 pt-6 bg-gray-50">
           {fields.map((item, index) => {
             return (
               <FieldItem

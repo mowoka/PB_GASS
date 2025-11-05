@@ -18,17 +18,23 @@ export default function SettingScreen({ navigation }: Props) {
   return (
     <Layout safeView={false}>
       <Header title="Pengaturan" hideBackButton={true} />
-      <View className="flex-1 p-5 bg-white">
+      <View className="flex-1 px-5 pt-6 pb-5 bg-gray-50">
         <MenuItem
           title="Profil Akun"
+          description="Kelola informasi profil Anda"
+          iconType="profile"
           onPress={() => navigation.push('AccountSetting')}
         />
         <MenuItem
           title="Lapangan Pertandingan"
+          description="Atur lokasi dan detail lapangan"
+          iconType="field"
           onPress={() => navigation.push('MatchField')}
         />
         <MenuItem
           title="Level Pemain"
+          description="Tentukan kategori skill pemain"
+          iconType="level"
           onPress={() => navigation.push('PlayerLevel')}
         />
       </View>
