@@ -5,7 +5,6 @@ import { RootStackParamList } from '../../types/navigation';
 import { useMatchDetailHooks } from '../../hooks/matches/useMatchDetail';
 import { Image, ScrollView, View } from 'react-native';
 import { MatchSchedule } from '../../components/match/MatchSchedule';
-import { Divider } from '../../components/common/Divider';
 import { MatchDescription } from '../../components/match/MatchDescription';
 import { MatchParticipant } from '../../components/match/MatchParticipant';
 import { ButtonActions } from '../../components/match/ButtonActions';
@@ -77,7 +76,7 @@ export function MatchDetailScreen({ navigation }: Props) {
           />
         }
       />
-      <ScrollView className="flex-1">
+      <ScrollView className="flex-1 bg-gray-50">
         <View className="flex-1">
           <MatchSchedule
             date={match.date}
@@ -94,7 +93,6 @@ export function MatchDetailScreen({ navigation }: Props) {
             total_field={match.total_field.toString()}
             participants={match.participants}
           />
-          {!isMatchFinished && <Divider dividerClass="mt-5" />}
           {isMatchFinished && (
             <PaymentResult
               totalEarnings={totalEarnings}

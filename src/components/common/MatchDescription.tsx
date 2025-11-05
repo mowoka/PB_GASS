@@ -40,7 +40,11 @@ export function MatchDescriptionCard({
         icon={Person}
         name={`${getTotalParticipants(participants)} Pemain`}
       />
-      <ContentDescription icon={AddressIcon} name={field.address} />
+      <ContentDescription
+        icon={AddressIcon}
+        name={field.address}
+        align="start"
+      />
     </View>
   );
 }

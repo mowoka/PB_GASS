@@ -28,35 +28,67 @@ export function MatchParticipant({
   const isZeroParticipant = participants.length === 0;
 
   return (
-    <View className="p-5 bg-white">
+    <View className="px-4 pb-6 bg-gray-50">
+      {/* Section Header */}
+      <View className="pt-6 pb-3">
+        <Text className="font-ubuntu-bold text-xl text-gray-900">
+          Daftar Pemain
+        </Text>
+        {!isZeroParticipant && (
+          <Text className="font-roboto-regular text-sm text-gray-500 mt-0.5">
+            Total {participants.reduce((acc, p) => acc + p.players.length, 0)}{' '}
+            pemain terdaftar
+          </Text>
+        )}
+      </View>
+
+      {/* Participants List */}
       {isZeroParticipant ? (
         <ZeroParticipant />
       ) : (
-        participants.map((participant, index) => {
-          return (
-            <View key={index} className="mb-2">
-              <ParticipantTitle participant={participant} />
-              {participant.players.map((player, pIndex) => {
-                return (
+        <View className="space-y-4">
+          {participants.map((participant, index) => (
+            <View
+              key={index}
+              className="bg-white rounded-2xl p-4 mb-4"
+              style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.06,
+                shadowRadius: 6,
+                elevation: 2,
+              }}
+            >
+              {/* Category Header */}
+              <View className="mb-3 pb-2 border-b border-gray-100">
+                <ParticipantTitle participant={participant} />
+              </View>
+
+              {/* Players */}
+              <View>
+                {participant.players.map((player, pIndex) => (
                   <Player
                     key={pIndex}
                     player={player}
                     number={pIndex + 1}
                     showTotalPlayed={showTotalPlayed && player.match_attendance}
                   />
-                );
-              })}
+                ))}
+              </View>
             </View>
-          );
-        })
+          ))}
+        </View>
       )}
-      <View className="mt-3 w-full">
+
+      {/* Action Buttons */}
+      <View className="mt-4 w-full">
         {(
           [
             showConfirmAttendance && {
               text: 'Konfirmasi Kehadiran',
               onPress: onConfirmAttendance,
               className: '',
+              variant: 'outlined' as const,
             },
             showEditParticipant && {
               text: isZeroParticipant
@@ -64,23 +96,26 @@ export function MatchParticipant({
                 : 'Edit Partisipasi',
               onPress: onAddParticipant,
               className: 'mt-3',
+              variant: 'contained' as const,
             },
             showPayment && {
               text: 'Konfirmasi Pembayaran',
               onPress: onConfirmPayment,
               className: 'mt-3',
+              variant: 'contained' as const,
             },
           ].filter(Boolean) as Array<{
             text: string;
             onPress: () => void;
             className: string;
+            variant: 'contained' | 'outlined';
           }>
         ).map((btn, index) => (
           <Button
             key={index}
             btnText={btn.text}
             onPress={btn.onPress}
-            variant="contained"
+            variant={btn.variant}
             btnClass={btn.className}
             isBtnDisable={disabled}
           />
@@ -92,8 +127,25 @@ export function MatchParticipant({
 
 function ZeroParticipant() {
   return (
-    <View className="w-full flex justify-center items-center">
-      <Text>Belum ada Partisipasi</Text>
+    <View
+      className="w-full flex justify-center items-center py-12 bg-white rounded-2xl"
+      style={{
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.04,
+        shadowRadius: 4,
+        elevation: 1,
+      }}
+    >
+      <View className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3">
+        <Text className="text-3xl">👥</Text>
+      </View>
+      <Text className="font-roboto-medium text-gray-900 text-base">
+        Belum ada Partisipasi
+      </Text>
+      <Text className="font-roboto-regular text-gray-500 text-sm mt-1">
+        Tambahkan pemain untuk memulai
+      </Text>
     </View>
   );
 }
