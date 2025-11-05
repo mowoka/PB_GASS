@@ -43,7 +43,7 @@ export function MatchItem({ match, onPress }: IMatchItemProps) {
       <View className="w-full border-b border-gray-100 mb-3" />
 
       {/* Match Info Section */}
-      <View className="bg-gray-50 rounded-xl p-3 mb-3">
+      <View className="bg-gray-100 rounded-xl p-3 mb-3">
         <View className="flex-row items-center mb-1">
           <Text className="text-lg font-ubuntu-bold text-gray-800 flex-1">
             {match.field.name}

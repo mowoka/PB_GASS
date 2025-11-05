@@ -26,26 +26,36 @@ export function InputDropdown({
 }: IDropdownProps) {
   return (
     <View className={cn('w-full', inputClass)}>
-      {label && <Text className="font-roboto-bold text-base">{label}</Text>}
-      <View className={cn('w-full', label && 'mt-2')}>
-        <Dropdown
-          style={[styles.dropdown]}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          data={options}
-          maxHeight={300}
-          labelField="name"
-          valueField="name"
-          placeholder={placeholder}
-          renderItem={item => {
-            return <Text className="p-3">{item.name}</Text>;
-          }}
-          value={value}
-          onChange={item => {
-            onChange(item);
-          }}
-        />
-      </View>
+      {label && (
+        <Text className="font-roboto-semi-bold text-sm text-gray-700 mb-2">
+          {label}
+        </Text>
+      )}
+      <Dropdown
+        style={[styles.dropdown]}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        containerStyle={styles.containerStyle}
+        itemTextStyle={styles.itemTextStyle}
+        data={options}
+        maxHeight={300}
+        labelField="name"
+        valueField="name"
+        placeholder={placeholder}
+        renderItem={item => {
+          return (
+            <View className="px-4 py-3 border-b border-gray-100">
+              <Text className="font-roboto-medium text-base text-gray-800">
+                {item.name}
+              </Text>
+            </View>
+          );
+        }}
+        value={value}
+        onChange={item => {
+          onChange(item);
+        }}
+      />
     </View>
   );
 }
@@ -56,20 +66,36 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   dropdown: {
-    height: 47,
-    borderColor: '#C9CDCF',
+    height: 52,
+    borderColor: '#d1d5db',
     borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    backgroundColor: 'white',
   },
   icon: {
     marginRight: 5,
   },
   placeholderStyle: {
     fontSize: 16,
+    color: '#9ca3af',
+    fontFamily: 'Roboto-Medium',
   },
   selectedTextStyle: {
     fontSize: 16,
-    color: 'black',
+    color: '#1f2937',
+    fontFamily: 'Roboto-Medium',
+  },
+  containerStyle: {
+    borderRadius: 12,
+    marginTop: 8,
+    overflow: 'hidden',
+    borderColor: '#e5e7eb',
+    borderWidth: 1,
+  },
+  itemTextStyle: {
+    fontSize: 16,
+    color: '#1f2937',
+    fontFamily: 'Roboto-Medium',
   },
 });

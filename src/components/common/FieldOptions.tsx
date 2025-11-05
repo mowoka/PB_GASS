@@ -20,7 +20,7 @@ export function FieldOptions({ options, onPress }: IFieldOptionsProps) {
   const [field, setField] = useState<IField>(DEFAULT_FIELD);
 
   return (
-    <View className="w-full h-full flex flex-col justify-center items-center">
+    <View className="w-full h-full flex flex-col justify-center items-center pb-10">
       <ScrollView className="flex-1 w-full">
         {options.map((item, index) => {
           return (

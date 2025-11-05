@@ -2,7 +2,7 @@ import { Layout } from '../../components/common/Layout';
 import { RootStackParamList } from '../../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Header } from '../../components/common/Header';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { InputButton } from '../../components/common/InputButton';
 import { BottomModal } from '../../components/common/BottomModal';
 import { useBottomModalHooks } from '../../hooks/common/useBottomModal';
@@ -82,60 +82,99 @@ export default function CreateMatchScreen({ navigation }: Props) {
       <Layout
         safeView={false}
         showBottomBtn={true}
-        bottomBtnText="Simpan"
+        bottomBtnText="Simpan Pertandingan"
         onPressBtn={onSubmit}
       >
         <Header title="Buat Pertandingan" onPress={() => navigation.goBack()} />
-        <View className="flex-1 p-5">
-          {error.show && (
-            <View className="mb-5 w-full">
-              <Text className="font-roboto-medium text-base text-center text-primary-red">
-                {error.message}
+
+        <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+          <View className="px-5 pt-5 pb-5">
+            {/* Info Card */}
+            <View className="bg-blue-50 rounded-xl p-4 border border-blue-100 mb-5">
+              <Text className="font-roboto-medium text-xs text-blue-800 leading-5">
+                💡 <Text className="font-roboto-bold">Tips:</Text> Pastikan
+                semua informasi sudah terisi dengan benar sebelum menyimpan
+                pertandingan.
               </Text>
             </View>
-          )}
-          <InputButton
-            label="Tanggal Pertandingan"
-            value={match.date}
-            onPress={() => openBottomMenu('calendar')}
-            placeholder="Pilih Tanggal Pertandingan"
-          />
-          <InputTimePicker
-            inputClass="mt-5"
-            onChange={handleOnChangeDateTime}
-          />
-          <InputButton
-            inputClass="mt-5"
-            label="Tempat Pertandingan"
-            value={match.field.name}
-            placeholder="Pilih Tempat Pertandingan"
-            onPress={() => openBottomMenu('field')}
-          />
-          <Input
-            label="Total Lapangan"
-            placeholder="Input Total Lapangan"
-            onChange={value => {
-              if (value === '') {
-                handleOnChange('total_field', 0);
-                return;
-              }
-              handleOnChange('total_field', Number(value));
-            }}
-            value={match.total_field.toString()}
-            containerClass="mt-5"
-            inputProps={{
-              maxLength: 2,
-              keyboardType: 'numeric',
-            }}
-          />
-          <ParticipanInput
-            inputClass="mt-5"
-            label="Partisipasi"
-            onAddParticipant={() => openBottomMenu('participant')}
-            participants={match.participants}
-            onDeleteParticipant={deleteParticipant}
-          />
-        </View>
+
+            {/* Error Message */}
+            {error.show && (
+              <View className="mb-5 bg-red-50 border-l-4 border-primary-red rounded-lg p-4">
+                <Text className="font-roboto-medium text-sm text-primary-red">
+                  ⚠️ {error.message}
+                </Text>
+              </View>
+            )}
+
+            {/* Schedule Section */}
+            <View className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-4">
+              <Text className="font-roboto-bold text-lg text-gray-800 mb-4">
+                📅 Jadwal Pertandingan
+              </Text>
+
+              <InputButton
+                label="Tanggal"
+                value={match.date}
+                onPress={() => openBottomMenu('calendar')}
+                placeholder="Pilih Tanggal Pertandingan"
+              />
+
+              <InputTimePicker
+                inputClass="mt-4"
+                onChange={handleOnChangeDateTime}
+              />
+            </View>
+
+            {/* Venue Section */}
+            <View className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-4">
+              <Text className="font-roboto-bold text-lg text-gray-800 mb-4">
+                📍 Lokasi & Lapangan
+              </Text>
+
+              <InputButton
+                label="Tempat Pertandingan"
+                value={match.field.name}
+                placeholder="Pilih Tempat Pertandingan"
+                onPress={() => openBottomMenu('field')}
+              />
+
+              <Input
+                label="Total Lapangan"
+                placeholder="Masukkan jumlah lapangan"
+                onChange={value => {
+                  if (value === '') {
+                    handleOnChange('total_field', 0);
+                    return;
+                  }
+                  handleOnChange('total_field', Number(value));
+                }}
+                value={
+                  match.total_field === 0 ? '' : match.total_field.toString()
+                }
+                containerClass="mt-4"
+                inputProps={{
+                  maxLength: 2,
+                  keyboardType: 'numeric',
+                }}
+              />
+            </View>
+
+            {/* Participants Section */}
+            <View className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-4">
+              <Text className="font-roboto-bold text-lg text-gray-800 mb-4">
+                👥 Daftar Partisipan
+              </Text>
+
+              <ParticipanInput
+                label=""
+                onAddParticipant={() => openBottomMenu('participant')}
+                participants={match.participants}
+                onDeleteParticipant={deleteParticipant}
+              />
+            </View>
+          </View>
+        </ScrollView>
       </Layout>
     </BottomModal>
   );

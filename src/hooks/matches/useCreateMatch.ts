@@ -46,6 +46,9 @@ export function useCreateMatchHooks({
       if (menu === 'participant') {
         return 600;
       }
+      if (menu === 'calendar') {
+        return 500;
+      }
       return 450;
     });
     openModal();

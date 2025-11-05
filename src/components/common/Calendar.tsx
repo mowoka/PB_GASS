@@ -15,7 +15,7 @@ export function Calendar({ onPress }: ICalendarProps) {
   const defaultStyles = useDefaultStyles();
   const [selected, setSelected] = useState<DateType>();
   return (
-    <View className="flex-1">
+    <View className="flex-1 pb-10">
       <DateTimePicker
         mode="single"
         date={selected}
@@ -26,6 +26,7 @@ export function Calendar({ onPress }: ICalendarProps) {
       />
       <Button
         isBtnDisable={selected === undefined}
+        btnClass="mt-2"
         btnText="Simpan"
         onPress={() => {
           const date = selected?.toString();

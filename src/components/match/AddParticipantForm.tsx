@@ -40,22 +40,37 @@ export function AddParticipantForm({
   };
 
   return (
-    <View className="w-full h-full  flex flex-col justify-between items-center">
-      {error.show && (
-        <View className="mb-2 w-full">
-          <Text className="text-center text-primary-red">{error.message}</Text>
-        </View>
-      )}
+    <View className="w-full h-full flex flex-col justify-between items-center pb-10">
       <View className="flex-1 w-full">
+        {/* Title */}
+        <View className="mb-5">
+          <Text className="font-roboto-bold text-xl text-gray-800 text-center">
+            Tambah Partisipan
+          </Text>
+          <Text className="font-roboto text-sm text-gray-500 text-center mt-1">
+            Isi informasi kategori partisipan
+          </Text>
+        </View>
+
+        {/* Error Message */}
+        {error.show && (
+          <View className="mb-4 bg-red-50 border-l-4 border-primary-red rounded-lg p-3">
+            <Text className="font-roboto-medium text-sm text-primary-red">
+              ⚠️ {error.message}
+            </Text>
+          </View>
+        )}
+
+        {/* Form Fields */}
         <InputDropdown
-          label="Lavel Pemain"
+          label="Level Pemain"
           placeholder="Pilih Level Pemain"
           value={form.playerLevel}
           options={playerLevelsOptions}
           onChange={item => setForm(prev => ({ ...prev, playerLevel: item }))}
         />
         <InputDropdown
-          inputClass="mt-5"
+          inputClass="mt-4"
           label="Gender Pemain"
           placeholder="Pilih Gender"
           value={
@@ -75,10 +90,10 @@ export function AddParticipantForm({
           }}
         />
         <Input
-          containerClass="mt-5"
+          containerClass="mt-4"
           label="Total Partisipasi"
-          placeholder="Input Total Partisipasi"
-          value={form.attendance.toString()}
+          placeholder="Masukkan jumlah partisipan"
+          value={form.attendance === 0 ? '' : form.attendance.toString()}
           onChange={value => {
             if (value === '') {
               setForm(prev => ({ ...prev, attendance: 0 }));
@@ -88,10 +103,19 @@ export function AddParticipantForm({
           }}
           inputProps={{
             maxLength: 2,
+            keyboardType: 'numeric',
           }}
+          mode="bottom-sheet"
         />
       </View>
-      <Button isBtnDisable={isBtnDisable} btnText="Simpan" onPress={onSubmit} />
+
+      <View className="w-full mt-4">
+        <Button
+          isBtnDisable={isBtnDisable}
+          btnText="Simpan Partisipan"
+          onPress={onSubmit}
+        />
+      </View>
     </View>
   );
 }

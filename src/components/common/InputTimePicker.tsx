@@ -79,17 +79,31 @@ function InputTime({
   value?: string;
   onPress: () => void;
 }) {
+  const hasValue = value && value !== '';
+
   return (
     <View className="flex-1">
-      <Text className="font-roboto-bold text-base">{label}</Text>
-      <View className="mt-2">
-        <TouchableOpacity
-          onPress={onPress}
-          className="w-full border border-primary-gray rounded-md p-3 min-h-[47px]"
+      <Text className="font-roboto-semi-bold text-sm text-gray-700 mb-2">
+        {label}
+      </Text>
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.7}
+        className={cn(
+          'w-full border rounded-xl p-4 min-h-[52px] flex flex-row justify-between items-center',
+          hasValue ? 'bg-white border-gray-300' : 'bg-gray-50 border-gray-200',
+        )}
+      >
+        <Text
+          className={cn(
+            'font-roboto-medium text-base',
+            hasValue ? 'text-gray-800' : 'text-gray-400',
+          )}
         >
-          <Text className="font-roboto-semi-bold text-black">{value}</Text>
-        </TouchableOpacity>
-      </View>
+          {hasValue ? value : '--:--'}
+        </Text>
+        <Text className="text-gray-400 ml-2">🕐</Text>
+      </TouchableOpacity>
     </View>
   );
 }

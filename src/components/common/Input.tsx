@@ -25,41 +25,36 @@ export function Input({
 }: InputProps) {
   return (
     <View className={cn(containerClass)}>
-      {label && <Text className="font-roboto-bold text-base">{label}</Text>}
-      <View className={cn(label && 'mt-2')}>
-        {mode === 'default' && (
-          <TextInput
-            {...inputProps}
-            className={cn(
-              `w-full border border-primary-gray rounded-md p-3 min-h-[47px]`,
-              inputClassName,
-            )}
-            placeholder={placeholder}
-            value={value}
-            onChangeText={onChange}
-          />
-        )}
-        {mode === 'bottom-sheet' && (
-          <BottomSheetTextInput
-            {...inputProps}
-            placeholder={placeholder}
-            value={value}
-            onChangeText={onChange}
-            className={cn(
-              `w-full border border-primary-gray rounded-md p-3 min-h-[47px]`,
-              inputClassName,
-            )}
-            style={{
-              width: '100%',
-              borderColor: '#c9cdcf',
-              borderWidth: 1,
-              borderRadius: 6,
-              padding: 12,
-              minHeight: 47,
-            }}
-          />
-        )}
-      </View>
+      {label && (
+        <Text className="font-roboto-semi-bold text-sm text-gray-700 mb-2">
+          {label}
+        </Text>
+      )}
+      {mode === 'default' && (
+        <TextInput
+          {...inputProps}
+          className={cn(
+            `w-full border border-gray-300 rounded-xl p-4 min-h-[52px] bg-white font-roboto-medium text-base text-gray-800`,
+            inputClassName,
+          )}
+          placeholder={placeholder}
+          placeholderTextColor="#9ca3af"
+          value={value}
+          onChangeText={onChange}
+        />
+      )}
+      {mode === 'bottom-sheet' && (
+        <BottomSheetTextInput
+          {...inputProps}
+          placeholder={placeholder}
+          value={value}
+          onChangeText={onChange}
+          className={cn(
+            `w-full border border-gray-300 rounded-xl p-4 min-h-[52px] bg-white font-roboto-medium text-base text-gray-800`,
+            inputClassName,
+          )}
+        />
+      )}
     </View>
   );
 }

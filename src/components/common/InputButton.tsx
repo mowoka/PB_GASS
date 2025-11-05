@@ -19,22 +19,31 @@ export function InputButton({
   const isValueEmpty = value === undefined || value === '';
   return (
     <View className={cn(`w-full`, inputClass)}>
-      {label && <Text className="font-roboto-bold text-base">{label}</Text>}
-      <View className={cn(label && 'mt-2')}>
-        <TouchableOpacity
-          onPress={onPress}
-          className="w-full border border-primary-gray rounded-md p-3 min-h-[47px]"
+      {label && (
+        <Text className="font-roboto-semi-bold text-sm text-gray-700 mb-2">
+          {label}
+        </Text>
+      )}
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.7}
+        className={cn(
+          'w-full border rounded-xl p-4 min-h-[52px] flex flex-row justify-between items-center',
+          isValueEmpty
+            ? 'bg-gray-50 border-gray-200'
+            : 'bg-white border-gray-300',
+        )}
+      >
+        <Text
+          className={cn(
+            'font-roboto-medium text-base flex-1',
+            isValueEmpty ? 'text-gray-400' : 'text-gray-800',
+          )}
         >
-          <Text
-            className={cn(
-              'font-roboto-semi-bold',
-              isValueEmpty ? 'text-gray-400' : 'text-black',
-            )}
-          >
-            {isValueEmpty ? placeholder : value}
-          </Text>
-        </TouchableOpacity>
-      </View>
+          {isValueEmpty ? placeholder : value}
+        </Text>
+        <Text className="text-gray-400 ml-2">▼</Text>
+      </TouchableOpacity>
     </View>
   );
 }
