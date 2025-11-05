@@ -37,7 +37,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     {
       name: 'Buat Pesan',
       image: WhatsApp,
-      onPress: () => {},
+      onPress: () => navigation.navigate('UnderConstruction'),
     },
     {
       name: 'Kontak Member',
