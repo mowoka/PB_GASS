@@ -13,6 +13,7 @@ import Attendence from '../screens/attendence/Attendence';
 import ConfirmAttendance from '../screens/attendence/ConfirmAttendance';
 import Payment from '../screens/payment/Payment';
 import ConfirmPayment from '../screens/payment/ConfirmPayment';
+import UnderConstruction from '../screens/UnderConstruction';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="ConfirmPayment"
           component={ConfirmPayment}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UnderConstruction"
+          component={UnderConstruction}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

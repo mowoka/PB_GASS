@@ -18,6 +18,7 @@ export type RootStackParamList = {
     ConfirmAttendance: { id: string };
     Payment: undefined;
     ConfirmPayment: { id: string };
+    UnderConstruction: undefined;
 };
 
 declare global {

@@ -42,7 +42,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     {
       name: 'Kontak Member',
       image: Contact,
-      onPress: () => {},
+      onPress: () => navigation.navigate('UnderConstruction'),
     },
     {
       name: 'Daftar Peserta',
