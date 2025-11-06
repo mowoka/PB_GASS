@@ -35,7 +35,7 @@ export function Participan({
   const renderPlayers = (): JSX.Element[] => {
     let partcitpanElmnt: JSX.Element[] = [];
     for (let i = 0; i < participant.attendance; i++) {
-      const player = findPlayer(participant.players[i].id);
+      const player = findPlayer(participant.players[i]?.id ?? '');
       partcitpanElmnt.push(
         <Player
           key={i}

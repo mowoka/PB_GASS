@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { IField, IPlayerLevel } from "./useSettings";
-import { MATH_DUMMY } from "../utils/data/match_dummy";
+// import { MATH_DUMMY } from "../utils/data/match_dummy";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Gender = "Cowo" | "Cewe";
@@ -106,7 +106,7 @@ export const EMTPY_PLAYER: IPlayer = {
 export const useMatchStore = create<IMatchStore & IMatchActions>()(
     persist(
         (set, get) => ({
-            matches: MATH_DUMMY,
+            matches: [],
             setMatches: (match: IMatch) => set(state => {
                 const find_match = state.matches.find(m => m.id === match.id);
                 if (find_match) {

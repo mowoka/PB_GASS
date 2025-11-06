@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { IMatch, IParticipant, useMatchStore } from '../../stores/useMatch';
 import { IField, useSettingStore } from '../../stores/useSettings';
 import { IErrorForm } from '../../types/navigation';
+import { generateParticipantId } from '../../utils/func';
 
 export const DEFAULT_PARTICIPANT: IParticipant = {
-  id: Date.now().toString(),
+  id: '',
   gender: 'Cowo',
   attendance: 0,
   playerLevel: { id: '', name: '' },
@@ -44,7 +45,7 @@ export function useCreateMatchHooks({
     setBottomMenu(menu);
     setBottomModalHeight(_ => {
       if (menu === 'participant') {
-        return 600;
+        return 550;
       }
       if (menu === 'calendar') {
         return 500;
@@ -75,7 +76,7 @@ export function useCreateMatchHooks({
 
   const addParticipant = (form: IParticipant) => {
     const data = { ...form };
-    data.id = Date.now().toString();
+    data.id = generateParticipantId(match.participants)
     setMatch(prev => ({ ...prev, participants: [...prev.participants, data] }));
   };
 

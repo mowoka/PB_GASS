@@ -44,12 +44,12 @@ export default function Matches({ navigation }: Props) {
     }, 1000);
   };
 
-  // Sort matches by date (newest first)
+  // Sort matches by date (oldest first)
   const sortedMatches = useMemo(() => {
     return [...matchs].sort((a, b) => {
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
-      return dateB - dateA; // Descending order
+      return dateA - dateB; // Ascending order
     });
   }, [matchs]);
 
@@ -130,7 +130,7 @@ export default function Matches({ navigation }: Props) {
             {/* Empty State */}
             {sortedMatches.length === 0 ? (
               <View className="flex-1 justify-center items-center py-20">
-                <Text className="text-6xl mb-4">🏸</Text>
+                <Text className="text-4xl mb-4">🏸</Text>
                 <Text className="text-xl font-ubuntu-bold text-gray-700 mb-2">
                   Belum Ada Pertandingan
                 </Text>

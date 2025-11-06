@@ -11,6 +11,10 @@ export function generatePlayerId(
     participantId: string,
     existingPlayers: IPlayer[]
 ): string {
+
+    if (existingPlayers.length === 0) {
+        return `${participantId}-1`;
+    }
     // Filter players that belong to this participant
     const participantPlayers = existingPlayers.filter(player =>
         player.id.startsWith(participantId)
@@ -33,6 +37,29 @@ export function generatePlayerId(
     const nextNumber = maxNumber + 1;
 
     return `${participantId}-${nextNumber}`;
+}
+
+export function generateParticipantId(existingParticipants: IParticipant[]): string {
+    if (existingParticipants.length === 0) {
+        return 'participant__01';
+    }
+
+    // Extract all participant numbers from existing IDs
+    const existingNumbers = existingParticipants
+        .map(participant => {
+            const match = participant.id.match(/participant__(\d+)/);
+            return match ? parseInt(match[1], 10) : 0;
+        })
+        .filter(num => num > 0);
+
+    // Find the next available number
+    const maxNumber = Math.max(...existingNumbers, 0);
+    const nextNumber = maxNumber + 1;
+
+    // Format with leading zero (01, 02, etc.)
+    const formattedNumber = nextNumber.toString().padStart(2, '0');
+
+    return `participant__${formattedNumber}`;
 }
 
 export function getTime(date: Date | undefined): string {
