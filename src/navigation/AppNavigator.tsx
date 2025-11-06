@@ -14,13 +14,19 @@ import ConfirmAttendance from '../screens/attendence/ConfirmAttendance';
 import Payment from '../screens/payment/Payment';
 import ConfirmPayment from '../screens/payment/ConfirmPayment';
 import UnderConstruction from '../screens/UnderConstruction';
+import SplashScreen from '../screens/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="MainTabs"
           component={CurvedBottomBarNavigator}

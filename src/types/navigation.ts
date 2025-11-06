@@ -4,6 +4,8 @@ export interface IErrorForm {
 }
 
 export type RootStackParamList = {
+    SplashScreen: undefined;
+    MainTabs: undefined;
     Home: undefined;
     Settings: undefined;
     Register: undefined;
