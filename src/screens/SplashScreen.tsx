@@ -81,7 +81,7 @@ const SplashScreen: React.FC = () => {
         {/* App Icon */}
         <View style={styles.iconContainer}>
           <Image
-            source={require('../assets/icons/sport-net.png')}
+            source={require('../assets/icons/racket.png')}
             style={styles.icon}
             resizeMode="contain"
           />
