@@ -47,8 +47,6 @@ export default function AddParticipant({ navigation }: Props) {
     0,
   );
 
-  console.log({ match });
-
   return (
     <BottomModal
       ref={bottomSheetModalRef}
