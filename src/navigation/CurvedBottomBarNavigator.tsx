@@ -143,7 +143,10 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 30,
   },
-  bottomBar: {},
+  bottomBar: {
+    marginBottom: 0,
+    padding: 0,
+  },
   btnCircleUp: {
     width: 60,
     height: 60,

@@ -20,7 +20,7 @@ export function Header({
   onPressRightIcon?: () => void;
 }) {
   return (
-    <View className="bg-black w-full h-28 px-5 pb-3 flex flex-row justify-start items-end">
+    <View className="bg-black w-full h-24 px-5 pb-3 flex flex-row justify-start items-end">
       <View className="w-full flex flex-row justify-start items-center relative">
         {!hideBackButton && (
           <View className="w-8 h-8 absolute left-0 z-10 flex justify-center items-center">

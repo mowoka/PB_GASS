@@ -16,7 +16,7 @@ export function Menu({ menu }: { menu: IHomeMenu[] }) {
         style={SHADOW_STYLES.extraLarge}
       >
         <Text className="text-gray-800 text-lg text-center font-ubuntu-bold mb-4 px-1">
-          Menu Utama
+          Menu
         </Text>
         <View className="w-full flex flex-row justify-start items-start flex-wrap">
           {menu.map((item, index) => {
@@ -46,7 +46,7 @@ function MenuItem({
 }) {
   return (
     <TouchableOpacity
-      className="flex flex-col justify-center items-center mb-6 w-[22%] mx-[1.5%]"
+      className="flex flex-col justify-center items-center mb-3 w-[22%] mx-[1.5%]"
       onPress={onPress}
       activeOpacity={0.7}
     >

@@ -48,7 +48,7 @@ function DefaultLayout({
 }) {
   return (
     <View className="flex-1">
-      <StatusBar barStyle={'light-content'} />
+      <StatusBar backgroundColor="#111827" barStyle="light-content" />
       <View className="flex-1 bg-gray-50">{children}</View>
       {showBottomBtn && (
         <View className="bg-black px-5 pt-5 pb-8 w-full">
