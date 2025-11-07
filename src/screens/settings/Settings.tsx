@@ -1,9 +1,10 @@
 import { Layout } from '../../components/common/Layout';
 import { Header } from '../../components/common/Header';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { MenuItem } from '../../components/setting/MenuItem';
 import { RootStackParamList } from '../../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { APK_VERSION } from '../../utils/constants';
 
 type AccountSettingScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -37,6 +38,11 @@ export default function SettingScreen({ navigation }: Props) {
           iconType="level"
           onPress={() => navigation.push('PlayerLevel')}
         />
+        <View className="w-full flex justify-center items-center mt-5">
+          <Text className="font-roboto-regular text-gray-400">
+            Version {APK_VERSION}
+          </Text>
+        </View>
       </View>
     </Layout>
   );

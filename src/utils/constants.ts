@@ -1,5 +1,7 @@
 export const MATCH_PAID_AMOUNT_PER_PLAYER = 20000;
 
+export const APK_VERSION = '1.0.0';
+
 // Shadow Styles
 export const SHADOW_STYLES = {
     // Light shadow - for subtle elevation
